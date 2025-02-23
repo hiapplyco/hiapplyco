@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Github, Linkedin } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -10,28 +11,22 @@ const Footer = () => {
         </p>
         <div className="flex space-x-6 mt-4 md:mt-0">
           <a
-            href="https://twitter.com"
+            href="https://www.linkedin.com/in/jamesschlauch/"
             className="text-muted-foreground hover:text-foreground transition-colors"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="LinkedIn"
           >
-            Twitter
+            <Linkedin size={20} />
           </a>
           <a
-            href="https://linkedin.com"
+            href="https://github.com/hiapplyco"
             className="text-muted-foreground hover:text-foreground transition-colors"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="GitHub"
           >
-            LinkedIn
-          </a>
-          <a
-            href="https://github.com"
-            className="text-muted-foreground hover:text-foreground transition-colors"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            GitHub
+            <Github size={20} />
           </a>
         </div>
       </div>
