@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ExternalLink, ArrowUpRight } from 'lucide-react';
 
@@ -8,9 +9,9 @@ const Projects = () => {
       description: "Transforming life coaching through AI-powered personalized guidance systems and adaptive mentorship algorithms",
       url: "https://www.harmony.works",
       style: {
-        bg: "linear-gradient(109.6deg, rgba(223,234,247,1) 11.2%, rgba(244,248,252,1) 91.1%)",
-        border: "#FFD700",
-        text: "text-gray-800"
+        bg: "linear-gradient(135deg, #4a4a4a, #000000)",
+        border: "#2a2a2a",
+        text: "text-white"
       }
     },
     {
@@ -144,3 +145,4 @@ const Projects = () => {
 };
 
 export default Projects;
+
