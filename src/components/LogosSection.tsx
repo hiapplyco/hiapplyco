@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { supabase } from "@/integrations/supabase/client";
 
@@ -38,26 +37,48 @@ const LogosSection = () => {
   }, []);
 
   if (loading) {
-    return <div className="flex justify-center py-8">Loading logos...</div>;
+    return (
+      <section className="py-16 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex justify-center">
+            <div className="h-20 w-20 rounded-full border-4 border-accent/30 border-t-accent animate-spin"></div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (!logos.length) {
+    return null;
   }
 
   return (
-    <section className="py-12 px-6">
+    <section className="py-16 px-6 relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <h3 className="text-2xl font-semibold text-center mb-8">Trusted Technologies</h3>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8 items-center justify-items-center">
-          {logos.map((url, index) => (
-            <div 
-              key={index} 
-              className="w-20 h-20 flex items-center justify-center filter grayscale hover:grayscale-0 transition-all duration-300"
-            >
-              <img 
-                src={url} 
-                alt={`Technology logo ${index + 1}`}
-                className="max-w-full max-h-full object-contain"
-              />
-            </div>
-          ))}
+        <div className="text-center mb-12 animate-fade-up">
+          <h3 className="text-2xl font-semibold">Trusted Technologies</h3>
+          <p className="text-muted-foreground mt-2">The powerful tools and platforms we leverage</p>
+        </div>
+        
+        <div className="relative">
+          <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-background to-transparent z-10"></div>
+          <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-background to-transparent z-10"></div>
+          
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-8 items-center justify-items-center px-8">
+            {logos.map((url, index) => (
+              <div 
+                key={index} 
+                className="w-24 h-24 flex items-center justify-center filter grayscale hover:grayscale-0 transition-all duration-500 animate-fade-in opacity-70 hover:opacity-100"
+                style={{ animationDelay: `${index * 50}ms` }}
+              >
+                <img 
+                  src={url} 
+                  alt={`Technology logo ${index + 1}`}
+                  className="max-w-full max-h-full object-contain"
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
