@@ -89,9 +89,6 @@ const Projects = () => {
                     {project.name}
                     <ExternalLink className="opacity-0 group-hover:opacity-100 transition-opacity" size={18} />
                   </span>
-                  
-                  {/* Shimmer effect */}
-                  <div className="absolute inset-0 bg-shimmer bg-200% animate-shimmer opacity-30"></div>
                 </div>
               </a>
               <p className="text-sm text-muted-foreground flex-grow">
@@ -145,4 +142,3 @@ const Projects = () => {
 };
 
 export default Projects;
-
