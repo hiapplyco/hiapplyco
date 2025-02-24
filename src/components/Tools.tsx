@@ -21,16 +21,21 @@ const Tools = () => {
       description: "Mastery of function calling and integration of sophisticated tools for powerful AI solutions.",
       skills: ["Function Calling", "API Integration", "Vector Databases", "Data Pipelines"],
       caseStudy: {
-        title: "AI-Powered Music Education",
-        description: "Developed an innovative music education platform integrating AI for personalized learning experiences. Features adaptive curriculum and real-time feedback systems.",
-        tags: ["AI Integration", "Music Tech", "EdTech"]
+        title: "AI Fitness Generator",
+        description: "Built a scalable workout generation system for a network of 1000+ gyms. The system creates personalized training programs based on individual fitness levels, goals, and equipment availability.",
+        tags: ["Machine Learning", "Scaling", "Personalization"]
       }
     },
     {
       icon: Brain,
       title: "Framework Expertise",
       description: "Deep knowledge of leading AI frameworks for efficient and scalable development.",
-      skills: ["crew.ai", "LangChain", "Semantic Kernel", "Custom Frameworks"]
+      skills: ["crew.ai", "LangChain", "Semantic Kernel", "Custom Frameworks"],
+      caseStudy: {
+        title: "Multi-Modal Assistant Platform",
+        description: "Developed a sophisticated AI assistant platform combining multiple frameworks for enhanced capabilities. Integrated voice, text, and image processing using LangChain and Semantic Kernel.",
+        tags: ["Framework Integration", "Multi-Modal", "Enterprise Scale"]
+      }
     },
     {
       icon: Database,
@@ -47,7 +52,12 @@ const Tools = () => {
       icon: Users,
       title: "Custom Solutions",
       description: "User-centric AI agent development focused on delivering practical business value.",
-      skills: ["Solution Design", "User Experience", "Integration", "Deployment"]
+      skills: ["Solution Design", "User Experience", "Integration", "Deployment"],
+      caseStudy: {
+        title: "Automated Document Processing",
+        description: "Created an intelligent document processing system for a legal firm handling millions of pages monthly. Implemented custom OCR and classification models with 99.8% accuracy.",
+        tags: ["Document AI", "Automation", "Enterprise Scale"]
+      }
     }
   ];
 
