@@ -1,5 +1,3 @@
-
-import { useState } from 'react';
 import Header from '@/components/Header';
 import Projects from '@/components/Projects';
 import Tools from '@/components/Tools';
@@ -15,29 +13,40 @@ const Index = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center pt-20 px-6">
-        <div className="max-w-3xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-up">
-            Strategic AI Agent Development
+      <section id="home" className="relative min-h-screen flex items-center justify-center pt-20 px-6 overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0 bg-grid-pattern bg-grid opacity-20 pointer-events-none"></div>
+        <div className="absolute top-20 right-16 w-64 h-64 bg-accent/10 rounded-full blur-3xl animate-pulse pointer-events-none"></div>
+        <div className="absolute bottom-20 left-16 w-80 h-80 bg-primary/5 rounded-full blur-3xl animate-pulse pointer-events-none"></div>
+        
+        <div className="relative max-w-3xl mx-auto text-center z-10">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-up text-balance">
+            Strategic <span className="text-accent">AI Agent</span> Development
           </h1>
-          <p className="text-lg text-muted-foreground mb-8 animate-fade-up" style={{ animationDelay: '200ms' }}>
+          <p className="text-lg md:text-xl text-muted-foreground mb-10 animate-fade-up animation-delay-200 md:px-6 text-balance">
             Expert in Strategic AI Agent Architecture, Advanced Tooling Integration, and User-Centric Solutions. Specializing in frameworks like crew.ai and LangChain to build intelligent systems that deliver real business value.
           </p>
-          <div className="space-x-4">
+          <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
             <a
               href="#projects"
-              className="inline-block bg-primary text-primary-foreground px-8 py-3 rounded-full font-medium transition-all duration-200 hover:scale-105 animate-fade-up"
-              style={{ animationDelay: '400ms' }}
+              className="inline-block bg-primary text-primary-foreground px-8 py-3.5 rounded-lg font-medium interactive-element animate-fade-up animation-delay-300"
             >
               View Projects
             </a>
             <a
               href="#contact"
-              className="inline-block bg-secondary text-secondary-foreground px-8 py-3 rounded-full font-medium transition-all duration-200 hover:scale-105 animate-fade-up"
-              style={{ animationDelay: '400ms' }}
+              className="inline-block bg-secondary text-foreground border border-border/50 px-8 py-3.5 rounded-lg font-medium interactive-element animate-fade-up animation-delay-400"
             >
               Get in Touch
             </a>
+          </div>
+          
+          {/* Scroll Indicator */}
+          <div className="absolute left-1/2 -translate-x-1/2 bottom-10 animate-bounce hidden md:block">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 5v14"></path>
+              <path d="m19 12-7 7-7-7"></path>
+            </svg>
           </div>
         </div>
       </section>
