@@ -1,5 +1,6 @@
+
 import React from 'react';
-import { Github, Linkedin, Twitter } from 'lucide-react';
+import { Github, Linkedin, Twitter, Rss } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -51,6 +52,15 @@ const Footer = () => {
             >
               <Twitter size={20} />
             </a>
+            <a
+              href="https://hiapplyco.substack.com/"
+              className="text-muted-foreground hover:text-accent transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Substack"
+            >
+              <Rss size={20} />
+            </a>
           </div>
         </div>
         
@@ -65,3 +75,4 @@ const Footer = () => {
 };
 
 export default Footer;
+
