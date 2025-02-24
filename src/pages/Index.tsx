@@ -25,7 +25,7 @@ const Index = () => {
             Strategic <span className="text-accent">AI Agent</span> Development
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground mb-10 animate-fade-up animation-delay-200 md:px-6 text-balance">
-            Expert in Strategic AI Agent Architecture, Advanced Tooling Integration, and User-Centric Solutions. Specializing in frameworks like crew.ai and LangChain to build intelligent systems that deliver real business value.
+            Expert in Strategic AI Agent Architecture, Advanced Tooling Integration, and User-Centric Solutions. Specializing in building intelligent systems that deliver real business value.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
             <a
