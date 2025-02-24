@@ -11,7 +11,7 @@ const Contact = () => {
             Looking to implement strategic AI agent solutions for your business? Let's discuss how we can leverage advanced AI capabilities to solve your specific challenges.
           </p>
           <a
-            href="mailto:contact@apply.co"
+            href="mailto:james@hiapply.co"
             className="inline-block bg-primary text-primary-foreground px-8 py-3 rounded-full font-medium transition-all duration-200 hover:scale-105"
           >
             Start a Conversation
