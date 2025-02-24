@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Shield, Target, LineChart } from 'lucide-react';
+import { Shield, Target, LineChart, ExternalLink } from 'lucide-react';
 
 const About = () => {
   return (
@@ -15,6 +15,21 @@ const About = () => {
                 A US Army Veteran and C-Suite Advisor specializing in AI Solutions Architecture. With over a decade of experience leading high-stakes tech deployments for Fortune 500s and government agencies, I design agentic AI systems that work as hard as your team.
               </p>
             </div>
+
+            <a 
+              href="https://ivmf.syracuse.edu/2024/07/01/entrepreneur-spotlight-james-schlauch/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="glass p-4 rounded-lg hover:scale-[1.02] transition-transform block"
+            >
+              <div className="flex items-center gap-3">
+                <ExternalLink className="h-5 w-5 text-primary flex-shrink-0" />
+                <div>
+                  <p className="font-medium">Featured in Syracuse University's D'Aniello Institute</p>
+                  <p className="text-sm text-muted-foreground">Entrepreneur Spotlight: James Schlauch</p>
+                </div>
+              </div>
+            </a>
 
             <div className="space-y-6">
               <div className="glass p-6 rounded-lg hover:scale-[1.02] transition-transform">
