@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Code2, Database, Brain, Workflow, Users } from 'lucide-react';
 
@@ -7,13 +8,23 @@ const Tools = () => {
       icon: Workflow,
       title: "Strategic AI Architecture",
       description: "Expert in designing scalable AI agent systems and workflows that solve complex business challenges.",
-      skills: ["System Design", "Agent Orchestration", "Solution Architecture", "Workflow Automation"]
+      skills: ["System Design", "Agent Orchestration", "Solution Architecture", "Workflow Automation"],
+      caseStudy: {
+        title: "Enterprise Agent Framework",
+        description: "Architected a scalable AI agent framework for enterprise clients, implementing advanced function calling and custom tool integration. Leveraged crew.ai for sophisticated agent orchestration.",
+        tags: ["System Design", "crew.ai", "LangChain"]
+      }
     },
     {
       icon: Code2,
       title: "Advanced Tooling",
       description: "Mastery of function calling and integration of sophisticated tools for powerful AI solutions.",
-      skills: ["Function Calling", "API Integration", "Vector Databases", "Data Pipelines"]
+      skills: ["Function Calling", "API Integration", "Vector Databases", "Data Pipelines"],
+      caseStudy: {
+        title: "AI-Powered Music Education",
+        description: "Developed an innovative music education platform integrating AI for personalized learning experiences. Features adaptive curriculum and real-time feedback systems.",
+        tags: ["AI Integration", "Music Tech", "EdTech"]
+      }
     },
     {
       icon: Brain,
@@ -25,7 +36,12 @@ const Tools = () => {
       icon: Database,
       title: "Prompt Engineering",
       description: "Strategic prompt design and LLM optimization for maximum performance and accuracy.",
-      skills: ["Chain-of-Thought", "Few-Shot Learning", "Context Management", "Performance Tuning"]
+      skills: ["Chain-of-Thought", "Few-Shot Learning", "Context Management", "Performance Tuning"],
+      caseStudy: {
+        title: "Intelligent Support System",
+        description: "Developed a user-centric AI support system with advanced prompt engineering and real-time data integration. Optimized LLM performance for accurate and contextual responses.",
+        tags: ["LLM Optimization", "Vector DB", "API Integration"]
+      }
     },
     {
       icon: Users,
@@ -76,7 +92,7 @@ const Tools = () => {
                   {area.description}
                 </p>
                 
-                <div className="space-y-2">
+                <div className="space-y-2 mb-6">
                   {area.skills.map((skill, skillIndex) => (
                     <div key={skillIndex} className="flex items-center">
                       <div className="w-1.5 h-1.5 rounded-full bg-accent mr-2"></div>
@@ -84,6 +100,26 @@ const Tools = () => {
                     </div>
                   ))}
                 </div>
+
+                {area.caseStudy && (
+                  <div className="mt-6 pt-6 border-t border-border/50">
+                    <h4 className="text-lg font-semibold mb-3">Case Study: {area.caseStudy.title}</h4>
+                    <p className="text-sm text-muted-foreground mb-4">
+                      {area.caseStudy.description}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {area.caseStudy.tags.map((tag, tagIndex) => (
+                        <span 
+                          key={tagIndex} 
+                          className="bg-accent/10 text-accent px-3 py-1 rounded-full text-sm animate-scale-in" 
+                          style={{ animationDelay: `${300 + tagIndex * 50}ms` }}
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             );
           })}
