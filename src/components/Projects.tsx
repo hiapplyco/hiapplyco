@@ -13,11 +13,11 @@ const Projects = () => {
             href="https://www.harmony.works" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="inline-flex items-center px-8 py-3 rounded-lg transition-all duration-200 hover:scale-105 border-2"
+            className="inline-flex items-center px-8 py-3 rounded-full transition-all duration-200 hover:scale-105 border-2"
             style={{ 
-              background: 'linear-gradient(135deg, #222222, #000000)',
+              background: 'linear-gradient(109.6deg, rgba(223,234,247,1) 11.2%, rgba(244,248,252,1) 91.1%)',
               borderColor: '#FFD700',
-              color: '#FFFFFF'
+              color: '#222222'
             }}
           >
             harmony.works
@@ -26,7 +26,7 @@ const Projects = () => {
             href="https://www.strength.design" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="inline-flex items-center px-8 py-3 rounded-lg transition-all duration-200 hover:scale-105 border-2"
+            className="inline-flex items-center px-8 py-3 rounded-full transition-all duration-200 hover:scale-105 border-2"
             style={{ 
               background: 'linear-gradient(135deg, #ea384c, #222)',
               borderColor: '#FEF7CD',
@@ -39,7 +39,7 @@ const Projects = () => {
             href="https://www.apply.codes" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="inline-flex items-center px-8 py-3 rounded-lg transition-all duration-200 hover:scale-105"
+            className="inline-flex items-center px-8 py-3 rounded-full transition-all duration-200 hover:scale-105"
             style={{ 
               background: 'linear-gradient(135deg, #F2FCE2, #FFDEE2, #E5DEFF)',
               color: '#222',
