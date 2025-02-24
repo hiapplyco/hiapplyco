@@ -1,5 +1,6 @@
+
 import React from 'react';
-import { Send, Mail, ArrowRight } from 'lucide-react';
+import { Send, Mail } from 'lucide-react';
 
 const Contact = () => {
   return (
@@ -26,23 +27,13 @@ const Contact = () => {
             Looking to implement strategic AI agent solutions for your business? Let's discuss how we can leverage advanced AI capabilities to solve your specific challenges.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center sm:justify-start">
+          <div className="flex justify-center sm:justify-start">
             <a
               href="mailto:james@hiapply.co"
               className="inline-flex items-center justify-center gap-2 bg-accent text-white px-8 py-3 rounded-lg font-medium transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] hover:bg-accent/90"
             >
               <Send className="h-4 w-4" />
               Start a Conversation
-            </a>
-            
-            <a
-              href="https://calendly.com/james-apply"
-              target="_blank"
-              rel="noopener noreferrer" 
-              className="inline-flex items-center justify-center gap-2 border border-border bg-background px-8 py-3 rounded-lg font-medium transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] hover:bg-secondary/50"
-            >
-              Schedule a Call
-              <ArrowRight className="h-4 w-4" />
             </a>
           </div>
         </div>
