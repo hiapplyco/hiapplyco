@@ -7,6 +7,7 @@ import About from '@/components/About';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import Process from '@/components/Process';
+import LogosSection from '@/components/LogosSection';
 
 const Index = () => {
   return (
@@ -44,6 +45,7 @@ const Index = () => {
       <Process />
       <Projects />
       <Tools />
+      <LogosSection />
       <About />
       <Contact />
       <Footer />
