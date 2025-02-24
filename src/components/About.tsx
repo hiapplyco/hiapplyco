@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Shield, Target, LineChart, ExternalLink } from 'lucide-react';
 
@@ -23,14 +24,12 @@ const About = () => {
               href="https://ivmf.syracuse.edu/2024/07/01/entrepreneur-spotlight-james-schlauch/"
               target="_blank"
               rel="noopener noreferrer"
-              className="glass glass-hover p-4 rounded-lg block group"
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-background to-secondary px-6 py-3 rounded-lg border border-border/50 hover:border-accent/30 transition-all duration-300 group shadow-sm hover:shadow-md"
             >
-              <div className="flex items-center gap-3">
-                <ExternalLink className="h-5 w-5 text-accent flex-shrink-0 group-hover:rotate-12 transition-transform" />
-                <div>
-                  <p className="font-medium">Featured in Syracuse University's D'Aniello Institute</p>
-                  <p className="text-sm text-muted-foreground">Entrepreneur Spotlight: James Schlauch</p>
-                </div>
+              <ExternalLink className="h-5 w-5 text-accent flex-shrink-0 group-hover:rotate-12 transition-transform" />
+              <div>
+                <p className="font-medium">Featured in Syracuse University's D'Aniello Institute</p>
+                <p className="text-sm text-muted-foreground">Entrepreneur Spotlight: James Schlauch</p>
               </div>
             </a>
 
