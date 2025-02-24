@@ -1,3 +1,4 @@
+
 import Header from '@/components/Header';
 import Projects from '@/components/Projects';
 import Tools from '@/components/Tools';
@@ -39,14 +40,6 @@ const Index = () => {
             >
               Get in Touch
             </a>
-          </div>
-          
-          {/* Scroll Indicator */}
-          <div className="absolute left-1/2 -translate-x-1/2 bottom-10 animate-bounce hidden md:block">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 5v14"></path>
-              <path d="m19 12-7 7-7-7"></path>
-            </svg>
           </div>
         </div>
       </section>
