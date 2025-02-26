@@ -7,6 +7,7 @@ import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import Process from '@/components/Process';
 import LogosSection from '@/components/LogosSection';
+import ParticleBackground from '@/components/ParticleBackground';
 
 const Index = () => {
   return (
@@ -16,7 +17,8 @@ const Index = () => {
       {/* Hero Section */}
       <section id="home" className="relative min-h-screen flex items-center justify-center pt-20 px-6 overflow-hidden">
         {/* Background Elements */}
-        <div className="absolute inset-0 bg-grid-pattern bg-grid opacity-20 pointer-events-none"></div>
+        <div className="absolute inset-0 bg-grid-pattern bg-grid opacity-10 pointer-events-none"></div>
+        <ParticleBackground />
         <div className="absolute top-20 right-16 w-64 h-64 bg-accent/10 rounded-full blur-3xl animate-pulse pointer-events-none"></div>
         <div className="absolute bottom-20 left-16 w-80 h-80 bg-primary/5 rounded-full blur-3xl animate-pulse pointer-events-none"></div>
         
