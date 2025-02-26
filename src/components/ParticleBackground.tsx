@@ -1,5 +1,6 @@
 
 import React, { useEffect, useRef } from 'react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 class Particle {
   originX: number;
@@ -111,10 +112,11 @@ const ParticleBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const effectRef = useRef<Effect | null>(null);
   const animationFrameRef = useRef<number>();
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas || isMobile) return;
 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
@@ -160,7 +162,9 @@ const ParticleBackground = () => {
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('mousemove', handleMouseMove);
     };
-  }, []);
+  }, [isMobile]);
+
+  if (isMobile) return null;
 
   return (
     <canvas
