@@ -131,8 +131,11 @@ const ParticleBackground = () => {
     const handleMouseMove = (e: MouseEvent) => {
       if (effectRef.current) {
         const rect = canvas.getBoundingClientRect();
-        effectRef.current.mouse.x = e.clientX - rect.left;
-        effectRef.current.mouse.y = e.clientY - rect.top;
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        effectRef.current.mouse.x = x;
+        effectRef.current.mouse.y = y;
       }
     };
 
@@ -160,18 +163,15 @@ const ParticleBackground = () => {
   }, []);
 
   return (
-    <div className="fixed inset-0 w-full h-full pointer-events-none" style={{ zIndex: -1 }}>
-      <canvas
-        ref={canvasRef}
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%'
-        }}
-      />
-    </div>
+    <canvas
+      ref={canvasRef}
+      className="w-full h-full"
+      style={{
+        position: 'absolute',
+        top: 0,
+        left: 0
+      }}
+    />
   );
 };
 
