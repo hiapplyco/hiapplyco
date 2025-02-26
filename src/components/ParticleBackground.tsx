@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 
 class Particle {
@@ -138,7 +139,6 @@ const ParticleBackground = () => {
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
         
-        // Don't multiply by DPR here since we've already scaled the canvas
         effectRef.current.mouse.x = x;
         effectRef.current.mouse.y = y;
       }
@@ -171,7 +171,7 @@ const ParticleBackground = () => {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 w-full h-full pointer-events-none"
-      style={{ zIndex: 1 }}
+      style={{ zIndex: -1 }} // Changed from 1 to -1
     />
   );
 };
