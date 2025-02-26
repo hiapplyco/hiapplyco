@@ -137,8 +137,10 @@ const ParticleBackground = () => {
         const rect = canvas.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
-        effectRef.current.mouse.x = x * window.devicePixelRatio;
-        effectRef.current.mouse.y = y * window.devicePixelRatio;
+        
+        // Don't multiply by DPR here since we've already scaled the canvas
+        effectRef.current.mouse.x = x;
+        effectRef.current.mouse.y = y;
       }
     };
 
