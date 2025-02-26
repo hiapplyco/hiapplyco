@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 
 class Particle {
@@ -40,9 +39,9 @@ class Particle {
 
   draw() {
     this.ctx.fillStyle = 'hsl(var(--primary))';
-    this.ctx.globalAlpha = 0.5; // Increased opacity
+    this.ctx.globalAlpha = 0.5;
     this.ctx.beginPath();
-    this.ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); // Changed to circles
+    this.ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
     this.ctx.fill();
   }
 
@@ -81,7 +80,7 @@ class Effect {
     this.height = height;
     this.ctx = context;
     this.particlesArray = [];
-    this.gap = 20; // Decreased gap for more particles
+    this.gap = 20;
     this.mouse = {
       radius: 2000,
       x: 0,
@@ -91,10 +90,8 @@ class Effect {
   }
 
   init() {
-    // Clear previous particles
     this.particlesArray = [];
     
-    // Create new particles
     for (let y = 0; y < this.height; y += this.gap) {
       for (let x = 0; x < this.width; x += this.gap) {
         this.particlesArray.push(new Particle(x, y, this));
@@ -123,29 +120,31 @@ const ParticleBackground = () => {
     if (!ctx) return;
 
     const handleResize = () => {
-      canvas.width = window.innerWidth * window.devicePixelRatio;
-      canvas.height = window.innerHeight * window.devicePixelRatio;
+      const dpr = window.devicePixelRatio;
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
       canvas.style.width = `${window.innerWidth}px`;
       canvas.style.height = `${window.innerHeight}px`;
-      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+      ctx.scale(dpr, dpr);
 
       if (effectRef.current) {
-        effectRef.current = new Effect(canvas.width, canvas.height, ctx);
+        effectRef.current = new Effect(window.innerWidth * dpr, window.innerHeight * dpr, ctx);
       }
     };
 
     const handleMouseMove = (e: MouseEvent) => {
       if (effectRef.current) {
-        effectRef.current.mouse.x = e.clientX * window.devicePixelRatio;
-        effectRef.current.mouse.y = e.pageY * window.devicePixelRatio;
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        effectRef.current.mouse.x = x * window.devicePixelRatio;
+        effectRef.current.mouse.y = y * window.devicePixelRatio;
       }
     };
 
-    // Initial setup
     handleResize();
     effectRef.current = new Effect(canvas.width, canvas.height, ctx);
 
-    // Animation loop
     const animate = () => {
       if (effectRef.current) {
         effectRef.current.update();
@@ -154,11 +153,9 @@ const ParticleBackground = () => {
     };
     animate();
 
-    // Event listeners
     window.addEventListener('resize', handleResize);
     window.addEventListener('mousemove', handleMouseMove);
 
-    // Cleanup
     return () => {
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
