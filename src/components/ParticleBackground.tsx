@@ -40,9 +40,10 @@ class Particle {
 
   draw() {
     this.ctx.fillStyle = 'hsl(var(--primary))';
-    this.ctx.globalAlpha = 0.15;
+    this.ctx.globalAlpha = 0.5; // Increased opacity
     this.ctx.beginPath();
-    this.ctx.fillRect(this.x, this.y, this.size, this.size);
+    this.ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); // Changed to circles
+    this.ctx.fill();
   }
 
   update() {
@@ -80,9 +81,9 @@ class Effect {
     this.height = height;
     this.ctx = context;
     this.particlesArray = [];
-    this.gap = 30;
+    this.gap = 20; // Decreased gap for more particles
     this.mouse = {
-      radius: 3000,
+      radius: 2000,
       x: 0,
       y: 0
     };
@@ -90,8 +91,12 @@ class Effect {
   }
 
   init() {
-    for (let x = 0; x < this.width; x += this.gap) {
-      for (let y = 0; y < this.height; y += this.gap) {
+    // Clear previous particles
+    this.particlesArray = [];
+    
+    // Create new particles
+    for (let y = 0; y < this.height; y += this.gap) {
+      for (let x = 0; x < this.width; x += this.gap) {
         this.particlesArray.push(new Particle(x, y, this));
       }
     }
@@ -122,6 +127,7 @@ const ParticleBackground = () => {
       canvas.height = window.innerHeight * window.devicePixelRatio;
       canvas.style.width = `${window.innerWidth}px`;
       canvas.style.height = `${window.innerHeight}px`;
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
 
       if (effectRef.current) {
         effectRef.current = new Effect(canvas.width, canvas.height, ctx);
@@ -165,8 +171,8 @@ const ParticleBackground = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 w-full h-full pointer-events-none"
-      style={{ background: 'transparent' }}
+      className="fixed inset-0 w-full h-full pointer-events-none"
+      style={{ zIndex: 1 }}
     />
   );
 };
