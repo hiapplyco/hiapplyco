@@ -26,7 +26,7 @@ const Index = () => {
         <div className="absolute top-20 right-16 w-64 h-64 bg-accent/10 rounded-full blur-3xl animate-pulse pointer-events-none" style={{ zIndex: 3 }}></div>
         <div className="absolute bottom-20 left-16 w-80 h-80 bg-primary/5 rounded-full blur-3xl animate-pulse pointer-events-none" style={{ zIndex: 3 }}></div>
         
-        <div className="relative max-w-3xl mx-auto text-center" style={{ zIndex: 10 }}>
+        <div className="relative max-w-3xl mx-auto text-center glass p-8 rounded-xl" style={{ zIndex: 10 }}>
           <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-up text-balance">
             Strategic <span className="text-accent">AI Agent</span> Development
           </h1>
