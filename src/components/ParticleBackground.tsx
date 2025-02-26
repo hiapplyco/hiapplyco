@@ -35,12 +35,11 @@ class Particle {
     this.distance = 0;
     this.force = 0;
     this.angle = 0;
-    this.size = Math.floor(Math.random() * 2) + 1;
+    this.size = Math.floor(Math.random() * 3) + 2; // Increased particle size
   }
 
   draw() {
-    this.ctx.fillStyle = 'hsl(var(--primary))';
-    this.ctx.globalAlpha = 0.5;
+    this.ctx.fillStyle = 'rgba(var(--primary), 0.8)'; // Using RGB with opacity
     this.ctx.beginPath();
     this.ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
     this.ctx.fill();
@@ -81,7 +80,7 @@ class Effect {
     this.height = height;
     this.ctx = context;
     this.particlesArray = [];
-    this.gap = 20;
+    this.gap = 30; // Increased gap to reduce particle density
     this.mouse = {
       radius: 2000,
       x: 0,
@@ -121,26 +120,19 @@ const ParticleBackground = () => {
     if (!ctx) return;
 
     const handleResize = () => {
-      const dpr = window.devicePixelRatio;
-      canvas.width = window.innerWidth * dpr;
-      canvas.height = window.innerHeight * dpr;
-      canvas.style.width = `${window.innerWidth}px`;
-      canvas.style.height = `${window.innerHeight}px`;
-      ctx.scale(dpr, dpr);
-
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      
       if (effectRef.current) {
-        effectRef.current = new Effect(window.innerWidth * dpr, window.innerHeight * dpr, ctx);
+        effectRef.current = new Effect(canvas.width, canvas.height, ctx);
       }
     };
 
     const handleMouseMove = (e: MouseEvent) => {
       if (effectRef.current) {
         const rect = canvas.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        effectRef.current.mouse.x = x;
-        effectRef.current.mouse.y = y;
+        effectRef.current.mouse.x = e.clientX - rect.left;
+        effectRef.current.mouse.y = e.clientY - rect.top;
       }
     };
 
@@ -171,7 +163,13 @@ const ParticleBackground = () => {
     <div className="fixed inset-0 w-full h-full pointer-events-none" style={{ zIndex: -1 }}>
       <canvas
         ref={canvasRef}
-        className="w-full h-full"
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%'
+        }}
       />
     </div>
   );
