@@ -19,6 +19,7 @@ export class Particle {
   angle: number;
   size: number;
   color: string;
+  settlingFactor: number;
   
   constructor(x: number, y: number, effect: Effect) {
     this.originX = x;
@@ -38,6 +39,7 @@ export class Particle {
     this.angle = 0;
     this.size = Math.floor(Math.random() * 3) + 2;
     this.color = '#d1d1d1'; // Default light grey color
+    this.settlingFactor = 0.05; // Controls how quickly particles settle
   }
 
   draw() {
@@ -66,13 +68,27 @@ export class Particle {
         const normalizedDistance = Math.sqrt(this.distance) / Math.sqrt(this.effect.mouse.radius);
         this.color = this.getGradientColor(normalizedDistance);
       } else {
-        // Reduce force when mouse is static or off-page
-        this.vx += this.force * Math.cos(this.angle) * 0.3;
-        this.vy += this.force * Math.sin(this.angle) * 0.3;
-        
-        // Still show some color, but less intense
-        const normalizedDistance = Math.sqrt(this.distance) / Math.sqrt(this.effect.mouse.radius);
-        this.color = this.getGradientColor(normalizedDistance, 0.7);
+        // When mouse is static, gradually return to origin with decreasing force
+        if (this.effect.mouse.isStatic) {
+          // Gradually reduce the force as particles settle
+          const staticFactor = 0.3 * Math.max(0, 1 - (Date.now() - this.effect.mouse.lastMoveTime) / 4000);
+          this.vx += this.force * Math.cos(this.angle) * staticFactor;
+          this.vy += this.force * Math.sin(this.angle) * staticFactor;
+          
+          // Fade color back to default as particles settle
+          const normalizedDistance = Math.sqrt(this.distance) / Math.sqrt(this.effect.mouse.radius);
+          const timeSinceLastMove = Date.now() - this.effect.mouse.lastMoveTime;
+          const colorFadeFactor = Math.max(0, 1 - timeSinceLastMove / 3000);
+          this.color = this.getGradientColor(normalizedDistance, colorFadeFactor);
+        } else {
+          // Reduced force when mouse is static or off-page
+          this.vx += this.force * Math.cos(this.angle) * 0.3;
+          this.vy += this.force * Math.sin(this.angle) * 0.3;
+          
+          // Still show some color, but less intense
+          const normalizedDistance = Math.sqrt(this.distance) / Math.sqrt(this.effect.mouse.radius);
+          this.color = this.getGradientColor(normalizedDistance, 0.7);
+        }
       }
     } else {
       // Default color when outside radius
@@ -80,10 +96,27 @@ export class Particle {
     }
 
     // Apply more friction when mouse is inactive
-    const currentFriction = this.effect.mouse.isActive ? this.friction : this.friction * 0.98;
+    let currentFriction = this.friction;
+    if (this.effect.mouse.isStatic) {
+      // Increase friction as time passes when static
+      const timeSinceLastMove = Date.now() - this.effect.mouse.lastMoveTime;
+      const maxFrictionReduction = 0.05;
+      const frictionReduction = Math.min(maxFrictionReduction, timeSinceLastMove / 3000 * maxFrictionReduction);
+      currentFriction = this.friction - frictionReduction;
+    } else if (!this.effect.mouse.isActive) {
+      currentFriction = this.friction * 0.98;
+    }
     
-    this.x += (this.vx *= currentFriction) + (this.originX - this.x) * this.ease;
-    this.y += (this.vy *= currentFriction) + (this.originY - this.y) * this.ease;
+    // Gradually return to origin position with increased ease factor when static
+    let currentEase = this.ease;
+    if (this.effect.mouse.isStatic) {
+      const timeSinceLastMove = Date.now() - this.effect.mouse.lastMoveTime;
+      const easeIncrease = Math.min(0.3, timeSinceLastMove / 3000 * 0.3);
+      currentEase = this.ease + easeIncrease;
+    }
+    
+    this.x += (this.vx *= currentFriction) + (this.originX - this.x) * currentEase;
+    this.y += (this.vy *= currentFriction) + (this.originY - this.y) * currentEase;
     this.draw();
   }
 

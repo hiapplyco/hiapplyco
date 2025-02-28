@@ -13,6 +13,7 @@ export class Effect {
     y: number;
     isActive: boolean;
     lastMoveTime: number;
+    isStatic: boolean;
   };
 
   constructor(width: number, height: number, context: CanvasRenderingContext2D) {
@@ -26,7 +27,8 @@ export class Effect {
       x: 0,
       y: 0,
       isActive: false,
-      lastMoveTime: 0
+      lastMoveTime: 0,
+      isStatic: false
     };
     this.init();
   }
@@ -46,10 +48,11 @@ export class Effect {
     
     // Check if mouse has been inactive for more than 2 seconds
     const now = Date.now();
-    const isMouseStatic = now - this.mouse.lastMoveTime > 2000;
+    const timeSinceLastMove = now - this.mouse.lastMoveTime;
+    this.mouse.isStatic = timeSinceLastMove > 1000; // Mark as static after 1 second
     
     // Set isActive based on mouse movement and presence on page
-    this.mouse.isActive = !isMouseStatic && this.mouse.x > 0;
+    this.mouse.isActive = !this.mouse.isStatic && this.mouse.x > 0;
     
     for (let i = 0; i < this.particlesArray.length; i++) {
       this.particlesArray[i].update();
