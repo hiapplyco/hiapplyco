@@ -24,6 +24,7 @@ export class Particle {
   sizeOscillation: number;
   oscillationSpeed: number;
   oscillationPhase: number;
+  defaultColor: string = '#d1d1d1'; // Store default color as a constant
 
   constructor(x: number, y: number, effect: Effect) {
     this.originX = x;
@@ -51,7 +52,7 @@ export class Particle {
     this.oscillationSpeed = Math.random() * 0.05 + 0.01; // Different speeds for different particles
     this.oscillationPhase = Math.random() * Math.PI * 2; // Random starting phase
     
-    this.color = '#d1d1d1'; // Default light grey color
+    this.color = this.defaultColor; // Default light grey color
     this.lastColor = this.color; // Cache the last color to avoid unnecessary string operations
   }
 
@@ -83,7 +84,7 @@ export class Particle {
       this.y += (this.originY - this.y) * returnEase;
       
       // Reset to default color
-      this.color = '#d1d1d1'; // Light grey
+      this.color = this.defaultColor;
       
       this.draw();
       return;
@@ -98,9 +99,7 @@ export class Particle {
     const dynamicRadius = this.effect.getMouseSpeedRadius();
     
     // Determine if particle is within the mouse radius
-    const withinRadius = this.distance <= dynamicRadius;
-    
-    if (withinRadius) {
+    if (this.distance <= dynamicRadius) {
       // Only apply force and color changes to particles within the radius
       this.force = -dynamicRadius / this.distance * 8;
       this.angle = Math.atan2(this.dy, this.dx);
@@ -111,14 +110,16 @@ export class Particle {
       const normalizedDistance = Math.sqrt(this.distance) / Math.sqrt(dynamicRadius);
       this.color = this.getGradientColor(normalizedDistance);
     } else {
-      // For particles outside the radius, gradually return to default color
-      this.color = '#d1d1d1'; // Light grey
+      // For particles outside the radius, always use default color
+      this.color = this.defaultColor;
       
       // If particle is very close to its origin and not being influenced, skip further calculations
       const distToOrigin = Math.pow(this.x - this.originX, 2) + Math.pow(this.y - this.originY, 2);
       if (distToOrigin < 1 && Math.abs(this.vx) < 0.01 && Math.abs(this.vy) < 0.01) {
         this.x = this.originX;
         this.y = this.originY;
+        this.vx = 0;
+        this.vy = 0;
         this.draw();
         return;
       }
