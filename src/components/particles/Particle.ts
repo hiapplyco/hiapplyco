@@ -83,15 +83,13 @@ export class Particle {
       this.y += (this.originY - this.y) * returnEase;
       
       // Reset to default color
-      if (this.color !== '#d1d1d1') {
-        this.color = '#d1d1d1'; // Light grey
-      }
+      this.color = '#d1d1d1'; // Light grey
       
       this.draw();
       return;
     }
     
-    // Only proceed with mouse interaction calculations if mouse is active
+    // Calculate distance from particle to mouse for all particles
     this.dx = this.effect.mouse.x - this.x;
     this.dy = this.effect.mouse.y - this.y;
     this.distance = this.dx * this.dx + this.dy * this.dy;
@@ -99,11 +97,13 @@ export class Particle {
     // Get the dynamic radius based on mouse speed
     const dynamicRadius = this.effect.getMouseSpeedRadius();
     
-    // Early exit if too far from mouse (optimization)
-    if (this.distance > dynamicRadius) {
-      if (this.color !== '#d1d1d1') {
-        this.color = '#d1d1d1'; // Light grey
-      }
+    // Determine if particle is outside the mouse radius
+    const outsideRadius = this.distance > dynamicRadius;
+    
+    // Set color based on distance from mouse
+    if (outsideRadius) {
+      // If outside radius, always use default color
+      this.color = '#d1d1d1'; // Light grey
       
       // If particle is close to its origin, skip further calculations
       const distToOrigin = Math.pow(this.x - this.originX, 2) + Math.pow(this.y - this.originY, 2);
@@ -114,7 +114,8 @@ export class Particle {
         return;
       }
     } else {
-      // Calculate force only when within mouse radius - scale by normalized distance
+      // Only calculate force and colors when within mouse radius
+      // Calculate force - scale by normalized distance
       this.force = -dynamicRadius / this.distance * 8;
       this.angle = Math.atan2(this.dy, this.dx);
       this.vx += this.force * Math.cos(this.angle);
