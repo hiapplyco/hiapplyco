@@ -89,7 +89,7 @@ export class Particle {
       return;
     }
     
-    // Calculate distance from particle to mouse for all particles
+    // Calculate distance from particle to mouse
     this.dx = this.effect.mouse.x - this.x;
     this.dy = this.effect.mouse.y - this.y;
     this.distance = this.dx * this.dx + this.dy * this.dy;
@@ -97,25 +97,11 @@ export class Particle {
     // Get the dynamic radius based on mouse speed
     const dynamicRadius = this.effect.getMouseSpeedRadius();
     
-    // Determine if particle is outside the mouse radius
-    const outsideRadius = this.distance > dynamicRadius;
+    // Determine if particle is within the mouse radius
+    const withinRadius = this.distance <= dynamicRadius;
     
-    // Set color based on distance from mouse
-    if (outsideRadius) {
-      // If outside radius, always use default color
-      this.color = '#d1d1d1'; // Light grey
-      
-      // If particle is close to its origin, skip further calculations
-      const distToOrigin = Math.pow(this.x - this.originX, 2) + Math.pow(this.y - this.originY, 2);
-      if (distToOrigin < 1) {
-        this.x = this.originX;
-        this.y = this.originY;
-        this.draw();
-        return;
-      }
-    } else {
-      // Only calculate force and colors when within mouse radius
-      // Calculate force - scale by normalized distance
+    if (withinRadius) {
+      // Only apply force and color changes to particles within the radius
       this.force = -dynamicRadius / this.distance * 8;
       this.angle = Math.atan2(this.dy, this.dx);
       this.vx += this.force * Math.cos(this.angle);
@@ -124,9 +110,21 @@ export class Particle {
       // Apply color gradient based on distance from cursor
       const normalizedDistance = Math.sqrt(this.distance) / Math.sqrt(dynamicRadius);
       this.color = this.getGradientColor(normalizedDistance);
+    } else {
+      // For particles outside the radius, gradually return to default color
+      this.color = '#d1d1d1'; // Light grey
+      
+      // If particle is very close to its origin and not being influenced, skip further calculations
+      const distToOrigin = Math.pow(this.x - this.originX, 2) + Math.pow(this.y - this.originY, 2);
+      if (distToOrigin < 1 && Math.abs(this.vx) < 0.01 && Math.abs(this.vy) < 0.01) {
+        this.x = this.originX;
+        this.y = this.originY;
+        this.draw();
+        return;
+      }
     }
 
-    // Simplified position update for better performance
+    // Update position - return to origin with easing
     this.x += (this.vx *= this.friction) + (this.originX - this.x) * this.ease;
     this.y += (this.vy *= this.friction) + (this.originY - this.y) * this.ease;
     
