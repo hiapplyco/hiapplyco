@@ -16,6 +16,7 @@ export class Effect {
   fps: number;
   nextFrame: number;
   isLowPerformance: boolean;
+  time: number; // Time counter for animations
 
   constructor(width: number, height: number, context: CanvasRenderingContext2D) {
     this.width = width;
@@ -32,6 +33,7 @@ export class Effect {
     this.fps = 60;
     this.nextFrame = 0;
     this.isLowPerformance = false;
+    this.time = 0; // Initialize time counter
     
     // Determine if device is low performance based on initial render time
     this.detectPerformance();
@@ -79,6 +81,11 @@ export class Effect {
   }
 
   update(timestamp: number) {
+    // Update global time counter for animations
+    const deltaTime = timestamp - this.lastTime;
+    this.lastTime = timestamp;
+    this.time += deltaTime * 0.001; // Convert to seconds
+    
     // Skip frames on low-performance devices
     if (this.isLowPerformance) {
       if (timestamp < this.nextFrame) {
@@ -108,7 +115,8 @@ export class Effect {
         }
       }
       
-      particle.update();
+      // Pass deltaTime to the particle update
+      particle.update(deltaTime);
     }
   }
 }

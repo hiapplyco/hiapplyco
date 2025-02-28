@@ -18,8 +18,12 @@ export class Particle {
   force: number;
   angle: number;
   size: number;
+  baseSize: number;
   color: string;
   lastColor: string;
+  sizeOscillation: number;
+  oscillationSpeed: number;
+  oscillationPhase: number;
 
   constructor(x: number, y: number, effect: Effect) {
     this.originX = x;
@@ -37,7 +41,16 @@ export class Particle {
     this.distance = 0;
     this.force = 0;
     this.angle = 0;
-    this.size = this.effect.isLowPerformance ? 2 : (Math.floor(Math.random() * 3) + 2);
+    
+    // Size variation - base size is now random within a range
+    this.baseSize = this.effect.isLowPerformance ? 2 : (Math.random() * 3 + 1.5);
+    this.size = this.baseSize;
+    
+    // Animation properties
+    this.sizeOscillation = Math.random() * 0.5 + 0.3; // Variation in size during animation
+    this.oscillationSpeed = Math.random() * 0.05 + 0.01; // Different speeds for different particles
+    this.oscillationPhase = Math.random() * Math.PI * 2; // Random starting phase
+    
     this.color = '#d1d1d1'; // Default light grey color
     this.lastColor = this.color; // Cache the last color to avoid unnecessary string operations
   }
@@ -54,10 +67,16 @@ export class Particle {
     this.ctx.fill();
   }
 
-  update() {
+  update(deltaTime: number = 16.67) { // Default to ~60fps timing if not provided
     this.dx = this.effect.mouse.x - this.x;
     this.dy = this.effect.mouse.y - this.y;
     this.distance = this.dx * this.dx + this.dy * this.dy;
+    
+    // Animate size - subtle breathing effect
+    if (!this.effect.isLowPerformance) {
+      // Use time-based animation with phase for more organic movement
+      this.size = this.baseSize + Math.sin(this.oscillationPhase + this.effect.time * this.oscillationSpeed) * this.sizeOscillation;
+    }
     
     // Early exit if too far from mouse (optimization)
     if (this.distance > this.effect.mouse.radius) {
