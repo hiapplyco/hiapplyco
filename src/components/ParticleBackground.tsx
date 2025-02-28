@@ -60,7 +60,7 @@ class Particle {
       this.vx += this.force * Math.cos(this.angle);
       this.vy += this.force * Math.sin(this.angle);
       
-      // Apply color gradient based on distance
+      // Apply color gradient based on distance - with higher color intensity
       const normalizedDistance = Math.sqrt(this.distance) / Math.sqrt(this.effect.mouse.radius);
       this.color = this.getGradientColor(normalizedDistance);
     } else {
@@ -74,16 +74,17 @@ class Particle {
   }
 
   getGradientColor(normalizedDistance: number) {
-    // Create a gradient from purple to light blue
-    const purple = { r: 155, g: 135, b: 245 }; // #9b87f5
-    const lightBlue = { r: 172, g: 206, b: 238 }; // #accbee
+    // Create more vibrant gradient colors
+    const purple = { r: 128, g: 0, b: 255 }; // Bright purple #8000ff
+    const pink = { r: 255, g: 0, b: 128 }; // Vibrant pink #ff0080
     
     // Interpolate between the colors based on distance
-    const r = Math.floor(purple.r + (lightBlue.r - purple.r) * normalizedDistance);
-    const g = Math.floor(purple.g + (lightBlue.g - purple.g) * normalizedDistance);
-    const b = Math.floor(purple.b + (lightBlue.b - purple.b) * normalizedDistance);
+    const r = Math.floor(purple.r + (pink.r - purple.r) * normalizedDistance);
+    const g = Math.floor(purple.g + (pink.g - purple.g) * normalizedDistance);
+    const b = Math.floor(purple.b + (pink.b - purple.b) * normalizedDistance);
     
-    return `rgba(${r}, ${g}, ${b}, 0.8)`;
+    // Increased opacity for better visibility
+    return `rgba(${r}, ${g}, ${b}, 1.0)`;
   }
 }
 
@@ -106,7 +107,7 @@ class Effect {
     this.particlesArray = [];
     this.gap = 30; // Increased gap to reduce particle density
     this.mouse = {
-      radius: 2000,
+      radius: 3000, // Increased radius for wider effect area
       x: 0,
       y: 0
     };
