@@ -4,10 +4,10 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { Effect } from './Effect';
 
 interface ParticleBackgroundProps {
-  targetElementIds?: string[]; // IDs of elements to apply the effect to
+  targetElementIds?: string[]; // IDs of elements to apply the effect to (no longer used)
 }
 
-const ParticleBackground: React.FC<ParticleBackgroundProps> = ({ targetElementIds = [] }) => {
+const ParticleBackground: React.FC<ParticleBackgroundProps> = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const effectRef = useRef<Effect | null>(null);
   const animationFrameRef = useRef<number>();
@@ -25,7 +25,7 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = ({ targetElementId
     const handleResize = () => {
       // Set canvas dimensions to match window size
       canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      canvas.height = window.innerHeight * 2; // Make canvas taller to cover the entire page
       
       // Reset animation when window is resized
       if (animationFrameRef.current) {
@@ -35,38 +35,8 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = ({ targetElementId
       // Create new effect with updated dimensions
       effectRef.current = new Effect(canvas.width, canvas.height, ctx);
       
-      // Update element bounds after resize
-      updateElementBounds();
-      
       // Restart animation
       animationFrameRef.current = requestAnimationFrame(animate);
-    };
-
-    const updateElementBounds = () => {
-      if (!effectRef.current) return;
-      
-      // If targetElementIds is provided, use those elements
-      if (targetElementIds.length > 0) {
-        const elements = targetElementIds
-          .map(id => document.getElementById(id))
-          .filter(el => el !== null) as HTMLElement[];
-        
-        if (elements.length > 0) {
-          effectRef.current.setElementBounds(elements);
-        }
-      } else {
-        // If no specific elements provided, use sections with the 'glass' class
-        const glassElements = Array.from(document.querySelectorAll('.glass')) as HTMLElement[];
-        if (glassElements.length > 0) {
-          effectRef.current.setElementBounds(glassElements);
-        } else {
-          // Fallback to main sections if no glass elements
-          const sections = Array.from(document.querySelectorAll('section')) as HTMLElement[];
-          if (sections.length > 0) {
-            effectRef.current.setElementBounds(sections);
-          }
-        }
-      }
     };
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -78,9 +48,9 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = ({ targetElementId
       lastMouseMoveRef.current = now;
       
       if (effectRef.current) {
-        const rect = canvas.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+        // Use clientX and clientY for accurate mouse position relative to viewport
+        const x = e.clientX;
+        const y = e.clientY + window.scrollY; // Add scrollY to account for page scroll
         
         // Update mouse position and calculate speed
         effectRef.current.updateMouseSpeed(x, y);
@@ -98,9 +68,6 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = ({ targetElementId
     };
 
     const handleScroll = () => {
-      // Update element bounds on scroll to capture new positions
-      updateElementBounds();
-      
       // Force redraw on scroll to ensure particles are visible
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
@@ -120,35 +87,14 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = ({ targetElementId
     canvas.height = window.innerHeight * 2; // Make canvas taller to cover the entire page
     effectRef.current = new Effect(canvas.width, canvas.height, ctx);
     
-    // Set initial element bounds
-    updateElementBounds();
-    
     // Start animation
     animate(0);
 
     // Add event listeners
     window.addEventListener('resize', handleResize);
     window.addEventListener('scroll', handleScroll);
-    canvas.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mousemove', handleMouseMove); // Listen on document instead of canvas
     canvas.addEventListener('mouseleave', handleMouseLeave);
-
-    // Track element changes and update bounds periodically
-    const elementObserver = new ResizeObserver(() => {
-      updateElementBounds();
-    });
-    
-    // Observe target elements for changes
-    if (targetElementIds.length > 0) {
-      targetElementIds.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) elementObserver.observe(el);
-      });
-    } else {
-      // Observe glass elements or sections if no specific targets
-      document.querySelectorAll('.glass, section').forEach(el => {
-        elementObserver.observe(el);
-      });
-    }
 
     // Track visibility changes to pause animation when tab is not visible
     const handleVisibilityChange = () => {
@@ -161,37 +107,26 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = ({ targetElementId
     
     document.addEventListener('visibilitychange', handleVisibilityChange);
 
-    // Periodically check and update element bounds to ensure accuracy
-    const intervalId = setInterval(() => {
-      updateElementBounds();
-      // Force redraw
-      if (effectRef.current) {
-        effectRef.current.shouldDrawAllParticles = true;
-      }
-    }, 1000);
-
     return () => {
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('scroll', handleScroll);
-      canvas.removeEventListener('mousemove', handleMouseMove);
-      canvas.removeEventListener('mouseleave', handleMouseLeave);
+      document.removeEventListener('mousemove', handleMouseMove);
+      canvas.addEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
-      elementObserver.disconnect();
-      clearInterval(intervalId);
     };
-  }, [isMobile, hasInteracted, targetElementIds]);
+  }, [isMobile, hasInteracted]);
 
   if (isMobile) return null;
 
   return (
     <canvas
       ref={canvasRef}
-      className="w-full h-full fixed inset-0 pointer-events-auto"
+      className="w-full h-full fixed inset-0 pointer-events-none"
       style={{
-        position: 'absolute',
+        position: 'fixed', // Use fixed instead of absolute
         top: 0,
         left: 0,
         zIndex: 1

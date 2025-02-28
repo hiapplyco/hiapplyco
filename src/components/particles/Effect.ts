@@ -1,6 +1,6 @@
 
 import { Particle } from './Particle';
-import { MouseState, ElementBounds } from './types';
+import { MouseState } from './types';
 import { detectPerformance } from './utils/performance';
 import { createParticleGrid, getVisibleParticles } from './utils/particleManager';
 import { getMouseSpeedRadius, updateMouseSpeed } from './utils/mouseUtils';
@@ -21,7 +21,6 @@ export class Effect {
   baseRadius: number; // Base radius for cursor effect
   maxRadius: number; // Maximum radius for fast cursor movements
   mouseInactivityTimer: number; // Time since last mouse activity
-  elementBounds: ElementBounds[] = []; // Bounds of elements to apply effect to
   shouldDrawAllParticles: boolean = true; // By default, draw all particles
 
   constructor(width: number, height: number, context: CanvasRenderingContext2D) {
@@ -71,43 +70,14 @@ export class Effect {
     );
   }
 
-  // Set the boundaries of elements that should have the effect
-  setElementBounds(elements: HTMLElement[]) {
-    this.elementBounds = elements.map(el => {
-      const rect = el.getBoundingClientRect();
-      return {
-        id: el.id || 'unnamed-element',
-        top: rect.top,
-        left: rect.left,
-        right: rect.right,
-        bottom: rect.bottom,
-        width: rect.width,
-        height: rect.height
-      };
-    });
-
-    console.log('Set element bounds:', this.elementBounds);
-  }
-
   // Make the dynamic radius calculation method available for particles
   getMouseSpeedRadius(): number {
     return getMouseSpeedRadius(this.mouse, this.baseRadius, this.maxRadius);
   }
 
-  // Check if a point is within any of the tracked element bounds
-  isPointInElements(x: number, y: number): boolean {
-    if (this.elementBounds.length === 0) return true; // If no elements specified, affect the whole canvas
-    
-    // Check if the point is within any of the elements or in a small gap between elements
-    return this.elementBounds.some(bounds => 
-      x >= bounds.left && x <= bounds.right && 
-      (y >= bounds.top - 100 && y <= bounds.bottom + 100) // Add a 100px buffer above and below each element
-    );
-  }
-
   // Update mouse position and calculate speed
   updateMouseSpeed(x: number, y: number) {
-    // Always update mouse position regardless of whether it's in an element
+    // Always update mouse position
     const result = updateMouseSpeed(this.mouse, x, y, this.mouseInactivityTimer);
     
     this.mouse = result.updatedMouse;
