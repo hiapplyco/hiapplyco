@@ -1,5 +1,9 @@
 
 import { Particle } from './Particle';
+import { MouseState } from './types';
+import { detectPerformance } from './utils/performance';
+import { createParticleGrid, getVisibleParticles } from './utils/particleManager';
+import { getMouseSpeedRadius, updateMouseSpeed } from './utils/mouseUtils';
 
 export class Effect {
   width: number;
@@ -7,16 +11,7 @@ export class Effect {
   ctx: CanvasRenderingContext2D;
   particlesArray: Particle[];
   gap: number;
-  mouse: {
-    radius: number;
-    x: number;
-    y: number;
-    prevX: number;
-    prevY: number;
-    speedX: number;
-    speedY: number;
-    speed: number;
-  };
+  mouse: MouseState;
   lastTime: number;
   fps: number;
   nextFrame: number;
@@ -31,8 +26,6 @@ export class Effect {
     this.width = width;
     this.height = height;
     this.ctx = context;
-    this.particlesArray = [];
-    this.gap = 30; // Default gap
     
     // Base radius and max radius for cursor effect
     this.baseRadius = 1500;
@@ -50,94 +43,44 @@ export class Effect {
     };
     
     this.lastTime = 0;
-    this.fps = 60;
-    this.nextFrame = 0;
-    this.isLowPerformance = false;
     this.time = 0; // Initialize time counter
     this.isMouseActive = false; // Initialize mouse activity state
     this.mouseInactivityTimer = 0; // Initialize mouse inactivity timer
     
-    // Determine if device is low performance based on initial render time
-    this.detectPerformance();
+    // Determine performance and set appropriate values
+    const perfResult = detectPerformance(this.ctx);
+    this.isLowPerformance = perfResult.isLowPerformance;
+    this.gap = perfResult.gap;
+    this.fps = perfResult.fps;
+    this.nextFrame = 0;
+    
+    // Initialize particle array
+    this.particlesArray = [];
     this.init();
   }
 
-  detectPerformance() {
-    const start = performance.now();
-    
-    // Create a small batch of test particles
-    const testParticles = [];
-    for (let i = 0; i < 100; i++) {
-      testParticles.push(new Particle(0, 0, this));
-    }
-    
-    // Render test batch
-    for (let i = 0; i < testParticles.length; i++) {
-      testParticles[i].draw();
-    }
-    
-    const end = performance.now();
-    const renderTime = end - start;
-    
-    // If rendering takes more than 10ms for 100 particles, consider it a low-performance device
-    if (renderTime > 10) {
-      this.isLowPerformance = true;
-      this.gap = 50; // Increase gap (fewer particles) for low-performance devices
-      this.fps = 30; // Lower target FPS
-    }
-    
-    console.log(`Performance test: ${renderTime.toFixed(2)}ms for 100 particles. Low performance mode: ${this.isLowPerformance}`);
-  }
-
   init() {
-    this.particlesArray = [];
-    
-    // Skip every other row and column on low-performance devices
-    const skipFactor = this.isLowPerformance ? 2 : 1;
-    
-    for (let y = 0; y < this.height; y += this.gap * skipFactor) {
-      for (let x = 0; x < this.width; x += this.gap * skipFactor) {
-        this.particlesArray.push(new Particle(x, y, this));
-      }
-    }
-    
-    console.log(`Created ${this.particlesArray.length} particles. Low performance mode: ${this.isLowPerformance}`);
+    this.particlesArray = createParticleGrid(
+      this.width, 
+      this.height, 
+      this.gap, 
+      this.isLowPerformance, 
+      this
+    );
   }
 
-  // Calculate dynamic radius based on mouse speed
-  getMouseSpeedRadius() {
-    // Scale radius based on mouse speed
-    // When speed is 0, use baseRadius
-    // When speed is high (>20), use maxRadius
-    const speedFactor = Math.min(this.mouse.speed / 20, 1);
-    return this.baseRadius + (this.maxRadius - this.baseRadius) * speedFactor;
+  // Make the dynamic radius calculation method available for particles
+  getMouseSpeedRadius(): number {
+    return getMouseSpeedRadius(this.mouse, this.baseRadius, this.maxRadius);
   }
 
   // Update mouse position and calculate speed
   updateMouseSpeed(x: number, y: number) {
-    // Store previous position
-    this.mouse.prevX = this.mouse.x;
-    this.mouse.prevY = this.mouse.y;
+    const result = updateMouseSpeed(this.mouse, x, y, this.mouseInactivityTimer);
     
-    // Update current position
-    this.mouse.x = x;
-    this.mouse.y = y;
-    
-    // Calculate speed (distance moved since last frame)
-    this.mouse.speedX = Math.abs(this.mouse.x - this.mouse.prevX);
-    this.mouse.speedY = Math.abs(this.mouse.y - this.mouse.prevY);
-    
-    // Calculate total speed (Euclidean distance)
-    this.mouse.speed = Math.sqrt(
-      Math.pow(this.mouse.speedX, 2) + 
-      Math.pow(this.mouse.speedY, 2)
-    );
-    
-    // Reset inactivity timer
-    this.mouseInactivityTimer = 0;
-    
-    // Update mouse activity state
-    this.isMouseActive = true;
+    this.mouse = result.updatedMouse;
+    this.mouseInactivityTimer = result.mouseInactivityTimer;
+    this.isMouseActive = result.isMouseActive;
   }
 
   update(timestamp: number) {
@@ -169,44 +112,17 @@ export class Effect {
     
     this.ctx.clearRect(0, 0, this.width, this.height);
     
-    // Determine particles to update based on viewport and mouse position
-    const viewportParticles = this.getVisibleParticles();
+    // Get particles that are visible or influenced by mouse
+    const viewportParticles = getVisibleParticles(
+      this.particlesArray, 
+      this.isLowPerformance, 
+      this.mouse, 
+      this.getMouseSpeedRadius()
+    );
     
     // Update particles that are visible or influenced by mouse
     for (let i = 0; i < viewportParticles.length; i++) {
       viewportParticles[i].update(deltaTime, this.isMouseActive);
     }
-  }
-  
-  // Get particles that are visible or influenced by mouse
-  getVisibleParticles() {
-    if (!this.isLowPerformance) {
-      return this.particlesArray;
-    }
-    
-    const result = [];
-    const mouseRadius = this.getMouseSpeedRadius();
-    
-    // For low performance mode, only update particles near the mouse or that have moved from origin
-    for (let i = 0; i < this.particlesArray.length; i++) {
-      const particle = this.particlesArray[i];
-      
-      // Calculate distance to mouse
-      const dx = particle.x - this.mouse.x;
-      const dy = particle.y - this.mouse.y;
-      const distToMouse = dx * dx + dy * dy;
-      
-      // Calculate distance to origin
-      const dxOrigin = particle.x - particle.originX;
-      const dyOrigin = particle.y - particle.originY;
-      const distToOrigin = dxOrigin * dxOrigin + dyOrigin * dyOrigin;
-      
-      // Include particle if it's near mouse or has moved from its origin
-      if (distToMouse < mouseRadius * 1.5 || distToOrigin > 1) {
-        result.push(particle);
-      }
-    }
-    
-    return result;
   }
 }
