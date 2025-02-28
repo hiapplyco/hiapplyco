@@ -14,8 +14,8 @@ const Index = () => {
     <div className="min-h-screen bg-background text-foreground font-sans antialiased">
       <Header />
       
-      {/* Particle background with proper z-index to appear throughout the entire page */}
-      <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 1 }}>
+      {/* Particle background layer */}
+      <div className="fixed inset-0 w-full h-full" style={{ zIndex: 1 }}>
         <ParticleBackground targetElementIds={['home', 'process', 'projects', 'tools', 'about', 'contact']} />
       </div>
 

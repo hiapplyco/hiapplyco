@@ -100,6 +100,12 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = ({ targetElementId
     const handleScroll = () => {
       // Update element bounds on scroll to capture new positions
       updateElementBounds();
+      
+      // Force redraw on scroll to ensure particles are visible
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+      animationFrameRef.current = requestAnimationFrame(animate);
     };
 
     const animate = (timestamp: number) => {
@@ -111,7 +117,7 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = ({ targetElementId
 
     // Initialize canvas size and effect
     canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    canvas.height = window.innerHeight * 2; // Make canvas taller to cover the entire page
     effectRef.current = new Effect(canvas.width, canvas.height, ctx);
     
     // Set initial element bounds
@@ -156,7 +162,13 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = ({ targetElementId
     document.addEventListener('visibilitychange', handleVisibilityChange);
 
     // Periodically check and update element bounds to ensure accuracy
-    const intervalId = setInterval(updateElementBounds, 2000);
+    const intervalId = setInterval(() => {
+      updateElementBounds();
+      // Force redraw
+      if (effectRef.current) {
+        effectRef.current.shouldDrawAllParticles = true;
+      }
+    }, 1000);
 
     return () => {
       if (animationFrameRef.current) {
@@ -181,7 +193,8 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = ({ targetElementId
       style={{
         position: 'absolute',
         top: 0,
-        left: 0
+        left: 0,
+        zIndex: 1
       }}
     />
   );

@@ -22,6 +22,7 @@ export class Effect {
   maxRadius: number; // Maximum radius for fast cursor movements
   mouseInactivityTimer: number; // Time since last mouse activity
   elementBounds: ElementBounds[] = []; // Bounds of elements to apply effect to
+  shouldDrawAllParticles: boolean = true; // By default, draw all particles
 
   constructor(width: number, height: number, context: CanvasRenderingContext2D) {
     this.width = width;
@@ -97,27 +98,21 @@ export class Effect {
   isPointInElements(x: number, y: number): boolean {
     if (this.elementBounds.length === 0) return true; // If no elements specified, affect the whole canvas
     
+    // Check if the point is within any of the elements or in a small gap between elements
     return this.elementBounds.some(bounds => 
-      x >= bounds.left && x <= bounds.right && y >= bounds.top && y <= bounds.bottom
+      x >= bounds.left && x <= bounds.right && 
+      (y >= bounds.top - 100 && y <= bounds.bottom + 100) // Add a 100px buffer above and below each element
     );
   }
 
   // Update mouse position and calculate speed
   updateMouseSpeed(x: number, y: number) {
-    // Only update if the mouse is within one of our elements
-    if (this.isPointInElements(x, y)) {
-      const result = updateMouseSpeed(this.mouse, x, y, this.mouseInactivityTimer);
-      
-      this.mouse = result.updatedMouse;
-      this.mouseInactivityTimer = result.mouseInactivityTimer;
-      this.isMouseActive = result.isMouseActive;
-    } else {
-      // If mouse leaves all elements, consider it inactive
-      this.mouseInactivityTimer += 100; // Accelerate inactivity
-      if (this.mouseInactivityTimer > 500) {
-        this.isMouseActive = false;
-      }
-    }
+    // Always update mouse position regardless of whether it's in an element
+    const result = updateMouseSpeed(this.mouse, x, y, this.mouseInactivityTimer);
+    
+    this.mouse = result.updatedMouse;
+    this.mouseInactivityTimer = result.mouseInactivityTimer;
+    this.isMouseActive = result.isMouseActive;
   }
 
   update(timestamp: number) {
@@ -152,17 +147,12 @@ export class Effect {
       this.getMouseSpeedRadius()
     );
     
-    // Update particles that are visible or influenced by mouse
+    // Update all particles to ensure they appear throughout the page
     for (let i = 0; i < viewportParticles.length; i++) {
       const particle = viewportParticles[i];
       
-      // Only animate particles within our target elements
-      if (this.isPointInElements(particle.x, particle.y)) {
-        particle.update(deltaTime, this.isMouseActive);
-      } else {
-        // Still draw particles outside elements but don't animate them
-        particle.draw();
-      }
+      // Always draw and animate the particle
+      particle.update(deltaTime, this.isMouseActive);
     }
   }
 }
