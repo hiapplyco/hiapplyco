@@ -24,6 +24,9 @@ export class Particle {
   oscillationSpeed: number;
   oscillationPhase: number;
   defaultColor: string = '#d1d1d1'; // Default light grey color
+  neonColors: string[] = ['#8B5CF6', '#D946EF', '#F97316', '#0EA5E9', '#1EAEDB', '#0FA0CE']; // Neon color palette
+  activeColor: string;
+  isNearMouse: boolean = false;
 
   constructor(x: number, y: number, effect: Effect) {
     this.originX = x;
@@ -51,12 +54,14 @@ export class Particle {
     this.oscillationSpeed = Math.random() * 0.05 + 0.01; // Different speeds for different particles
     this.oscillationPhase = Math.random() * Math.PI * 2; // Random starting phase
     
-    this.color = this.defaultColor; // Initialize with default color only
+    // Randomly select a neon color for this particle to use when active
+    this.activeColor = this.neonColors[Math.floor(Math.random() * this.neonColors.length)];
+    this.color = this.defaultColor; // Initialize with default color
   }
 
   draw() {
-    // Set fillStyle to default color
-    this.ctx.fillStyle = this.defaultColor;
+    // Set fillStyle based on whether the particle is near the mouse
+    this.ctx.fillStyle = this.isNearMouse ? this.activeColor : this.defaultColor;
     
     this.ctx.beginPath();
     this.ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
@@ -75,6 +80,7 @@ export class Particle {
       this.dy = 0;
       this.vx *= 0.9; // Decelerate gradually
       this.vy *= 0.9; // Decelerate gradually
+      this.isNearMouse = false; // Reset color when mouse is inactive
       
       // Faster return to origin when mouse is inactive
       const returnEase = this.ease * 2;
@@ -90,7 +96,10 @@ export class Particle {
       const dynamicRadius = this.effect.getMouseSpeedRadius();
       
       // Determine if particle is within the mouse radius
-      if (this.distance <= dynamicRadius) {
+      const isWithinRadius = this.distance <= dynamicRadius;
+      this.isNearMouse = isWithinRadius; // Update color state based on proximity
+      
+      if (isWithinRadius) {
         // Only apply force for particles within the radius
         this.force = -dynamicRadius / this.distance * 8;
         this.angle = Math.atan2(this.dy, this.dx);
