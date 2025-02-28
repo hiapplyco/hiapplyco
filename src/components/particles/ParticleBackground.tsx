@@ -1,10 +1,9 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { Effect } from './Effect';
+import { Effect } from './particles/Effect';
 
 interface ParticleBackgroundProps {
-  targetElementIds?: string[]; // IDs of elements to apply the effect to (no longer used)
+  targetElementIds?: string[]; 
 }
 
 const ParticleBackground: React.FC<ParticleBackgroundProps> = () => {
@@ -12,6 +11,7 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = () => {
   const effectRef = useRef<Effect | null>(null);
   const animationFrameRef = useRef<number>();
   const lastMouseMoveRef = useRef<number>(0);
+  const lastMousePosRef = useRef<{x: number, y: number}>({ x: 0, y: 0 });
   const isMobile = useIsMobile();
   const [hasInteracted, setHasInteracted] = useState(false);
 
@@ -48,9 +48,12 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = () => {
       lastMouseMoveRef.current = now;
       
       if (effectRef.current) {
-        // FIXED: Use clientX/Y for viewport position and add scrollY for absolute document position
+        // Store mouse position relative to viewport
+        lastMousePosRef.current = { x: e.clientX, y: e.clientY };
+        
+        // Convert to document coordinates with current scroll position
         const x = e.clientX;
-        const y = e.clientY + window.scrollY; // Add scrollY for correct vertical position
+        const y = e.clientY + window.scrollY;
         
         // Update mouse position and calculate speed
         effectRef.current.updateMouseSpeed(x, y);
@@ -68,6 +71,13 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = () => {
     };
 
     const handleScroll = () => {
+      // Update mouse position based on last known position plus current scroll
+      if (effectRef.current && hasInteracted) {
+        const { x } = lastMousePosRef.current;
+        const y = lastMousePosRef.current.y + window.scrollY;
+        effectRef.current.updateMouseSpeed(x, y);
+      }
+      
       // Force redraw on scroll to ensure particles are visible
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
@@ -114,7 +124,7 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = () => {
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('scroll', handleScroll);
       document.removeEventListener('mousemove', handleMouseMove);
-      canvas.addEventListener('mouseleave', handleMouseLeave);
+      canvas.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, [isMobile, hasInteracted]);
