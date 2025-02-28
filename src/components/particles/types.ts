@@ -10,3 +10,13 @@ export type MouseState = {
   speedY: number;
   speed: number;
 };
+
+export type ElementBounds = {
+  id: string;
+  top: number;
+  left: number;
+  right: number;
+  bottom: number;
+  width: number;
+  height: number;
+};

@@ -16,7 +16,7 @@ const Index = () => {
       
       {/* Fixed particle background that covers the entire page */}
       <div className="fixed inset-0" style={{ zIndex: 2 }}>
-        <ParticleBackground />
+        <ParticleBackground targetElementIds={['home', 'process', 'projects', 'tools', 'about', 'contact']} />
       </div>
 
       {/* Hero Section */}
