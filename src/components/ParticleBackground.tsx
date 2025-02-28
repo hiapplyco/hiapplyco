@@ -19,6 +19,7 @@ class Particle {
   force: number;
   angle: number;
   size: number;
+  color: string;
 
   constructor(x: number, y: number, effect: Effect) {
     this.originX = x;
@@ -37,10 +38,11 @@ class Particle {
     this.force = 0;
     this.angle = 0;
     this.size = Math.floor(Math.random() * 3) + 2; // Increased particle size
+    this.color = '#d1d1d1'; // Default light grey color
   }
 
   draw() {
-    this.ctx.fillStyle = 'rgba(var(--primary), 0.8)'; // Using RGB with opacity
+    this.ctx.fillStyle = this.color;
     this.ctx.beginPath();
     this.ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
     this.ctx.fill();
@@ -52,15 +54,36 @@ class Particle {
     this.distance = this.dx * this.dx + this.dy * this.dy;
     this.force = -this.effect.mouse.radius / this.distance * 8;
 
+    // Calculate normalized distance for gradient effect
     if (this.distance < this.effect.mouse.radius) {
       this.angle = Math.atan2(this.dy, this.dx);
       this.vx += this.force * Math.cos(this.angle);
       this.vy += this.force * Math.sin(this.angle);
+      
+      // Apply color gradient based on distance
+      const normalizedDistance = Math.sqrt(this.distance) / Math.sqrt(this.effect.mouse.radius);
+      this.color = this.getGradientColor(normalizedDistance);
+    } else {
+      // Default color when outside radius
+      this.color = '#d1d1d1'; // Light grey
     }
 
     this.x += (this.vx *= this.friction) + (this.originX - this.x) * this.ease;
     this.y += (this.vy *= this.friction) + (this.originY - this.y) * this.ease;
     this.draw();
+  }
+
+  getGradientColor(normalizedDistance: number) {
+    // Create a gradient from purple to light blue
+    const purple = { r: 155, g: 135, b: 245 }; // #9b87f5
+    const lightBlue = { r: 172, g: 206, b: 238 }; // #accbee
+    
+    // Interpolate between the colors based on distance
+    const r = Math.floor(purple.r + (lightBlue.r - purple.r) * normalizedDistance);
+    const g = Math.floor(purple.g + (lightBlue.g - purple.g) * normalizedDistance);
+    const b = Math.floor(purple.b + (lightBlue.b - purple.b) * normalizedDistance);
+    
+    return `rgba(${r}, ${g}, ${b}, 0.8)`;
   }
 }
 
