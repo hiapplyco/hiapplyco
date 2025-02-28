@@ -1,6 +1,7 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { Effect } from './particles/Effect';
+import { Effect } from './Effect';
 
 interface ParticleBackgroundProps {
   targetElementIds?: string[]; 
