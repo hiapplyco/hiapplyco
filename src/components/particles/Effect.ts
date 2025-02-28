@@ -17,6 +17,7 @@ export class Effect {
   nextFrame: number;
   isLowPerformance: boolean;
   time: number; // Time counter for animations
+  isMouseActive: boolean; // Flag to track if mouse is active
 
   constructor(width: number, height: number, context: CanvasRenderingContext2D) {
     this.width = width;
@@ -34,6 +35,7 @@ export class Effect {
     this.nextFrame = 0;
     this.isLowPerformance = false;
     this.time = 0; // Initialize time counter
+    this.isMouseActive = false; // Initialize mouse activity state
     
     // Determine if device is low performance based on initial render time
     this.detectPerformance();
@@ -115,8 +117,8 @@ export class Effect {
         }
       }
       
-      // Pass deltaTime to the particle update
-      particle.update(deltaTime);
+      // Pass deltaTime and mouse active state to the particle update
+      particle.update(deltaTime, this.isMouseActive);
     }
   }
 }

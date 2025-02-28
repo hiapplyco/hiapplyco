@@ -67,16 +67,34 @@ export class Particle {
     this.ctx.fill();
   }
 
-  update(deltaTime: number = 16.67) { // Default to ~60fps timing if not provided
+  update(deltaTime: number = 16.67, isMouseActive: boolean = true) { // Default to ~60fps timing if not provided
+    // Animate size - subtle breathing effect always happens
+    if (!this.effect.isLowPerformance) {
+      this.size = this.baseSize + Math.sin(this.oscillationPhase + this.effect.time * this.oscillationSpeed) * this.sizeOscillation;
+    }
+    
+    // If mouse is not active, gradually return to original position
+    if (!isMouseActive) {
+      this.vx = 0;
+      this.vy = 0;
+      // Faster return to origin when mouse is inactive
+      const returnEase = this.ease * 2;
+      this.x += (this.originX - this.x) * returnEase;
+      this.y += (this.originY - this.y) * returnEase;
+      
+      // Reset to default color
+      if (this.color !== '#d1d1d1') {
+        this.color = '#d1d1d1'; // Light grey
+      }
+      
+      this.draw();
+      return;
+    }
+    
+    // Only proceed with mouse interaction calculations if mouse is active
     this.dx = this.effect.mouse.x - this.x;
     this.dy = this.effect.mouse.y - this.y;
     this.distance = this.dx * this.dx + this.dy * this.dy;
-    
-    // Animate size - subtle breathing effect
-    if (!this.effect.isLowPerformance) {
-      // Use time-based animation with phase for more organic movement
-      this.size = this.baseSize + Math.sin(this.oscillationPhase + this.effect.time * this.oscillationSpeed) * this.sizeOscillation;
-    }
     
     // Early exit if too far from mouse (optimization)
     if (this.distance > this.effect.mouse.radius) {

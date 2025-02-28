@@ -10,6 +10,8 @@ const ParticleBackground = () => {
   const lastMouseMoveRef = useRef<number>(0);
   const isMobile = useIsMobile();
   const [hasInteracted, setHasInteracted] = useState(false);
+  const lastMouseActivityRef = useRef<number>(0);
+  const isMouseActiveRef = useRef<boolean>(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -43,6 +45,8 @@ const ParticleBackground = () => {
         return;
       }
       lastMouseMoveRef.current = now;
+      lastMouseActivityRef.current = now;
+      isMouseActiveRef.current = true;
       
       if (effectRef.current) {
         const rect = canvas.getBoundingClientRect();
@@ -51,9 +55,28 @@ const ParticleBackground = () => {
         
         effectRef.current.mouse.x = x;
         effectRef.current.mouse.y = y;
+        effectRef.current.isMouseActive = true;
         
         if (!hasInteracted) {
           setHasInteracted(true);
+        }
+      }
+    };
+
+    const handleMouseLeave = () => {
+      if (effectRef.current) {
+        effectRef.current.isMouseActive = false;
+        isMouseActiveRef.current = false;
+      }
+    };
+
+    const checkMouseActivity = () => {
+      const now = performance.now();
+      // If mouse hasn't moved for 2 seconds, consider it inactive
+      if (now - lastMouseActivityRef.current > 2000 && isMouseActiveRef.current) {
+        isMouseActiveRef.current = false;
+        if (effectRef.current) {
+          effectRef.current.isMouseActive = false;
         }
       }
     };
@@ -62,6 +85,8 @@ const ParticleBackground = () => {
     effectRef.current = new Effect(canvas.width, canvas.height, ctx);
 
     const animate = (timestamp: number) => {
+      checkMouseActivity();
+      
       if (effectRef.current) {
         effectRef.current.update(timestamp);
       }
@@ -71,6 +96,7 @@ const ParticleBackground = () => {
 
     window.addEventListener('resize', handleResize);
     window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseleave', handleMouseLeave);
 
     // Track visibility changes to pause animation when tab is not visible
     const handleVisibilityChange = () => {
@@ -89,6 +115,7 @@ const ParticleBackground = () => {
       }
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, [isMobile, hasInteracted]);
