@@ -24,7 +24,9 @@ export class Particle {
   sizeOscillation: number;
   oscillationSpeed: number;
   oscillationPhase: number;
-  defaultColor: string = '#d1d1d1'; // Store default color as a constant
+  defaultColor: string = '#d1d1d1'; // Default light grey color
+  targetColor: string = this.defaultColor;
+  colorTransitionSpeed: number = 0.1; // Speed of color transition
 
   constructor(x: number, y: number, effect: Effect) {
     this.originX = x;
@@ -52,7 +54,7 @@ export class Particle {
     this.oscillationSpeed = Math.random() * 0.05 + 0.01; // Different speeds for different particles
     this.oscillationPhase = Math.random() * Math.PI * 2; // Random starting phase
     
-    this.color = this.defaultColor; // Default light grey color
+    this.color = this.defaultColor; // Initialize with default color
     this.lastColor = this.color; // Cache the last color to avoid unnecessary string operations
   }
 
@@ -68,7 +70,48 @@ export class Particle {
     this.ctx.fill();
   }
 
-  update(deltaTime: number = 16.67, isMouseActive: boolean = true) { // Default to ~60fps timing if not provided
+  // Helper function to interpolate between two colors
+  lerpColor(startColor: string, endColor: string, t: number): string {
+    // Parse the hex colors to RGB components
+    const parseColor = (hex: string) => {
+      const r = parseInt(hex.substring(1, 3), 16);
+      const g = parseInt(hex.substring(3, 5), 16);
+      const b = parseInt(hex.substring(5, 7), 16);
+      return { r, g, b };
+    };
+    
+    // For performance, hardcoded color parsing for known colors
+    let start, end;
+    
+    if (startColor === this.defaultColor) {
+      start = { r: 209, g: 209, b: 209 }; // #d1d1d1
+    } else {
+      start = parseColor(startColor);
+    }
+    
+    if (endColor.startsWith('#')) {
+      end = parseColor(endColor);
+    } else if (endColor === 'purple') {
+      end = { r: 128, g: 0, b: 255 }; // #8000ff
+    } else if (endColor === 'pink') {
+      end = { r: 255, g: 0, b: 128 }; // #ff0080
+    } else {
+      // Default to purple if unknown
+      end = { r: 128, g: 0, b: 255 };
+    }
+    
+    // Clamp t between 0 and 1
+    t = Math.max(0, Math.min(1, t));
+    
+    // Linear interpolation of RGB values
+    const r = Math.round(start.r + (end.r - start.r) * t);
+    const g = Math.round(start.g + (end.g - start.g) * t);
+    const b = Math.round(start.b + (end.b - start.b) * t);
+    
+    return `rgb(${r}, ${g}, ${b})`;
+  }
+
+  update(deltaTime: number = 16.67, isMouseActive: boolean = true) {
     // Animate size - subtle breathing effect always happens
     if (!this.effect.isLowPerformance) {
       this.size = this.baseSize + Math.sin(this.oscillationPhase + this.effect.time * this.oscillationSpeed) * this.sizeOscillation;
@@ -76,52 +119,60 @@ export class Particle {
     
     // If mouse is not active, gradually return to original position
     if (!isMouseActive) {
-      this.vx = 0;
-      this.vy = 0;
+      this.dx = 0;
+      this.dy = 0;
+      this.vx *= 0.9; // Decelerate gradually
+      this.vy *= 0.9; // Decelerate gradually
+      
       // Faster return to origin when mouse is inactive
       const returnEase = this.ease * 2;
       this.x += (this.originX - this.x) * returnEase;
       this.y += (this.originY - this.y) * returnEase;
       
-      // Reset to default color
-      this.color = this.defaultColor;
-      
-      this.draw();
-      return;
-    }
-    
-    // Calculate distance from particle to mouse
-    this.dx = this.effect.mouse.x - this.x;
-    this.dy = this.effect.mouse.y - this.y;
-    this.distance = this.dx * this.dx + this.dy * this.dy;
-    
-    // Get the dynamic radius based on mouse speed
-    const dynamicRadius = this.effect.getMouseSpeedRadius();
-    
-    // Determine if particle is within the mouse radius
-    if (this.distance <= dynamicRadius) {
-      // Only apply force and color changes to particles within the radius
-      this.force = -dynamicRadius / this.distance * 8;
-      this.angle = Math.atan2(this.dy, this.dx);
-      this.vx += this.force * Math.cos(this.angle);
-      this.vy += this.force * Math.sin(this.angle);
-      
-      // Apply color gradient based on distance from cursor
-      const normalizedDistance = Math.sqrt(this.distance) / Math.sqrt(dynamicRadius);
-      this.color = this.getGradientColor(normalizedDistance);
+      // Set target color to default
+      this.targetColor = this.defaultColor;
     } else {
-      // For particles outside the radius, always use default color
-      this.color = this.defaultColor;
+      // Calculate distance from particle to mouse
+      this.dx = this.effect.mouse.x - this.x;
+      this.dy = this.effect.mouse.y - this.y;
+      this.distance = this.dx * this.dx + this.dy * this.dy;
       
-      // If particle is very close to its origin and not being influenced, skip further calculations
-      const distToOrigin = Math.pow(this.x - this.originX, 2) + Math.pow(this.y - this.originY, 2);
-      if (distToOrigin < 1 && Math.abs(this.vx) < 0.01 && Math.abs(this.vy) < 0.01) {
-        this.x = this.originX;
-        this.y = this.originY;
-        this.vx = 0;
-        this.vy = 0;
-        this.draw();
-        return;
+      // Get the dynamic radius based on mouse speed
+      const dynamicRadius = this.effect.getMouseSpeedRadius();
+      
+      // Determine if particle is within the mouse radius
+      if (this.distance <= dynamicRadius) {
+        // Only apply force and set target color for particles within the radius
+        this.force = -dynamicRadius / this.distance * 8;
+        this.angle = Math.atan2(this.dy, this.dx);
+        this.vx += this.force * Math.cos(this.angle);
+        this.vy += this.force * Math.sin(this.angle);
+        
+        // Apply color gradient based on distance from cursor
+        const normalizedDistance = Math.sqrt(this.distance) / Math.sqrt(dynamicRadius);
+        
+        // Set target color based on normalized distance
+        if (normalizedDistance < 0.5) {
+          this.targetColor = '#8000ff'; // Purple for closer particles
+        } else {
+          this.targetColor = '#ff0080'; // Pink for particles at the edge
+        }
+      } else {
+        // For particles outside the radius, target is default color
+        this.targetColor = this.defaultColor;
+        
+        // If particle is very close to its origin and not being influenced, skip further calculations
+        const distToOrigin = Math.pow(this.x - this.originX, 2) + Math.pow(this.y - this.originY, 2);
+        if (distToOrigin < 1 && Math.abs(this.vx) < 0.01 && Math.abs(this.vy) < 0.01) {
+          this.x = this.originX;
+          this.y = this.originY;
+          this.vx = 0;
+          this.vy = 0;
+          this.color = this.defaultColor; // Set color immediately to default
+          this.targetColor = this.defaultColor;
+          this.draw();
+          return;
+        }
       }
     }
 
@@ -129,25 +180,12 @@ export class Particle {
     this.x += (this.vx *= this.friction) + (this.originX - this.x) * this.ease;
     this.y += (this.vy *= this.friction) + (this.originY - this.y) * this.ease;
     
-    this.draw();
-  }
-
-  getGradientColor(normalizedDistance: number) {
-    // Create more vibrant gradient colors
-    const purple = { r: 128, g: 0, b: 255 }; // Bright purple #8000ff
-    const pink = { r: 255, g: 0, b: 128 }; // Vibrant pink #ff0080
-    
-    // Use optimized color calculation
-    if (this.effect.isLowPerformance) {
-      // Simplified color calculation for low-performance devices
-      return normalizedDistance < 0.5 ? 'rgba(128, 0, 255, 1.0)' : 'rgba(255, 0, 128, 1.0)';
+    // Gradually change color towards target color
+    if (this.color !== this.targetColor) {
+      // Use color lerping for smooth transition
+      this.color = this.lerpColor(this.color, this.targetColor, this.colorTransitionSpeed);
     }
     
-    // Regular interpolation for normal devices
-    const r = Math.floor(purple.r + (pink.r - purple.r) * normalizedDistance);
-    const g = Math.floor(purple.g + (pink.g - purple.g) * normalizedDistance);
-    const b = Math.floor(purple.b + (pink.b - purple.b) * normalizedDistance);
-    
-    return `rgba(${r}, ${g}, ${b}, 1.0)`;
+    this.draw();
   }
 }

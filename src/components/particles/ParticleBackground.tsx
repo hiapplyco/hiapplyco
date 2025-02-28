@@ -10,8 +10,6 @@ const ParticleBackground = () => {
   const lastMouseMoveRef = useRef<number>(0);
   const isMobile = useIsMobile();
   const [hasInteracted, setHasInteracted] = useState(false);
-  const lastMouseActivityRef = useRef<number>(0);
-  const isMouseActiveRef = useRef<boolean>(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -21,21 +19,20 @@ const ParticleBackground = () => {
     if (!ctx) return;
 
     const handleResize = () => {
-      // Debounce resize for performance
-      if (effectRef.current) {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        
-        // Recreate effect after a short delay to avoid multiple recreations during resize
-        clearTimeout(window.resizeTimer);
-        window.resizeTimer = setTimeout(() => {
-          effectRef.current = new Effect(canvas.width, canvas.height, ctx);
-        }, 200);
-      } else {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        effectRef.current = new Effect(canvas.width, canvas.height, ctx);
+      // Set canvas dimensions to match window size
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      
+      // Reset animation when window is resized
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
       }
+      
+      // Create new effect with updated dimensions
+      effectRef.current = new Effect(canvas.width, canvas.height, ctx);
+      
+      // Restart animation
+      animationFrameRef.current = requestAnimationFrame(animate);
     };
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -45,8 +42,6 @@ const ParticleBackground = () => {
         return;
       }
       lastMouseMoveRef.current = now;
-      lastMouseActivityRef.current = now;
-      isMouseActiveRef.current = true;
       
       if (effectRef.current) {
         const rect = canvas.getBoundingClientRect();
@@ -65,43 +60,34 @@ const ParticleBackground = () => {
     const handleMouseLeave = () => {
       if (effectRef.current) {
         effectRef.current.isMouseActive = false;
-        isMouseActiveRef.current = false;
       }
     };
-
-    const checkMouseActivity = () => {
-      const now = performance.now();
-      // If mouse hasn't moved for 2 seconds, consider it inactive
-      if (now - lastMouseActivityRef.current > 2000 && isMouseActiveRef.current) {
-        isMouseActiveRef.current = false;
-        if (effectRef.current) {
-          effectRef.current.isMouseActive = false;
-        }
-      }
-    };
-
-    handleResize();
-    effectRef.current = new Effect(canvas.width, canvas.height, ctx);
 
     const animate = (timestamp: number) => {
-      checkMouseActivity();
-      
       if (effectRef.current) {
         effectRef.current.update(timestamp);
       }
       animationFrameRef.current = requestAnimationFrame(animate);
     };
+
+    // Initialize canvas size and effect
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    effectRef.current = new Effect(canvas.width, canvas.height, ctx);
+    
+    // Start animation
     animate(0);
 
+    // Add event listeners
     window.addEventListener('resize', handleResize);
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseleave', handleMouseLeave);
+    canvas.addEventListener('mousemove', handleMouseMove);
+    canvas.addEventListener('mouseleave', handleMouseLeave);
 
     // Track visibility changes to pause animation when tab is not visible
     const handleVisibilityChange = () => {
       if (document.hidden && animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
-      } else {
+      } else if (!document.hidden && !animationFrameRef.current) {
         animationFrameRef.current = requestAnimationFrame(animate);
       }
     };
@@ -113,8 +99,8 @@ const ParticleBackground = () => {
         cancelAnimationFrame(animationFrameRef.current);
       }
       window.removeEventListener('resize', handleResize);
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseleave', handleMouseLeave);
+      canvas.removeEventListener('mousemove', handleMouseMove);
+      canvas.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, [isMobile, hasInteracted]);
@@ -124,7 +110,7 @@ const ParticleBackground = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="w-full h-full"
+      className="w-full h-full fixed inset-0 z-0 pointer-events-auto"
       style={{
         position: 'absolute',
         top: 0,
