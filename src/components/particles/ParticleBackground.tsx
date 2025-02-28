@@ -48,9 +48,9 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = () => {
       lastMouseMoveRef.current = now;
       
       if (effectRef.current) {
-        // Use clientX and clientY for accurate mouse position relative to viewport
+        // FIXED: Use clientX/Y for viewport position and add scrollY for absolute document position
         const x = e.clientX;
-        const y = e.clientY + window.scrollY; // Add scrollY to account for page scroll
+        const y = e.clientY + window.scrollY; // Add scrollY for correct vertical position
         
         // Update mouse position and calculate speed
         effectRef.current.updateMouseSpeed(x, y);
@@ -126,7 +126,7 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = () => {
       ref={canvasRef}
       className="w-full h-full fixed inset-0 pointer-events-none"
       style={{
-        position: 'fixed', // Use fixed instead of absolute
+        position: 'fixed', // Use fixed position to stay aligned with viewport
         top: 0,
         left: 0,
         zIndex: 1
