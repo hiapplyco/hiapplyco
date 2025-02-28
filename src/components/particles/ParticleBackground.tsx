@@ -53,9 +53,8 @@ const ParticleBackground = () => {
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
         
-        effectRef.current.mouse.x = x;
-        effectRef.current.mouse.y = y;
-        effectRef.current.isMouseActive = true;
+        // Update mouse position and calculate speed
+        effectRef.current.updateMouseSpeed(x, y);
         
         if (!hasInteracted) {
           setHasInteracted(true);

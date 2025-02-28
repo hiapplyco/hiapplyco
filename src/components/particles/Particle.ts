@@ -96,8 +96,11 @@ export class Particle {
     this.dy = this.effect.mouse.y - this.y;
     this.distance = this.dx * this.dx + this.dy * this.dy;
     
+    // Get the dynamic radius based on mouse speed
+    const dynamicRadius = this.effect.getMouseSpeedRadius();
+    
     // Early exit if too far from mouse (optimization)
-    if (this.distance > this.effect.mouse.radius) {
+    if (this.distance > dynamicRadius) {
       if (this.color !== '#d1d1d1') {
         this.color = '#d1d1d1'; // Light grey
       }
@@ -111,14 +114,14 @@ export class Particle {
         return;
       }
     } else {
-      // Calculate force only when within mouse radius
-      this.force = -this.effect.mouse.radius / this.distance * 8;
+      // Calculate force only when within mouse radius - scale by normalized distance
+      this.force = -dynamicRadius / this.distance * 8;
       this.angle = Math.atan2(this.dy, this.dx);
       this.vx += this.force * Math.cos(this.angle);
       this.vy += this.force * Math.sin(this.angle);
       
-      // Apply color gradient based on distance
-      const normalizedDistance = Math.sqrt(this.distance) / Math.sqrt(this.effect.mouse.radius);
+      // Apply color gradient based on distance from cursor
+      const normalizedDistance = Math.sqrt(this.distance) / Math.sqrt(dynamicRadius);
       this.color = this.getGradientColor(normalizedDistance);
     }
 
