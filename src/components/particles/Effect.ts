@@ -11,6 +11,8 @@ export class Effect {
     radius: number;
     x: number;
     y: number;
+    isActive: boolean;
+    lastMoveTime: number;
   };
 
   constructor(width: number, height: number, context: CanvasRenderingContext2D) {
@@ -22,7 +24,9 @@ export class Effect {
     this.mouse = {
       radius: 3000, // Increased radius for wider effect area
       x: 0,
-      y: 0
+      y: 0,
+      isActive: false,
+      lastMoveTime: 0
     };
     this.init();
   }
@@ -39,6 +43,14 @@ export class Effect {
 
   update() {
     this.ctx.clearRect(0, 0, this.width, this.height);
+    
+    // Check if mouse has been inactive for more than 2 seconds
+    const now = Date.now();
+    const isMouseStatic = now - this.mouse.lastMoveTime > 2000;
+    
+    // Set isActive based on mouse movement and presence on page
+    this.mouse.isActive = !isMouseStatic && this.mouse.x > 0;
+    
     for (let i = 0; i < this.particlesArray.length; i++) {
       this.particlesArray[i].update();
     }

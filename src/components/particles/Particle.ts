@@ -19,7 +19,7 @@ export class Particle {
   angle: number;
   size: number;
   color: string;
-
+  
   constructor(x: number, y: number, effect: Effect) {
     this.originX = x;
     this.originY = y;
@@ -56,23 +56,38 @@ export class Particle {
     // Calculate normalized distance for gradient effect
     if (this.distance < this.effect.mouse.radius) {
       this.angle = Math.atan2(this.dy, this.dx);
-      this.vx += this.force * Math.cos(this.angle);
-      this.vy += this.force * Math.sin(this.angle);
       
-      // Apply color gradient based on distance - with higher color intensity
-      const normalizedDistance = Math.sqrt(this.distance) / Math.sqrt(this.effect.mouse.radius);
-      this.color = this.getGradientColor(normalizedDistance);
+      // Adjust force based on mouse activity
+      if (this.effect.mouse.isActive) {
+        this.vx += this.force * Math.cos(this.angle);
+        this.vy += this.force * Math.sin(this.angle);
+        
+        // Apply color gradient based on distance - with higher color intensity
+        const normalizedDistance = Math.sqrt(this.distance) / Math.sqrt(this.effect.mouse.radius);
+        this.color = this.getGradientColor(normalizedDistance);
+      } else {
+        // Reduce force when mouse is static or off-page
+        this.vx += this.force * Math.cos(this.angle) * 0.3;
+        this.vy += this.force * Math.sin(this.angle) * 0.3;
+        
+        // Still show some color, but less intense
+        const normalizedDistance = Math.sqrt(this.distance) / Math.sqrt(this.effect.mouse.radius);
+        this.color = this.getGradientColor(normalizedDistance, 0.7);
+      }
     } else {
       // Default color when outside radius
       this.color = '#d1d1d1'; // Light grey
     }
 
-    this.x += (this.vx *= this.friction) + (this.originX - this.x) * this.ease;
-    this.y += (this.vy *= this.friction) + (this.originY - this.y) * this.ease;
+    // Apply more friction when mouse is inactive
+    const currentFriction = this.effect.mouse.isActive ? this.friction : this.friction * 0.98;
+    
+    this.x += (this.vx *= currentFriction) + (this.originX - this.x) * this.ease;
+    this.y += (this.vy *= currentFriction) + (this.originY - this.y) * this.ease;
     this.draw();
   }
 
-  getGradientColor(normalizedDistance: number) {
+  getGradientColor(normalizedDistance: number, opacityMultiplier: number = 1.0) {
     // Create more vibrant gradient colors
     const purple = { r: 128, g: 0, b: 255 }; // Bright purple #8000ff
     const pink = { r: 255, g: 0, b: 128 }; // Vibrant pink #ff0080
@@ -82,7 +97,9 @@ export class Particle {
     const g = Math.floor(purple.g + (pink.g - purple.g) * normalizedDistance);
     const b = Math.floor(purple.b + (pink.b - purple.b) * normalizedDistance);
     
-    // Increased opacity for better visibility
-    return `rgba(${r}, ${g}, ${b}, 1.0)`;
+    // Adjust opacity based on mouse activity
+    const opacity = 1.0 * opacityMultiplier;
+    
+    return `rgba(${r}, ${g}, ${b}, ${opacity})`;
   }
 }

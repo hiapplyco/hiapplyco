@@ -33,6 +33,15 @@ const ParticleBackground = () => {
         
         effectRef.current.mouse.x = x;
         effectRef.current.mouse.y = y;
+        effectRef.current.mouse.lastMoveTime = Date.now();
+      }
+    };
+    
+    const handleMouseLeave = () => {
+      if (effectRef.current) {
+        // When mouse leaves, set x to negative to indicate it's off page
+        effectRef.current.mouse.x = -100;
+        effectRef.current.mouse.y = -100;
       }
     };
 
@@ -49,6 +58,7 @@ const ParticleBackground = () => {
 
     window.addEventListener('resize', handleResize);
     window.addEventListener('mousemove', handleMouseMove);
+    canvas.addEventListener('mouseleave', handleMouseLeave);
 
     return () => {
       if (animationFrameRef.current) {
@@ -56,6 +66,7 @@ const ParticleBackground = () => {
       }
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('mousemove', handleMouseMove);
+      canvas.removeEventListener('mouseleave', handleMouseLeave);
     };
   }, [isMobile]);
 
