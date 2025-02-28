@@ -97,6 +97,11 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = ({ targetElementId
       }
     };
 
+    const handleScroll = () => {
+      // Update element bounds on scroll to capture new positions
+      updateElementBounds();
+    };
+
     const animate = (timestamp: number) => {
       if (effectRef.current) {
         effectRef.current.update(timestamp);
@@ -117,6 +122,7 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = ({ targetElementId
 
     // Add event listeners
     window.addEventListener('resize', handleResize);
+    window.addEventListener('scroll', handleScroll);
     canvas.addEventListener('mousemove', handleMouseMove);
     canvas.addEventListener('mouseleave', handleMouseLeave);
 
@@ -149,15 +155,20 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = ({ targetElementId
     
     document.addEventListener('visibilitychange', handleVisibilityChange);
 
+    // Periodically check and update element bounds to ensure accuracy
+    const intervalId = setInterval(updateElementBounds, 2000);
+
     return () => {
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }
       window.removeEventListener('resize', handleResize);
+      window.removeEventListener('scroll', handleScroll);
       canvas.removeEventListener('mousemove', handleMouseMove);
       canvas.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
       elementObserver.disconnect();
+      clearInterval(intervalId);
     };
   }, [isMobile, hasInteracted, targetElementIds]);
 
@@ -166,7 +177,7 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = ({ targetElementId
   return (
     <canvas
       ref={canvasRef}
-      className="w-full h-full fixed inset-0 z-0 pointer-events-auto"
+      className="w-full h-full fixed inset-0 pointer-events-auto"
       style={{
         position: 'absolute',
         top: 0,
