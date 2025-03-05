@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ExternalLink, ArrowUpRight } from 'lucide-react';
 
@@ -6,7 +5,7 @@ const Projects = () => {
   const featuredProjects = [
     {
       name: "harmony.works",
-      description: "Transforming life coaching through AI-powered personalized guidance systems and adaptive mentorship algorithms",
+      description: "Transforming life coaching through AI-powered personalized guidance systems and adaptive mentorship algorithms that deliver tailored growth experiences",
       url: "https://www.harmony.works",
       style: {
         bg: "linear-gradient(135deg, #4a4a4a, #000000)",
@@ -16,7 +15,7 @@ const Projects = () => {
     },
     {
       name: "strength.design",
-      description: "Revolutionary AI fitness platform leveraging machine learning to create precision-engineered workout programs tailored to individual goals",
+      description: "Revolutionary AI fitness platform leveraging machine learning to create precision-engineered workout programs tailored to individual goals and physiological markers",
       url: "https://www.strength.design",
       style: {
         bg: "linear-gradient(135deg, #ea384c, #222)",
@@ -26,16 +25,36 @@ const Projects = () => {
     },
     {
       name: "apply.codes",
-      description: "Next-generation recruitment platform powered by intelligent AI agents that revolutionize talent acquisition through automated screening and matching",
+      description: "Next-generation recruitment platform powered by intelligent AI agents that revolutionize talent acquisition through automated screening and personalized candidate matching",
       url: "https://www.apply.codes",
       style: {
         bg: "linear-gradient(135deg, #F2FCE2, #FFDEE2, #E5DEFF)",
         border: "#E5DEFF",
         text: "text-gray-800"
       }
+    },
+    {
+      name: "JiuJitsu Analyzer",
+      description: "Advanced martial arts technique analysis platform utilizing Gemini 2.0 Flash AI to provide real-time feedback and personalized improvement recommendations for practitioners",
+      url: "https://540studio.streamlit.app/",
+      style: {
+        bg: "linear-gradient(135deg, #2C3E50, #4CA1AF)",
+        border: "#6DD5FA",
+        text: "text-white"
+      }
+    },
+    {
+      name: "CrossFit Analyzer",
+      description: "Comprehensive movement assessment tool powered by Gemini Flash 2.0 AI that analyzes CrossFit techniques to optimize performance and reduce injury risk through detailed feedback",
+      url: "https://cfvideoanalysis.streamlit.app/",
+      style: {
+        bg: "linear-gradient(135deg, #603813, #b29f94)",
+        border: "#DFC2A3",
+        text: "text-white"
+      }
     }
   ];
-
+  
   return (
     <section id="projects" className="section-spacing px-6 bg-background relative">
       <div className="max-w-7xl mx-auto">
@@ -45,7 +64,6 @@ const Projects = () => {
             Transforming businesses with intelligent AI agent solutions
           </p>
         </div>
-
         {/* Featured Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {featuredProjects.map((project, index) => (
