@@ -222,6 +222,65 @@ export type Database = {
           },
         ]
       }
+      interview_messages: {
+        Row: {
+          content: string | null
+          created_at: string | null
+          id: number
+          role: string
+          session_id: number | null
+        }
+        Insert: {
+          content?: string | null
+          created_at?: string | null
+          id?: number
+          role: string
+          session_id?: number | null
+        }
+        Update: {
+          content?: string | null
+          created_at?: string | null
+          id?: number
+          role?: string
+          session_id?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "interview_messages_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "interview_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      interview_sessions: {
+        Row: {
+          created_at: string | null
+          ended_at: string | null
+          id: number
+          started_at: string | null
+          status: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          ended_at?: string | null
+          id?: number
+          started_at?: string | null
+          status?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          ended_at?: string | null
+          id?: number
+          started_at?: string | null
+          status?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       jobs: {
         Row: {
           analysis: Json | null
@@ -242,6 +301,7 @@ export type Database = {
           salary_range: string | null
           search_string: string | null
           skills_required: string[] | null
+          source: string | null
           summary: string | null
           tags: string[] | null
           title: string | null
@@ -266,6 +326,7 @@ export type Database = {
           salary_range?: string | null
           search_string?: string | null
           skills_required?: string[] | null
+          source?: string | null
           summary?: string | null
           tags?: string[] | null
           title?: string | null
@@ -290,6 +351,7 @@ export type Database = {
           salary_range?: string | null
           search_string?: string | null
           skills_required?: string[] | null
+          source?: string | null
           summary?: string | null
           tags?: string[] | null
           title?: string | null

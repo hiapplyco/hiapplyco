@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Search, Lightbulb, RefreshCcw, Brain, Server, GitFork } from 'lucide-react';
 
@@ -46,6 +47,15 @@ const Process = () => {
           <p className="text-muted-foreground max-w-2xl mx-auto animate-fade-up animation-delay-100">
             A systematic approach to building effective AI agents that deliver real value
           </p>
+        </div>
+        
+        {/* Process Diagram Image */}
+        <div className="mb-16 max-w-5xl mx-auto">
+          <img 
+            src="/lovable-uploads/8165a53c-449a-42c1-9b0c-7483ea924bbf.png" 
+            alt="Strategic AI Agent Development Process" 
+            className="w-full h-auto rounded-xl shadow-lg animate-fade-up"
+          />
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
