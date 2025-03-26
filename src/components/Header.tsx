@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 
@@ -25,9 +26,13 @@ const Header = () => {
         <div className="flex justify-between items-center">
           <a 
             href="#home" 
-            className="text-xl font-semibold hover:opacity-80 transition-opacity flex items-center gap-2"
+            className="hover:opacity-80 transition-opacity flex items-center gap-2"
           >
-            <span className="text-accent">Apply,</span> Co.
+            <img 
+              src="/lovable-uploads/d57e18cf-ef2b-43ec-84cc-a8bcb2c88158.png" 
+              alt="Apply Logo" 
+              className="h-10" 
+            />
           </a>
           
           <nav className="hidden md:flex space-x-8">

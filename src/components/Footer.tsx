@@ -8,8 +8,12 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex flex-col items-center md:items-start">
-            <a href="#home" className="text-xl font-semibold flex items-center gap-1 mb-2">
-              <span className="text-accent">Apply,</span> Co.
+            <a href="#home" className="mb-2">
+              <img 
+                src="/lovable-uploads/d57e18cf-ef2b-43ec-84cc-a8bcb2c88158.png" 
+                alt="Apply Logo" 
+                className="h-10" 
+              />
             </a>
             <p className="text-muted-foreground text-sm max-w-md text-center md:text-left">
               Strategic AI agent development for businesses looking to harness the power of artificial intelligence.
@@ -75,4 +79,3 @@ const Footer = () => {
 };
 
 export default Footer;
-
