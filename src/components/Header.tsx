@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -48,6 +49,14 @@ const Header = () => {
                 {item}
               </a>
             ))}
+            <Link
+              to="/animation-demo"
+              className={`text-sm font-medium relative px-1 py-2 transition-all
+                after:absolute after:w-0 after:h-0.5 after:bg-accent after:bottom-0 after:left-0 
+                after:transition-all after:duration-300 hover:after:w-full hover:text-accent`}
+            >
+              Animations
+            </Link>
           </nav>
 
           <button
@@ -74,6 +83,13 @@ const Header = () => {
                 {item}
               </a>
             ))}
+            <Link
+              to="/animation-demo"
+              className="block text-lg font-medium hover:text-accent transition-colors py-2"
+              onClick={toggleMenu}
+            >
+              Animations
+            </Link>
           </nav>
         )}
       </div>
