@@ -9,6 +9,7 @@ import Process from '@/components/Process';
 import LogosSection from '@/components/LogosSection';
 import ParticleBackground from '@/components/ParticleBackground';
 import SuccessStories from '@/components/SuccessStories';
+import AgentEcosystemVisualization from '@/components/AgentEcosystemVisualization';
 
 const Index = () => {
   return <div className="min-h-screen bg-background text-foreground font-sans antialiased">
@@ -60,6 +61,7 @@ const Index = () => {
     }}>
         <Process />
         <Projects />
+        <AgentEcosystemVisualization />
         <Tools />
         <SuccessStories />
         <LogosSection />

@@ -20,7 +20,7 @@ const Contact = () => {
         <div className="glass p-8 md:p-10 rounded-2xl animate-fade-up shadow-lg">
           <div className="flex items-center gap-3 mb-8 text-accent">
             <Mail className="h-5 w-5" />
-            <span className="font-medium">james@hiapply.co</span>
+            <span className="font-medium">hello@hiapply.co</span>
           </div>
           
           <div className="mb-8 space-y-4">
@@ -51,7 +51,7 @@ const Contact = () => {
           
           <div className="flex justify-center sm:justify-start">
             <a
-              href="mailto:james@hiapply.co?subject=SMB%20AI%20Consultation"
+              href="mailto:hello@hiapply.co?subject=SMB%20AI%20Consultation"
               className="inline-flex items-center justify-center gap-2 bg-accent text-white px-8 py-3 rounded-lg font-medium transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] hover:bg-accent/90"
             >
               <Send className="h-4 w-4" />
