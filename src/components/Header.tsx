@@ -32,7 +32,7 @@ const Header = () => {
             <img 
               src="/lovable-uploads/d57e18cf-ef2b-43ec-84cc-a8bcb2c88158.png" 
               alt="Apply Logo" 
-              className="h-20" 
+              className="h-28 transform transition-all duration-300 hover:scale-110 hover:rotate-2 hover:brightness-110" 
             />
           </a>
           
