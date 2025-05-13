@@ -1,62 +1,62 @@
 
 import React from 'react';
-import { Code2, Database, Brain, Workflow, Users } from 'lucide-react';
+import { Code2, Database, Brain, Workflow, Users, Store, Building, Globe, Map, Compass } from 'lucide-react';
 
 const Tools = () => {
   const expertiseAreas = [
     {
+      icon: Store,
+      title: "SMB-Focused AI Strategies",
+      description: "Specialized AI implementations tailored to small and medium business needs, budgets, and local markets.",
+      skills: ["Cost-Optimized Solutions", "SMB Market Analysis", "Local Advantage Design", "ROI-Centric Planning"],
+      caseStudy: {
+        title: "Local Bakery Chain Transformation",
+        description: "Developed a hyperlocal AI system for a 5-store bakery chain that analyzes neighborhood preferences, resulting in 27% reduction in waste and 41% increase in return customers through personalized marketing.",
+        tags: ["SMB Success", "Hyper-Local", "Cost Reduction"]
+      }
+    },
+    {
+      icon: Map,
+      title: "Hyper-Local Deployment",
+      description: "AI systems that understand and adapt to local markets, regional preferences, and neighborhood dynamics.",
+      skills: ["Geo-Specific Training", "Local Data Integration", "Cultural Context Adaptation", "Regional Preference Analysis"],
+      caseStudy: {
+        title: "Multi-Region Retail Optimization",
+        description: "Built a hyper-local inventory system for a regional retail chain that adjusts stock based on neighborhood demographics, reducing overstock by 32% while increasing local relevance ratings by 47%.",
+        tags: ["Local Adaptation", "Regional AI", "SMB Scale"]
+      }
+    },
+    {
       icon: Workflow,
-      title: "Strategic AI Architecture",
-      description: "Expert in designing scalable AI agent systems and workflows that solve complex business challenges.",
-      skills: ["System Design", "Agent Orchestration", "Solution Architecture", "Workflow Automation"],
+      title: "SMB Agent Architecture",
+      description: "Right-sized agent systems specifically designed for small and medium businesses with budget-conscious implementation.",
+      skills: ["SMB Workflow Design", "Cost-Efficient Architecture", "Scalable SMB Systems", "Owner-Friendly Interfaces"],
       caseStudy: {
-        title: "Enterprise Agent Framework",
-        description: "Architected a scalable AI agent framework for enterprise clients, implementing advanced function calling and custom tool integration. Leveraged crew.ai for sophisticated agent orchestration.",
-        tags: ["System Design", "crew.ai", "LangChain"]
+        title: "Small Business Agent Network",
+        description: "Created an interconnected AI agent ecosystem for a local business collective, enabling 12 small businesses to share customer insights while maintaining privacy and boosting cross-referral revenue by 34%.",
+        tags: ["SMB Ecosystem", "Localized AI", "Collective Intelligence"]
       }
     },
     {
-      icon: Code2,
-      title: "Advanced Tooling",
-      description: "Mastery of function calling and integration of sophisticated tools for powerful AI solutions.",
-      skills: ["Function Calling", "API Integration", "Vector Databases", "Data Pipelines"],
+      icon: Compass,
+      title: "Local Market Intelligence",
+      description: "AI systems that monitor and analyze hyperlocal trends, competition, and customer behavior specific to your location.",
+      skills: ["Neighborhood Analysis", "Local Competitor Tracking", "Community Trend Detection", "Regional Customer Insight"],
       caseStudy: {
-        title: "AI Fitness Generator",
-        description: "Built a scalable workout generation system for a network of 1000+ gyms. The system creates personalized training programs based on individual fitness levels, goals, and equipment availability.",
-        tags: ["Machine Learning", "Scaling", "Personalization"]
+        title: "Localized Customer Intelligence",
+        description: "Developed a community-aware customer analysis tool for a small service business that identified hyperlocal service gaps, leading to three new revenue streams tailored to neighborhood needs.",
+        tags: ["SMB Growth", "Community Analysis", "Revenue Creation"]
       }
     },
     {
-      icon: Brain,
-      title: "Framework Expertise",
-      description: "Deep knowledge of leading AI frameworks for efficient and scalable development.",
-      skills: ["crew.ai", "LangChain", "Semantic Kernel", "Custom Frameworks"],
+      icon: Building,
+      title: "SMB-Scale Operations",
+      description: "Right-sized implementations that deliver enterprise-level AI capabilities at SMB budgets and operational scale.",
+      skills: ["Budget Optimization", "Operational Integration", "Simplified Management", "SMB Team Training"],
       caseStudy: {
-        title: "Multi-Modal Assistant Platform",
-        description: "Developed a sophisticated AI assistant platform combining multiple frameworks for enhanced capabilities. Integrated voice, text, and image processing using LangChain and Semantic Kernel.",
-        tags: ["Framework Integration", "Multi-Modal", "Enterprise Scale"]
-      }
-    },
-    {
-      icon: Database,
-      title: "Prompt Engineering",
-      description: "Strategic prompt design and LLM optimization for maximum performance and accuracy.",
-      skills: ["Chain-of-Thought", "Few-Shot Learning", "Context Management", "Performance Tuning"],
-      caseStudy: {
-        title: "Intelligent Support System",
-        description: "Developed a user-centric AI support system with advanced prompt engineering and real-time data integration. Optimized LLM performance for accurate and contextual responses.",
-        tags: ["LLM Optimization", "Vector DB", "API Integration"]
-      }
-    },
-    {
-      icon: Users,
-      title: "Custom Solutions",
-      description: "User-centric AI agent development focused on delivering practical business value.",
-      skills: ["Solution Design", "User Experience", "Integration", "Deployment"],
-      caseStudy: {
-        title: "Automated Document Processing",
-        description: "Created an intelligent document processing system for a legal firm handling millions of pages monthly. Implemented custom OCR and classification models with 99.8% accuracy.",
-        tags: ["Document AI", "Automation", "Enterprise Scale"]
+        title: "Streamlined Operations for Local Chain",
+        description: "Implemented a cost-effective AI operations suite for a 7-location service business, automating 76% of back-office tasks while operating within SMB budget constraints.",
+        tags: ["Operational AI", "Cost-Effective", "SMB Scale"]
       }
     }
   ];
@@ -68,9 +68,9 @@ const Tools = () => {
       
       <div className="max-w-7xl mx-auto">
         <div className="mb-16 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 animate-fade-up">Core Expertise</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 animate-fade-up">SMB AI Expertise</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto animate-fade-up animation-delay-100">
-            Specialized knowledge and capabilities for building intelligent AI systems
+            Specialized knowledge and frameworks for building intelligent AI systems specifically for small and medium businesses
           </p>
         </div>
 

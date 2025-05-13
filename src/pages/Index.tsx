@@ -1,3 +1,4 @@
+
 import Header from '@/components/Header';
 import Projects from '@/components/Projects';
 import Tools from '@/components/Tools';
@@ -7,6 +8,8 @@ import Footer from '@/components/Footer';
 import Process from '@/components/Process';
 import LogosSection from '@/components/LogosSection';
 import ParticleBackground from '@/components/ParticleBackground';
+import SuccessStories from '@/components/SuccessStories';
+
 const Index = () => {
   return <div className="min-h-screen bg-background text-foreground font-sans antialiased">
       <Header />
@@ -35,17 +38,18 @@ const Index = () => {
         zIndex: 10
       }}>
           <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-up text-balance">
-            Strategic <span className="text-accent">AI Agent</span> Development
+            AI Agent Solutions <span className="text-accent">Built for SMBs</span>
           </h1>
-          <p className="text-lg md:text-xl text-muted-foreground mb-10 animate-fade-up animation-delay-200 md:px-6 text-balance">Experts in Strategic AI Agentic Architecture, Small-Medium Sized Businesses, and User-Centric Solutions. 
-
-Building intelligent systems that deliver real business value.</p>
+          <p className="text-lg md:text-xl text-muted-foreground mb-10 animate-fade-up animation-delay-200 md:px-6 text-balance">
+            Experts in hyper-local AI deployment specifically for small and medium businesses. 
+            <span className="block mt-2 font-medium">Delivering measurable ROI with localized intelligence that understands your market.</span>
+          </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
             <a href="#projects" className="inline-block bg-primary text-primary-foreground px-8 py-3.5 rounded-lg font-medium interactive-element animate-fade-up animation-delay-300">
-              View Projects
+              SMB Success Stories
             </a>
             <a href="#contact" className="inline-block bg-secondary text-foreground border border-border/50 px-8 py-3.5 rounded-lg font-medium interactive-element animate-fade-up animation-delay-400">
-              Get in Touch
+              Free SMB Consultation
             </a>
           </div>
         </div>
@@ -57,6 +61,7 @@ Building intelligent systems that deliver real business value.</p>
         <Process />
         <Projects />
         <Tools />
+        <SuccessStories />
         <LogosSection />
         <About />
         <Contact />

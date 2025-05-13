@@ -1,31 +1,31 @@
 
 import React from 'react';
-import { Search, Lightbulb, RefreshCcw, Brain, Server, GitFork } from 'lucide-react';
+import { Search, Lightbulb, RefreshCcw, Brain, Server, GitFork, DollarSign, Target, Clock } from 'lucide-react';
 const Process = () => {
   const stages = [{
     icon: Search,
-    title: "Problem Discovery & JTBD Alignment",
-    description: "Uncover high-impact, underserved 'jobs' in specific domains using customer interviews and JTBD principles. Ensure you're solving real problems that matter."
+    title: "SMB Problem Discovery",
+    description: "Identify high-impact opportunities uniquely relevant to small business contexts. We focus on issues that deliver immediate ROI for local businesses with limited resources."
   }, {
-    icon: Lightbulb,
-    title: "Pretotyping & Rapid Validation",
-    description: "Test demand and feasibility before building complex AI. Use Fake Agent Demos and Wizard of Oz testing to validate your core value proposition quickly and cheaply."
+    icon: DollarSign,
+    title: "Budget-Conscious Validation",
+    description: "Test solutions with minimal investment using cost-effective prototyping. We validate concepts without requiring enterprise-level investment, perfect for SMB budgets."
   }, {
-    icon: RefreshCcw,
-    title: "Agentic Build-Measure-Learn",
-    description: "Iterate your agents with tight feedback loops focused on job completion. Build Minimum Viable Agents (MVAs) and continuously validate with user feedback."
+    icon: Clock,
+    title: "Rapid SMB Implementation",
+    description: "Fast-track deployment with agile cycles optimized for small business timelines. Get operational AI agents in weeks, not months, critical for businesses that need immediate results."
   }, {
-    icon: Brain,
-    title: "Domain-Driven Agent Design",
-    description: "Embed deep domain expertise into your agents. Collaborate with industry experts, train on domain-specific language, and bake in necessary guardrails."
+    icon: Target,
+    title: "Hyper-Local Intelligence",
+    description: "Build agents that understand your specific community, neighborhood demographics, and local market dynamics. AI that knows your customers like you do."
   }, {
     icon: Server,
-    title: "Scalable AgentOps",
-    description: "Systematize deployment, monitoring, and iteration across multiple agents with an Agent Factory Model. Track performance and optimize for cost and efficiency."
+    title: "SMB-Scale Operations",
+    description: "Deploy agent systems that work within your existing business operations. No enterprise-level IT department required – designed for small teams with big goals."
   }, {
-    icon: GitFork,
-    title: "Pivot or Scale Decision Framework",
-    description: "Make informed decisions about iterating, pivoting, or scaling your agents based on confidence thresholds and data-driven insights."
+    icon: Brain,
+    title: "Ongoing Local Learning",
+    description: "Continuously adapt your AI to evolving local trends, seasonal patterns, and community changes. Systems that grow with your business and neighborhood."
   }];
   return <section id="process" className="section-spacing px-6 relative overflow-hidden">
       {/* Background accent */}
@@ -33,15 +33,18 @@ const Process = () => {
       
       <div className="max-w-7xl mx-auto relative">
         <div className="mb-16 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 animate-fade-up">Development Process</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 animate-fade-up">SMB AI Development Process</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto animate-fade-up animation-delay-100">
-            A systematic approach to building effective AI agents that deliver real value
+            A streamlined approach to building effective AI agents specifically for small and medium businesses
           </p>
         </div>
         
         {/* Process Diagram Image */}
         <div className="mb-16 max-w-5xl mx-auto bg-slate-50">
           <img src="/lovable-uploads/8165a53c-449a-42c1-9b0c-7483ea924bbf.png" alt="Strategic AI Agent Development Process" className="w-full h-auto rounded-xl shadow-lg animate-fade-up opacity-75" />
+          <div className="text-center text-sm text-muted-foreground py-2">
+            Hyper-localized AI deployment framework optimized for SMB implementation
+          </div>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -55,7 +58,7 @@ const Process = () => {
                 </div>
                 <h3 className="text-xl font-semibold mb-4">{stage.title}</h3>
                 <p className="text-muted-foreground">{stage.description}</p>
-                <div className="mt-4 text-sm text-accent font-medium">Step {index + 1}</div>
+                <div className="mt-4 text-sm text-accent font-medium">Phase {index + 1}</div>
               </div>;
         })}
         </div>

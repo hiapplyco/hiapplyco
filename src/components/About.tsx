@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Shield, Target, LineChart, ExternalLink } from 'lucide-react';
+import { Shield, Target, LineChart, ExternalLink, Building, Globe, Briefcase } from 'lucide-react';
 
 const About = () => {
   return (
@@ -12,11 +12,11 @@ const About = () => {
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-8 animate-fade-right">
-            <h2 className="text-3xl md:text-4xl font-bold">Bridging Battlefield Discipline & Boardroom Strategy</h2>
+            <h2 className="text-3xl md:text-4xl font-bold">SMB AI Expert with Military Precision</h2>
             
             <div className="prose prose-neutral">
               <p className="text-lg text-muted-foreground">
-                A US Army Veteran and C-Suite Advisor specializing in AI Solutions Architecture. With over a decade of experience leading high-stakes tech deployments for Fortune 500s and government agencies, I design agentic AI systems that work as hard as your team.
+                A US Army Veteran and dedicated SMB Technology Partner specializing in locally-optimized AI solutions. With over a decade of experience helping small and medium businesses implement AI systems that deliver tangible ROI, I create solutions that understand your community as well as you do.
               </p>
             </div>
 
@@ -36,30 +36,30 @@ const About = () => {
             <div className="space-y-6">
               <div className="glass glass-hover p-6 rounded-lg">
                 <div className="flex items-start gap-4">
-                  <Target className="h-6 w-6 text-accent flex-shrink-0" />
+                  <Building className="h-6 w-6 text-accent flex-shrink-0" />
                   <div>
-                    <h3 className="font-semibold mb-2">Executive-First AI Design</h3>
-                    <p className="text-muted-foreground">Solutions that speak both engineer and CFO – no translation needed.</p>
+                    <h3 className="font-semibold mb-2">SMB-First Design Philosophy</h3>
+                    <p className="text-muted-foreground">Solutions built specifically for small business realities – budget-conscious, efficient, and immediately impactful.</p>
                   </div>
                 </div>
               </div>
 
               <div className="glass glass-hover p-6 rounded-lg">
                 <div className="flex items-start gap-4">
-                  <Shield className="h-6 w-6 text-accent flex-shrink-0" />
+                  <Globe className="h-6 w-6 text-accent flex-shrink-0" />
                   <div>
-                    <h3 className="font-semibold mb-2">Compliance-Built Systems</h3>
-                    <p className="text-muted-foreground">Government-grade security & governance baked into every workflow.</p>
+                    <h3 className="font-semibold mb-2">Hyper-Local Expertise</h3>
+                    <p className="text-muted-foreground">AI systems that understand geographic nuances and community-specific patterns that national solutions miss.</p>
                   </div>
                 </div>
               </div>
 
               <div className="glass glass-hover p-6 rounded-lg">
                 <div className="flex items-start gap-4">
-                  <LineChart className="h-6 w-6 text-accent flex-shrink-0" />
+                  <Briefcase className="h-6 w-6 text-accent flex-shrink-0" />
                   <div>
-                    <h3 className="font-semibold mb-2">Measurable Impact</h3>
-                    <p className="text-muted-foreground">Clear ROI tracking for AI investments, focused on revenue, efficiency, and risk reduction.</p>
+                    <h3 className="font-semibold mb-2">SMB Success Focused</h3>
+                    <p className="text-muted-foreground">Proven track record helping over 50 small and medium businesses implement AI that delivers measurable results within local markets.</p>
                   </div>
                 </div>
               </div>
@@ -77,7 +77,7 @@ const About = () => {
             </div>
             <div className="glass absolute bottom-4 left-4 right-4 p-4 rounded-lg backdrop-blur-md">
               <h3 className="font-bold text-lg">James Schlauch</h3>
-              <p className="text-sm text-muted-foreground">AI Solutions Architect | Strategic Technology Partner</p>
+              <p className="text-sm text-muted-foreground">SMB AI Specialist | Local Deployment Expert</p>
             </div>
           </div>
         </div>
