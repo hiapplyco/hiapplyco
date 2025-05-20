@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Database, MessageSquare, PieChart, Calendar, Users, ArrowRight, Settings, Connect } from 'lucide-react';
+import { Database, MessageSquare, PieChart, Calendar, Users, ArrowRight, Settings } from 'lucide-react';
 import { Card } from './ui/card';
 
 const AgentEcosystemVisualization = () => {
