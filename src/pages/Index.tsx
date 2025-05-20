@@ -17,7 +17,7 @@ const Index = () => {
       
       {/* Fixed particle background that covers the entire page */}
       <div className="fixed inset-0" style={{
-      zIndex: 2
+      zIndex: 1
     }}>
         <ParticleBackground />
       </div>
