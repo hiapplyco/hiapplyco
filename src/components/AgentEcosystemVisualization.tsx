@@ -54,7 +54,7 @@ const AgentEcosystemVisualization = () => {
     };
   }, []);
   
-  // Agent node component
+  // Agent node component - more compact design
   const AgentNode = ({ 
     visible, 
     icon: Icon, 
@@ -80,25 +80,24 @@ const AgentEcosystemVisualization = () => {
     
     return (
       <div 
-        className={`relative w-64 rounded-lg glass p-4 transition-all duration-1000 ${positionClass} ${
-          visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
+        className={`relative w-64 rounded-lg glass p-4 transition-all duration-700 ${positionClass} ${
+          visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}
       >
-        <div className="absolute -top-4 -left-4 flex h-12 w-12 items-center justify-center rounded-full bg-background shadow-sm border border-border/40">
-          <Icon size={24} className={colorClasses[color]} />
+        <div className="absolute -top-3 -left-3 flex h-10 w-10 items-center justify-center rounded-full bg-background shadow-sm border border-border/40">
+          <Icon size={20} className={colorClasses[color]} />
         </div>
-        <div className="pt-2">
-          <h3 className="mb-2 font-bold text-lg">{title}</h3>
-          <p className="text-sm text-muted-foreground mb-3">{description}</p>
+        <div className="pt-1 pl-2">
+          <h3 className="mb-1 font-bold text-base">{title}</h3>
+          <p className="text-xs text-muted-foreground mb-2">{description}</p>
           
           {services.length > 0 && (
-            <div className="border-t border-border/40 pt-2">
-              <p className="text-xs text-muted-foreground mb-1">Integrates with:</p>
+            <div className="border-t border-border/40 pt-1.5">
               <div className="flex flex-wrap gap-1">
                 {services.map((service, idx) => (
                   <span 
                     key={idx} 
-                    className="bg-secondary text-foreground text-xs px-2 py-1 rounded"
+                    className="bg-secondary/60 text-foreground text-[10px] px-1.5 py-0.5 rounded"
                   >
                     {service}
                   </span>
@@ -111,15 +110,15 @@ const AgentEcosystemVisualization = () => {
     );
   };
   
-  // Connection line between nodes
+  // Connection line between nodes - thinner and more subtle
   const ConnectionLine = ({ visible, from, to }) => {
     return (
       <div 
-        className={`absolute w-px bg-border/60 transition-all duration-1000 ${
-          visible ? 'opacity-100' : 'opacity-0'
+        className={`absolute w-[1px] bg-border/60 transition-all duration-700 ${
+          visible ? 'opacity-80' : 'opacity-0'
         }`}
         style={{
-          height: '60px',
+          height: '40px',
           left: '50%',
           top: from,
           transformOrigin: 'top',
@@ -134,38 +133,38 @@ const AgentEcosystemVisualization = () => {
       <div className="absolute top-20 left-16 w-64 h-64 bg-accent/5 rounded-full blur-3xl animate-pulse pointer-events-none"></div>
       <div className="absolute bottom-0 right-10 w-80 h-80 bg-primary/5 rounded-full blur-3xl animate-pulse pointer-events-none"></div>
       
-      <div className="relative w-full max-w-3xl mx-auto pb-40">
-        <div className="sticky top-20 z-10 py-4 text-center glass rounded-lg mb-8 animate-fade-up">
-          <h2 className="text-2xl md:text-3xl font-bold mb-2">
-            AI Agent Ecosystem for Subscription-Based SMBs
+      <div className="max-w-3xl mx-auto relative">
+        <div className="sticky top-20 z-10 py-3 text-center glass rounded-lg mb-6 animate-fade-up">
+          <h2 className="text-xl md:text-2xl font-bold mb-1">
+            AI Agent Ecosystem for SMBs
           </h2>
-          <p className="text-muted-foreground">Scroll to explore the agent network</p>
+          <p className="text-xs text-muted-foreground">Scroll to explore the agent network</p>
         </div>
         
-        {/* Central Hub Section */}
+        {/* Central Hub Section - more compact */}
         <section 
           ref={sectionRefs.hub} 
-          className="min-h-[60vh] flex flex-col items-center justify-center"
+          className="min-h-[30vh] flex flex-col items-center justify-center"
         >
           <AgentNode
             visible={visibleSections.hub}
             icon={Database}
             title="Central Agent Hub"
-            description="Command center that coordinates workflows and manages subscription services"
+            description="Command center coordinating workflows across subscription services"
             color="blue"
             services={["All connected services"]}
           />
           <ConnectionLine 
             visible={visibleSections.hub}
             from="100%"
-            to="calc(100% + 60px)"
+            to="calc(100% + 40px)"
           />
         </section>
         
-        {/* Executive Assistant Section */}
+        {/* Executive Assistant Section - more compact */}
         <section 
           ref={sectionRefs.executive} 
-          className="min-h-[60vh] flex flex-col items-center justify-start pt-20"
+          className="min-h-[25vh] flex flex-col items-center justify-start pt-10"
         >
           <AgentNode
             visible={visibleSections.executive}
@@ -173,119 +172,118 @@ const AgentEcosystemVisualization = () => {
             title="Executive Assistant Agents"
             description="Manages calendars, emails, and coordinates meetings"
             color="purple"
-            services={["Google Workspace", "Microsoft 365", "Zoom", "Slack"]}
+            services={["Google Workspace", "Microsoft 365", "Slack"]}
             position="left"
           />
           <ConnectionLine 
             visible={visibleSections.executive}
             from="100%"
-            to="calc(100% + 60px)"
+            to="calc(100% + 40px)"
           />
         </section>
         
-        {/* Customer Service Section */}
+        {/* Customer Service Section - more compact */}
         <section 
           ref={sectionRefs.customer} 
-          className="min-h-[60vh] flex flex-col items-center justify-start pt-20"
+          className="min-h-[25vh] flex flex-col items-center justify-start pt-10"
         >
           <AgentNode
             visible={visibleSections.customer}
             icon={MessageSquare}
             title="Customer Service Agents"
-            description="Handles ticket routing and automated responses to FAQs"
+            description="Handles ticket routing and automated responses"
             color="green"
-            services={["Zendesk", "Intercom", "HubSpot", "Salesforce"]}
+            services={["Zendesk", "Intercom", "HubSpot"]}
             position="right"
           />
           <ConnectionLine 
             visible={visibleSections.customer}
             from="100%"
-            to="calc(100% + 60px)"
+            to="calc(100% + 40px)"
           />
         </section>
         
-        {/* Data Analysis Section */}
+        {/* Data Analysis Section - more compact */}
         <section 
           ref={sectionRefs.data} 
-          className="min-h-[60vh] flex flex-col items-center justify-start pt-20"
+          className="min-h-[25vh] flex flex-col items-center justify-start pt-10"
         >
           <AgentNode
             visible={visibleSections.data}
             icon={PieChart}
             title="Data Analysis Agents"
-            description="Generates reports and identifies trends across business data"
+            description="Generates reports and identifies key trends"
             color="yellow"
-            services={["QuickBooks", "Tableau", "Power BI", "Google Analytics"]}
+            services={["QuickBooks", "Tableau", "Google Analytics"]}
             position="left"
           />
           <ConnectionLine 
             visible={visibleSections.data}
             from="100%"
-            to="calc(100% + 60px)"
+            to="calc(100% + 40px)"
           />
         </section>
         
-        {/* Content Creation Section */}
+        {/* Content Creation Section - more compact */}
         <section 
           ref={sectionRefs.content} 
-          className="min-h-[60vh] flex flex-col items-center justify-start pt-20"
+          className="min-h-[25vh] flex flex-col items-center justify-start pt-10"
         >
           <AgentNode
             visible={visibleSections.content}
             icon={Users}
             title="Content Creation Agents"
-            description="Creates marketing materials and manages social media content"
+            description="Creates marketing materials and social content"
             color="red"
-            services={["Canva", "Buffer", "Hootsuite", "WordPress"]}
+            services={["Canva", "Buffer", "WordPress"]}
             position="right"
+          />
+          <ConnectionLine 
+            visible={visibleSections.connections}
+            from="100%"
+            to="calc(100% + 40px)"
           />
         </section>
         
-        {/* Subscription Connection Map */}
+        {/* Subscription Connection Map - more compact */}
         <section 
           ref={sectionRefs.connections} 
-          className="min-h-[60vh] flex flex-col items-center justify-center"
+          className="min-h-[30vh] flex flex-col items-center justify-center pt-10"
         >
-          <div className={`text-center mb-8 transition-all duration-1000 ${
+          <div className={`text-center mb-4 transition-all duration-700 ${
             visibleSections.connections ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}>
-            <h3 className="text-xl font-bold mb-2">Complete Integration Network</h3>
-            <p className="text-muted-foreground">How all agents interact with subscription services</p>
+            <h3 className="text-lg font-bold mb-1">Integration Network</h3>
+            <p className="text-xs text-muted-foreground">How agents integrate with subscriptions</p>
           </div>
           
-          <div className={`w-full max-w-2xl glass p-6 transition-all duration-1500 transform ${
+          <div className={`w-full max-w-lg glass p-4 transition-all duration-1000 ${
             visibleSections.connections ? 'opacity-100 scale-100' : 'opacity-0 scale-90'
           }`}>
-            <div className="flex flex-wrap justify-center gap-4">
-              {/* This would be a more complex visualization of all connections */}
-              {/* For simplicity, showing placeholder boxes */}
+            <div className="flex flex-wrap justify-center gap-2">
               {['CRM', 'Productivity', 'Communication', 'Financial', 'Project'].map((category, idx) => (
-                <div key={idx} className="border border-border/40 rounded p-3 w-32 text-center">
-                  <div className="font-semibold text-sm">{category}</div>
-                  <div className="mt-2 text-xs text-muted-foreground">Subscription Services</div>
+                <div key={idx} className="border border-border/40 rounded p-2 w-24 text-center">
+                  <div className="font-medium text-xs">{category}</div>
+                  <div className="mt-1 text-[10px] text-muted-foreground">Services</div>
                 </div>
               ))}
             </div>
             
-            <div className="mt-8 border-t border-border/40 pt-4">
-              <h4 className="font-semibold mb-2">Cost Structure</h4>
-              <div className="bg-secondary/30 p-3 rounded">
-                <div className="flex justify-between items-center text-sm">
-                  <span>Base</span>
-                  <span>Professional</span>
+            <div className="mt-4 border-t border-border/40 pt-3">
+              <h4 className="font-medium text-sm mb-2">Cost Structure</h4>
+              <div className="bg-secondary/30 p-2 rounded">
+                <div className="flex justify-between items-center text-xs">
+                  <span>Basic</span>
+                  <span>Pro</span>
                   <span>Enterprise</span>
                 </div>
-                <div className="h-2 bg-secondary rounded-full mt-2 overflow-hidden">
+                <div className="h-1.5 bg-secondary rounded-full mt-1.5 overflow-hidden">
                   <div className="h-full bg-gradient-to-r from-accent/50 via-accent to-accent/80 w-full"></div>
                 </div>
               </div>
             </div>
           </div>
         </section>
-        
-        <div className="text-center py-8 text-muted-foreground text-sm">
-          Contact us to learn more about our AI agent solutions for your business
-        </div>
       </div>
     </section>
   );
