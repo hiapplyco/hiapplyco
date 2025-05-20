@@ -1,75 +1,41 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { ArrowRight, Database, MessageSquare, PieChart, Calendar, Users } from 'lucide-react';
+import { Database, MessageSquare, PieChart, Calendar, Users, ArrowRight, Settings, Connect } from 'lucide-react';
+import { Card } from './ui/card';
 
 const AgentEcosystemVisualization = () => {
-  // Track which sections are visible
-  const [visibleSections, setVisibleSections] = useState({
-    hub: false,
-    executive: false,
-    customer: false,
-    data: false,
-    content: false,
-    connections: false
-  });
-  
-  // References to section elements
-  const sectionRefs = {
-    hub: useRef(null),
-    executive: useRef(null),
-    customer: useRef(null),
-    data: useRef(null),
-    content: useRef(null),
-    connections: useRef(null)
-  };
-  
-  // Set up intersection observers for each section
+  const [isVisible, setIsVisible] = useState(false);
+  const visualizationRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    const observers = Object.entries(sectionRefs).map(([key, ref]) => {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              setVisibleSections(prev => ({ ...prev, [key]: true }));
-            }
-          });
-        },
-        { threshold: 0.3 } // Trigger when 30% visible
-      );
-      
-      if (ref.current) {
-        observer.observe(ref.current);
-      }
-      
-      return { key, observer };
-    });
-    
-    // Cleanup observers
-    return () => {
-      observers.forEach(({ key, observer }) => {
-        if (sectionRefs[key].current) {
-          observer.unobserve(sectionRefs[key].current);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setIsVisible(true);
         }
-      });
+      },
+      { threshold: 0.2 }
+    );
+    
+    if (visualizationRef.current) {
+      observer.observe(visualizationRef.current);
+    }
+    
+    return () => {
+      if (visualizationRef.current) {
+        observer.unobserve(visualizationRef.current);
+      }
     };
   }, []);
   
-  // Agent node component - more compact design
-  const AgentNode = ({ 
-    visible, 
+  // Tool node component
+  const ToolNode = ({ 
     icon: Icon, 
     title, 
-    description, 
     color, 
-    services = [],
-    position = 'center'
+    delay = 0,
+    services = []
   }) => {
-    const positionClass = {
-      'left': 'justify-start mr-auto',
-      'right': 'justify-end ml-auto',
-      'center': 'mx-auto'
-    }[position];
-    
     const colorClasses = {
       'blue': 'text-accent',
       'purple': 'text-purple-500',
@@ -80,24 +46,21 @@ const AgentEcosystemVisualization = () => {
     
     return (
       <div 
-        className={`relative w-64 rounded-lg glass p-4 transition-all duration-700 ${positionClass} ${
-          visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        className={`transition-all duration-700 delay-[${delay}ms] ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}
       >
-        <div className="absolute -top-3 -left-3 flex h-10 w-10 items-center justify-center rounded-full bg-background shadow-sm border border-border/40">
-          <Icon size={20} className={colorClasses[color]} />
-        </div>
-        <div className="pt-1 pl-2">
-          <h3 className="mb-1 font-bold text-base">{title}</h3>
-          <p className="text-xs text-muted-foreground mb-2">{description}</p>
+        <div className="relative glass p-3 rounded-lg w-40 h-40 flex flex-col items-center justify-center border border-border/40">
+          <Icon size={28} className={colorClasses[color]} />
+          <h3 className="font-semibold text-sm mt-2 mb-1 text-center">{title}</h3>
           
           {services.length > 0 && (
-            <div className="border-t border-border/40 pt-1.5">
-              <div className="flex flex-wrap gap-1">
+            <div className="mt-1">
+              <div className="flex flex-wrap justify-center gap-1">
                 {services.map((service, idx) => (
                   <span 
                     key={idx} 
-                    className="bg-secondary/60 text-foreground text-[10px] px-1.5 py-0.5 rounded"
+                    className="bg-secondary/60 text-[10px] px-1 py-0.5 rounded"
                   >
                     {service}
                   </span>
@@ -110,21 +73,29 @@ const AgentEcosystemVisualization = () => {
     );
   };
   
-  // Connection line between nodes - thinner and more subtle
-  const ConnectionLine = ({ visible, from, to }) => {
+  // Connection line between nodes
+  const ConnectionLine = ({ 
+    delay = 0, 
+    type = 'straight',
+    direction = 'right'
+  }) => {
     return (
-      <div 
-        className={`absolute w-[1px] bg-border/60 transition-all duration-700 ${
-          visible ? 'opacity-80' : 'opacity-0'
-        }`}
-        style={{
-          height: '40px',
-          left: '50%',
-          top: from,
-          transformOrigin: 'top',
-          transform: visible ? 'scaleY(1)' : 'scaleY(0)'
-        }}
-      />
+      <div className="flex items-center w-10 h-20 mx-1">
+        <div 
+          className={`w-full h-[2px] bg-border relative transition-all duration-500 delay-[${delay + 100}ms] ${
+            isVisible ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'
+          }`}
+        >
+          <ArrowRight 
+            size={12} 
+            className={`absolute top-1/2 -translate-y-1/2 ${direction === 'right' ? 'right-0' : 'left-0 rotate-180'} text-muted-foreground`} 
+          />
+          
+          {type === 'data' && (
+            <div className="absolute -top-1 left-1/2 w-2 h-2 rounded-full bg-accent/70 animate-pulse"></div>
+          )}
+        </div>
+      </div>
     );
   };
   
@@ -133,157 +104,110 @@ const AgentEcosystemVisualization = () => {
       <div className="absolute top-20 left-16 w-64 h-64 bg-accent/5 rounded-full blur-3xl animate-pulse pointer-events-none"></div>
       <div className="absolute bottom-0 right-10 w-80 h-80 bg-primary/5 rounded-full blur-3xl animate-pulse pointer-events-none"></div>
       
-      <div className="max-w-3xl mx-auto relative">
-        <div className="sticky top-20 z-10 py-3 text-center glass rounded-lg mb-6 animate-fade-up">
-          <h2 className="text-xl md:text-2xl font-bold mb-1">
-            AI Agent Ecosystem for SMBs
+      <div className="max-w-5xl mx-auto" ref={visualizationRef}>
+        <div className="text-center mb-8 animate-fade-up">
+          <h2 className="text-xl md:text-2xl font-bold mb-2">
+            AI Agent Ecosystem for SMB Integration
           </h2>
-          <p className="text-xs text-muted-foreground">Scroll to explore the agent network</p>
+          <p className="text-sm text-muted-foreground">An interconnected network of specialized AI agents working across your tools</p>
         </div>
         
-        {/* Central Hub Section - more compact */}
-        <section 
-          ref={sectionRefs.hub} 
-          className="min-h-[30vh] flex flex-col items-center justify-center"
-        >
-          <AgentNode
-            visible={visibleSections.hub}
-            icon={Database}
-            title="Central Agent Hub"
-            description="Command center coordinating workflows across subscription services"
-            color="blue"
-            services={["All connected services"]}
-          />
-          <ConnectionLine 
-            visible={visibleSections.hub}
-            from="100%"
-            to="calc(100% + 40px)"
-          />
-        </section>
-        
-        {/* Executive Assistant Section - more compact */}
-        <section 
-          ref={sectionRefs.executive} 
-          className="min-h-[25vh] flex flex-col items-center justify-start pt-10"
-        >
-          <AgentNode
-            visible={visibleSections.executive}
-            icon={Calendar}
-            title="Executive Assistant Agents"
-            description="Manages calendars, emails, and coordinates meetings"
-            color="purple"
-            services={["Google Workspace", "Microsoft 365", "Slack"]}
-            position="left"
-          />
-          <ConnectionLine 
-            visible={visibleSections.executive}
-            from="100%"
-            to="calc(100% + 40px)"
-          />
-        </section>
-        
-        {/* Customer Service Section - more compact */}
-        <section 
-          ref={sectionRefs.customer} 
-          className="min-h-[25vh] flex flex-col items-center justify-start pt-10"
-        >
-          <AgentNode
-            visible={visibleSections.customer}
-            icon={MessageSquare}
-            title="Customer Service Agents"
-            description="Handles ticket routing and automated responses"
-            color="green"
-            services={["Zendesk", "Intercom", "HubSpot"]}
-            position="right"
-          />
-          <ConnectionLine 
-            visible={visibleSections.customer}
-            from="100%"
-            to="calc(100% + 40px)"
-          />
-        </section>
-        
-        {/* Data Analysis Section - more compact */}
-        <section 
-          ref={sectionRefs.data} 
-          className="min-h-[25vh] flex flex-col items-center justify-start pt-10"
-        >
-          <AgentNode
-            visible={visibleSections.data}
-            icon={PieChart}
-            title="Data Analysis Agents"
-            description="Generates reports and identifies key trends"
-            color="yellow"
-            services={["QuickBooks", "Tableau", "Google Analytics"]}
-            position="left"
-          />
-          <ConnectionLine 
-            visible={visibleSections.data}
-            from="100%"
-            to="calc(100% + 40px)"
-          />
-        </section>
-        
-        {/* Content Creation Section - more compact */}
-        <section 
-          ref={sectionRefs.content} 
-          className="min-h-[25vh] flex flex-col items-center justify-start pt-10"
-        >
-          <AgentNode
-            visible={visibleSections.content}
-            icon={Users}
-            title="Content Creation Agents"
-            description="Creates marketing materials and social content"
-            color="red"
-            services={["Canva", "Buffer", "WordPress"]}
-            position="right"
-          />
-          <ConnectionLine 
-            visible={visibleSections.connections}
-            from="100%"
-            to="calc(100% + 40px)"
-          />
-        </section>
-        
-        {/* Subscription Connection Map - more compact */}
-        <section 
-          ref={sectionRefs.connections} 
-          className="min-h-[30vh] flex flex-col items-center justify-center pt-10"
-        >
-          <div className={`text-center mb-4 transition-all duration-700 ${
-            visibleSections.connections ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}>
-            <h3 className="text-lg font-bold mb-1">Integration Network</h3>
-            <p className="text-xs text-muted-foreground">How agents integrate with subscriptions</p>
+        {/* Workflow diagram - horizontal layout */}
+        <div className="w-full overflow-x-auto pb-6">
+          <div className="flex flex-nowrap min-w-[900px] justify-center items-center p-4">
+            {/* Hub */}
+            <ToolNode
+              icon={Database}
+              title="Central Hub"
+              color="blue"
+              services={["Orchestration"]}
+              delay={0}
+            />
+            
+            <ConnectionLine delay={150} type="data" />
+            
+            {/* Executive Assistant */}
+            <ToolNode
+              icon={Calendar}
+              title="Executive Assistant"
+              color="purple"
+              services={["Calendar", "Email"]}
+              delay={200}
+            />
+            
+            <ConnectionLine delay={350} />
+            
+            {/* Customer Service */}
+            <ToolNode
+              icon={MessageSquare}
+              title="Customer Service"
+              color="green"
+              services={["Support", "Chat"]}
+              delay={400}
+            />
+            
+            <ConnectionLine delay={550} type="data" />
+            
+            {/* Data Analysis */}
+            <ToolNode
+              icon={PieChart}
+              title="Data Analysis"
+              color="yellow"
+              services={["Reports", "Insights"]}
+              delay={600}
+            />
+            
+            <ConnectionLine delay={750} />
+            
+            {/* Content Creation */}
+            <ToolNode
+              icon={Users}
+              title="Content Creation"
+              color="red"
+              services={["Marketing", "Social"]}
+              delay={800}
+            />
           </div>
           
-          <div className={`w-full max-w-lg glass p-4 transition-all duration-1000 ${
-            visibleSections.connections ? 'opacity-100 scale-100' : 'opacity-0 scale-90'
+          {/* Connection lines to SaaS tools below */}
+          <div className={`mt-4 glass rounded-lg p-4 transition-all duration-1000 delay-[900ms] ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}>
-            <div className="flex flex-wrap justify-center gap-2">
-              {['CRM', 'Productivity', 'Communication', 'Financial', 'Project'].map((category, idx) => (
-                <div key={idx} className="border border-border/40 rounded p-2 w-24 text-center">
-                  <div className="font-medium text-xs">{category}</div>
-                  <div className="mt-1 text-[10px] text-muted-foreground">Services</div>
+            <h3 className="text-sm font-medium mb-3 text-center">Connected SaaS Subscriptions</h3>
+            
+            <div className="grid grid-cols-5 gap-2">
+              {/* Tool connections - 5 columns to match the 5 agent nodes */}
+              {[
+                ["Google", "Microsoft", "Slack"],
+                ["Zoom", "Asana", "Notion"],
+                ["Zendesk", "Intercom", "HubSpot"],
+                ["QuickBooks", "Tableau", "Google Analytics"],
+                ["Canva", "Buffer", "WordPress"]
+              ].map((toolGroup, groupIdx) => (
+                <div key={groupIdx} className="flex flex-col items-center">
+                  <div className="h-6 border-l border-border/50 w-0"></div>
+                  <div className="bg-secondary/30 p-2 rounded w-full">
+                    {toolGroup.map((tool, idx) => (
+                      <div key={idx} className="text-[10px] text-center mb-1 bg-background/50 rounded py-0.5">
+                        {tool}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               ))}
             </div>
-            
-            <div className="mt-4 border-t border-border/40 pt-3">
-              <h4 className="font-medium text-sm mb-2">Cost Structure</h4>
-              <div className="bg-secondary/30 p-2 rounded">
-                <div className="flex justify-between items-center text-xs">
-                  <span>Basic</span>
-                  <span>Pro</span>
-                  <span>Enterprise</span>
-                </div>
-                <div className="h-1.5 bg-secondary rounded-full mt-1.5 overflow-hidden">
-                  <div className="h-full bg-gradient-to-r from-accent/50 via-accent to-accent/80 w-full"></div>
-                </div>
-              </div>
-            </div>
           </div>
-        </section>
+        </div>
+        
+        {/* Data flow indicators */}
+        <div className={`mt-6 text-center transition-all duration-700 delay-[1100ms] ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        }`}>
+          <Card className="inline-flex items-center px-4 py-2 gap-2 text-xs border border-border/40">
+            <div className="w-3 h-3 rounded-full bg-accent/70 animate-pulse"></div>
+            <span className="text-muted-foreground">Live data flowing through the ecosystem</span>
+          </Card>
+        </div>
       </div>
     </section>
   );
