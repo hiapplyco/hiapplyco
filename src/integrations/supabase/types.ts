@@ -441,6 +441,86 @@ export type Database = {
           },
         ]
       }
+      lead_activities: {
+        Row: {
+          activity_type: string
+          created_at: string
+          created_by: string | null
+          details: string | null
+          id: string
+          lead_id: string
+        }
+        Insert: {
+          activity_type: string
+          created_at?: string
+          created_by?: string | null
+          details?: string | null
+          id?: string
+          lead_id: string
+        }
+        Update: {
+          activity_type?: string
+          created_at?: string
+          created_by?: string | null
+          details?: string | null
+          id?: string
+          lead_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lead_activities_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      leads: {
+        Row: {
+          assigned_to: string | null
+          company: string
+          created_at: string
+          email: string
+          id: string
+          industry: string
+          message: string
+          name: string
+          phone: string | null
+          preferred_contact: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          assigned_to?: string | null
+          company: string
+          created_at?: string
+          email: string
+          id?: string
+          industry: string
+          message: string
+          name: string
+          phone?: string | null
+          preferred_contact: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          assigned_to?: string | null
+          company?: string
+          created_at?: string
+          email?: string
+          id?: string
+          industry?: string
+          message?: string
+          name?: string
+          phone?: string | null
+          preferred_contact?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       meeting_analyses: {
         Row: {
           analysis: string

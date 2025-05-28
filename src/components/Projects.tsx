@@ -1,19 +1,9 @@
-
 import React from 'react';
 import { ExternalLink, ArrowUpRight, Heart, Dumbbell, UserRound, Swords, Crosshair, Store, Building, Globe } from 'lucide-react';
 import { Badge } from './ui/badge';
 
 const Projects = () => {
   const featuredProjects = [
-    {
-      name: "LocalAI Market Analyzer",
-      description: "AI-powered local market analysis helping SMBs understand their neighborhood demographics and competition, resulting in 38% more targeted marketing campaigns",
-      url: "https://www.localaianalyzer.co",
-      icon: Globe,
-      iconColor: "text-blue-500",
-      tags: ["SMB-Optimized", "Hyper-Local"],
-      metrics: "38% increase in campaign effectiveness"
-    },
     {
       name: "harmony.works",
       description: "SMB coaching platform providing AI mentorship for local business owners, with customized guidance tailored to specific local market conditions",
@@ -22,15 +12,6 @@ const Projects = () => {
       iconColor: "text-pink-500",
       tags: ["Small Business", "Locally Deployed"],
       metrics: "87% owner satisfaction rate"
-    },
-    {
-      name: "SMB RetailGenius",
-      description: "Hyper-local inventory optimization system for small retailers, analyzing neighborhood purchase patterns to predict local demand curves",
-      url: "https://www.retailgenius.local",
-      icon: Store,
-      iconColor: "text-emerald-500",
-      tags: ["SMB-First", "Local Analytics"],
-      metrics: "22% inventory cost reduction"
     },
     {
       name: "strength.design",
