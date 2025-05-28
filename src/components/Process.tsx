@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Search, Lightbulb, RefreshCcw, Brain, Server, GitFork, DollarSign, Target, Clock } from 'lucide-react';
 const Process = () => {
@@ -41,7 +40,7 @@ const Process = () => {
         
         {/* Process Diagram Image */}
         <div className="mb-16 max-w-5xl mx-auto bg-slate-50">
-          <img src="/lovable-uploads/8165a53c-449a-42c1-9b0c-7483ea924bbf.png" alt="Strategic AI Agent Development Process" className="w-full h-auto rounded-xl shadow-lg animate-fade-up opacity-75" />
+          
           <div className="text-center text-sm text-muted-foreground py-2">
             Hyper-localized AI deployment framework optimized for SMB implementation
           </div>
