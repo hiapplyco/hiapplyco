@@ -97,17 +97,18 @@ const CinematicHero = ({ config }: CinematicHeroProps) => {
         <div className={`text-center max-w-4xl mx-auto transition-all duration-1000 ease-out ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
-          {/* Partnership Announcement */}
+          {/* Main Content */}
           <div className="mb-8">
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/90 backdrop-blur-sm border border-white/20 text-gray-800 text-sm font-medium mb-6 shadow-lg">
-              Partnership Announcement
-            </div>
             <h1 className="text-4xl md:text-6xl font-bold mb-4 text-white drop-shadow-lg">
               BlueZones Health × Apply
             </h1>
             <p className="text-xl md:text-2xl text-white/90 drop-shadow-md mb-8 max-w-3xl mx-auto leading-relaxed">
               Revolutionizing healthcare recruitment through AI-powered talent matching
             </p>
+            {/* Partnership Announcement - Moved below the fold */}
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/90 backdrop-blur-sm border border-white/20 text-gray-800 text-sm font-medium shadow-lg">
+              Partnership Announcement
+            </div>
           </div>
         </div>
       </div>
