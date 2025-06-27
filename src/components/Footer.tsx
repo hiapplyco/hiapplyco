@@ -10,7 +10,7 @@ const Footer = () => {
           <div className="flex flex-col items-center md:items-start">
             <a href="#home" className="mb-2">
               <img 
-                src="/lovable-uploads/d57e18cf-ef2b-43ec-84cc-a8bcb2c88158.png" 
+                src="https://kxghaajojntkqrmvsngn.supabase.co/storage/v1/object/public/logos/Apply2025logo.png" 
                 alt="Apply Logo" 
                 className="h-10" 
               />
