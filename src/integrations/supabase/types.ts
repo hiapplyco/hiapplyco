@@ -222,6 +222,68 @@ export type Database = {
           },
         ]
       }
+      daughter_registrations: {
+        Row: {
+          created_at: string
+          daughter_age: number
+          daughter_name: string
+          daughter_tshirt_size: string | null
+          id: string
+          registration_id: string
+        }
+        Insert: {
+          created_at?: string
+          daughter_age: number
+          daughter_name: string
+          daughter_tshirt_size?: string | null
+          id?: string
+          registration_id: string
+        }
+        Update: {
+          created_at?: string
+          daughter_age?: number
+          daughter_name?: string
+          daughter_tshirt_size?: string | null
+          id?: string
+          registration_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "daughter_registrations_registration_id_fkey"
+            columns: ["registration_id"]
+            isOneToOne: false
+            referencedRelation: "registrations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      interview_frameworks: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          id: string
+          name: string
+          question_types: Json | null
+          system_prompt: string
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          id: string
+          name: string
+          question_types?: Json | null
+          system_prompt: string
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          name?: string
+          question_types?: Json | null
+          system_prompt?: string
+        }
+        Relationships: []
+      }
       interview_messages: {
         Row: {
           content: string | null
@@ -254,29 +316,79 @@ export type Database = {
           },
         ]
       }
+      interview_plans: {
+        Row: {
+          generated_at: string | null
+          id: number
+          plan_content: Json
+          session_id: number | null
+          status: string | null
+        }
+        Insert: {
+          generated_at?: string | null
+          id?: number
+          plan_content: Json
+          session_id?: number | null
+          status?: string | null
+        }
+        Update: {
+          generated_at?: string | null
+          id?: number
+          plan_content?: Json
+          session_id?: number | null
+          status?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "interview_plans_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "interview_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       interview_sessions: {
         Row: {
           created_at: string | null
+          custom_framework_prompt: string | null
           ended_at: string | null
           id: number
+          interview_framework: string | null
+          interview_plan: Json | null
+          role_description: string | null
+          role_title: string | null
           started_at: string | null
           status: string | null
+          uploaded_files: Json | null
           user_id: string | null
         }
         Insert: {
           created_at?: string | null
+          custom_framework_prompt?: string | null
           ended_at?: string | null
           id?: number
+          interview_framework?: string | null
+          interview_plan?: Json | null
+          role_description?: string | null
+          role_title?: string | null
           started_at?: string | null
           status?: string | null
+          uploaded_files?: Json | null
           user_id?: string | null
         }
         Update: {
           created_at?: string | null
+          custom_framework_prompt?: string | null
           ended_at?: string | null
           id?: number
+          interview_framework?: string | null
+          interview_plan?: Json | null
+          role_description?: string | null
+          role_title?: string | null
           started_at?: string | null
           status?: string | null
+          uploaded_files?: Json | null
           user_id?: string | null
         }
         Relationships: []
@@ -643,6 +755,47 @@ export type Database = {
         }
         Relationships: []
       }
+      payments: {
+        Row: {
+          amount: number
+          created_at: string
+          id: string
+          paid_at: string | null
+          payment_status: string | null
+          registration_id: string
+          stripe_payment_intent_id: string | null
+          stripe_session_id: string | null
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          id?: string
+          paid_at?: string | null
+          payment_status?: string | null
+          registration_id: string
+          stripe_payment_intent_id?: string | null
+          stripe_session_id?: string | null
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          id?: string
+          paid_at?: string | null
+          payment_status?: string | null
+          registration_id?: string
+          stripe_payment_intent_id?: string | null
+          stripe_session_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payments_registration_id_fkey"
+            columns: ["registration_id"]
+            isOneToOne: false
+            referencedRelation: "registrations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       production_reports: {
         Row: {
           crew_call: string | null
@@ -719,6 +872,71 @@ export type Database = {
           updated_at?: string | null
         }
         Relationships: []
+      }
+      registrations: {
+        Row: {
+          created_at: string
+          dad_email: string
+          dad_name: string
+          dad_phone: string
+          dad_tshirt_size: string | null
+          dietary_restrictions: string | null
+          emergency_contact_name: string
+          emergency_contact_phone: string
+          id: string
+          number_of_daughters: number
+          payment_method: string | null
+          registration_status: string | null
+          special_requests: string | null
+          swimming_ability: string | null
+          trip_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          dad_email: string
+          dad_name: string
+          dad_phone: string
+          dad_tshirt_size?: string | null
+          dietary_restrictions?: string | null
+          emergency_contact_name: string
+          emergency_contact_phone: string
+          id?: string
+          number_of_daughters?: number
+          payment_method?: string | null
+          registration_status?: string | null
+          special_requests?: string | null
+          swimming_ability?: string | null
+          trip_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          dad_email?: string
+          dad_name?: string
+          dad_phone?: string
+          dad_tshirt_size?: string | null
+          dietary_restrictions?: string | null
+          emergency_contact_name?: string
+          emergency_contact_phone?: string
+          id?: string
+          number_of_daughters?: number
+          payment_method?: string | null
+          registration_status?: string | null
+          special_requests?: string | null
+          swimming_ability?: string | null
+          trip_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "registrations_trip_id_fkey"
+            columns: ["trip_id"]
+            isOneToOne: false
+            referencedRelation: "trips"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       resume_matches: {
         Row: {
@@ -838,6 +1056,48 @@ export type Database = {
           search_text?: string | null
           search_type?: string | null
           user_id?: string | null
+        }
+        Relationships: []
+      }
+      trips: {
+        Row: {
+          camping_location: string | null
+          created_at: string
+          departure_location: string | null
+          id: string
+          is_active: boolean
+          price_per_person: number | null
+          return_date: string
+          spots_available: number
+          total_spots: number
+          trip_date: string
+          updated_at: string
+        }
+        Insert: {
+          camping_location?: string | null
+          created_at?: string
+          departure_location?: string | null
+          id?: string
+          is_active?: boolean
+          price_per_person?: number | null
+          return_date: string
+          spots_available?: number
+          total_spots?: number
+          trip_date: string
+          updated_at?: string
+        }
+        Update: {
+          camping_location?: string | null
+          created_at?: string
+          departure_location?: string | null
+          id?: string
+          is_active?: boolean
+          price_per_person?: number | null
+          return_date?: string
+          spots_available?: number
+          total_spots?: number
+          trip_date?: string
+          updated_at?: string
         }
         Relationships: []
       }

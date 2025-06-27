@@ -1,6 +1,8 @@
+
 import React from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
 import { Building, TrendingUp, DollarSign, Users } from 'lucide-react';
+
 const SuccessStories = () => {
   const stories = [{
     business: "Regional Coffee Chain",
@@ -30,6 +32,73 @@ const SuccessStories = () => {
     quote: "The localized AI helped us understand the unique health challenges in each neighborhood we serve. We're now seen as part of the community fabric.",
     person: "Dr. Ramirez, Head Pharmacist"
   }];
-  return;
+
+  return (
+    <section id="success-stories" className="section-spacing px-6 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto">
+        <div className="mb-16 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 animate-fade-up">SMB Success Stories</h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto animate-fade-up animation-delay-100">
+            Real results from small and medium businesses that have implemented our hyper-local AI solutions
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {stories.map((story, index) => {
+            const Icon = story.icon;
+            return (
+              <Card key={index} className="glass glass-hover animate-fade-up hover:scale-[1.02] transition-all duration-300" style={{
+                animationDelay: `${index * 100}ms`
+              }}>
+                <CardHeader>
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="p-3 rounded-lg bg-accent/10 text-accent">
+                      <Icon className="w-6 h-6" />
+                    </div>
+                  </div>
+                  <CardTitle className="text-xl">{story.business}</CardTitle>
+                  <CardDescription className="text-sm text-muted-foreground">{story.location}</CardDescription>
+                </CardHeader>
+                
+                <CardContent className="space-y-4">
+                  <div>
+                    <h4 className="font-semibold text-sm mb-2 text-destructive">Challenge:</h4>
+                    <p className="text-sm text-muted-foreground">{story.challenge}</p>
+                  </div>
+                  
+                  <div>
+                    <h4 className="font-semibold text-sm mb-2 text-accent">Solution:</h4>
+                    <p className="text-sm text-muted-foreground">{story.solution}</p>
+                  </div>
+                  
+                  <div>
+                    <h4 className="font-semibold text-sm mb-2 text-primary">Results:</h4>
+                    <ul className="space-y-1">
+                      {story.results.map((result, resultIndex) => (
+                        <li key={resultIndex} className="text-sm text-muted-foreground flex items-start">
+                          <span className="text-accent mr-2">•</span>
+                          {result}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </CardContent>
+                
+                <CardFooter className="pt-4 border-t">
+                  <div className="w-full">
+                    <blockquote className="text-sm italic text-muted-foreground mb-2">
+                      "{story.quote}"
+                    </blockquote>
+                    <cite className="text-xs font-medium text-accent">— {story.person}</cite>
+                  </div>
+                </CardFooter>
+              </Card>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
 };
+
 export default SuccessStories;
