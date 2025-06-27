@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import AnimationDemo from "./pages/AnimationDemo";
 import Pricing from "./pages/Pricing";
+import ProtectedPricing from "./pages/ProtectedPricing";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +24,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/animation-demo" element={<AnimationDemo />} />
             <Route path="/pricing/:clientSlug" element={<Pricing />} />
+            <Route path="/protected-pricing/:clientSlug" element={<ProtectedPricing />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
