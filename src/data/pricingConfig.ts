@@ -315,7 +315,7 @@ const pricingConfigs: Record<string, PricingConfig> = {
     },
     contact: {
       name: 'Martin Moreno',
-      email: 'martin@apply.co',
+      email: 'martin@hiapply.co',
       phone: '(301) 639-2545',
     },
     seo: {
