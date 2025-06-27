@@ -12,28 +12,27 @@ const PricingFeatures = ({ config }: PricingFeaturesProps) => {
   }
 
   return (
-    <section className="py-12 md:py-16 px-6 bg-muted/20">
-      <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-10">
-          <h2 className="text-2xl md:text-3xl font-bold mb-3 animate-fade-up">
+    <section className="py-8 px-6 bg-muted/20">
+      <div className="max-w-4xl mx-auto">
+        <div className="text-center mb-6">
+          <h2 className="text-xl font-bold mb-2">
             Everything You Need to Succeed
           </h2>
-          <p className="text-base md:text-lg text-muted-foreground animate-fade-up animation-delay-100 max-w-2xl mx-auto">
+          <p className="text-muted-foreground max-w-xl mx-auto">
             Powerful features designed to transform your business operations
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {config.additionalFeatures.map((feature, index) => (
             <div 
               key={index} 
-              className="bg-background/50 backdrop-blur-sm border border-border/50 p-6 rounded-lg hover:shadow-md transition-all duration-300 animate-fade-up"
-              style={{ animationDelay: `${index * 100}ms` }}
+              className="bg-background/50 backdrop-blur-sm border border-border/50 p-4 rounded-lg hover:shadow-sm transition-all duration-300"
             >
-              <h3 className="text-lg font-semibold mb-3 text-foreground">
+              <h3 className="font-semibold mb-2">
                 {feature.title}
               </h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
+              <p className="text-muted-foreground text-sm">
                 {feature.description}
               </p>
             </div>

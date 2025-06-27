@@ -11,66 +11,62 @@ interface PricingTiersProps {
 
 const PricingTiers = ({ config }: PricingTiersProps) => {
   return (
-    <section className="py-12 md:py-16 px-6">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-2xl md:text-3xl font-bold mb-3 animate-fade-up">
+    <section className="py-8 px-6">
+      <div className="max-w-5xl mx-auto">
+        <div className="text-center mb-8">
+          <h2 className="text-2xl font-bold mb-2">
             Choose Your Plan
           </h2>
-          <p className="text-base md:text-lg text-muted-foreground animate-fade-up animation-delay-100 max-w-2xl mx-auto">
+          <p className="text-muted-foreground max-w-xl mx-auto">
             Select the perfect solution for your business needs
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
           {config.tiers.map((tier, index) => (
             <Card 
               key={tier.id} 
-              className={`relative overflow-hidden transition-all duration-300 hover:shadow-lg ${
+              className={`relative transition-all duration-300 hover:shadow-lg ${
                 tier.popular 
-                  ? 'ring-2 ring-accent shadow-lg border-accent/20' 
-                  : 'border hover:border-accent/30'
+                  ? 'ring-2 ring-accent shadow-md scale-105' 
+                  : 'hover:border-accent/30'
               }`}
-              style={{ animationDelay: `${index * 100}ms` }}
             >
               {tier.popular && (
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-accent to-accent/60"></div>
-              )}
-              
-              <CardHeader className="text-center pb-6">
-                {tier.popular && (
-                  <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-accent text-accent-foreground px-3 py-1 text-xs font-semibold">
+                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                  <Badge className="bg-accent text-accent-foreground px-3 py-1 text-xs font-semibold">
                     Most Popular
                   </Badge>
-                )}
-                
-                <CardTitle className="text-xl font-bold mb-3 text-foreground">
+                </div>
+              )}
+              
+              <CardHeader className="text-center pb-4 pt-6">
+                <CardTitle className="text-lg font-bold mb-2">
                   {tier.name}
                 </CardTitle>
                 
-                <div className="mb-4">
-                  <span className="text-3xl md:text-4xl font-bold text-foreground">
+                <div className="mb-3">
+                  <span className="text-2xl md:text-3xl font-bold">
                     {tier.price}
                   </span>
                   {tier.period && (
-                    <span className="text-sm text-muted-foreground font-medium">
+                    <span className="text-sm text-muted-foreground">
                       /{tier.period}
                     </span>
                   )}
                 </div>
                 
-                <p className="text-muted-foreground text-sm leading-relaxed">
+                <p className="text-muted-foreground text-sm">
                   {tier.description}
                 </p>
               </CardHeader>
               
-              <CardContent className="pt-0">
-                <div className="space-y-3">
-                  <div className="h-px bg-border mb-4"></div>
+              <CardContent className="pt-0 pb-6">
+                <div className="space-y-2">
                   {tier.features.map((feature, featureIndex) => (
-                    <div key={featureIndex} className="flex items-start gap-3">
+                    <div key={featureIndex} className="flex items-start gap-2">
                       <Check className="w-4 h-4 text-accent mt-0.5 flex-shrink-0" />
-                      <span className="text-sm text-foreground leading-relaxed">
+                      <span className="text-sm">
                         {feature}
                       </span>
                     </div>
