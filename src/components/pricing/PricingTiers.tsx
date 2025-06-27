@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
-import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
 import { Check } from 'lucide-react';
 import { PricingConfig } from '../../types/pricing';
@@ -40,7 +39,7 @@ const PricingTiers = ({ config }: PricingTiersProps) => {
                 <p className="text-muted-foreground">{tier.description}</p>
               </CardHeader>
               
-              <CardContent className="space-y-6">
+              <CardContent>
                 <ul className="space-y-3">
                   {tier.features.map((feature, featureIndex) => (
                     <li key={featureIndex} className="flex items-start">
@@ -49,14 +48,6 @@ const PricingTiers = ({ config }: PricingTiersProps) => {
                     </li>
                   ))}
                 </ul>
-                
-                <Button 
-                  className="w-full" 
-                  variant={tier.popular ? 'default' : 'outline'}
-                  size="lg"
-                >
-                  {tier.ctaText}
-                </Button>
               </CardContent>
             </Card>
           ))}
