@@ -192,6 +192,103 @@ const pricingConfigs: Record<string, PricingConfig> = {
       description: 'Custom AI inventory management solutions for local hardware stores. Eliminate stockouts, optimize inventory, and increase profits with smart demand forecasting.',
     },
   },
+  'blue-zones-health': {
+    clientSlug: 'blue-zones-health',
+    clientName: 'Blue Zones Health',
+    hero: {
+      title: 'SMB Hiring - Staffing Enterprise Recruitment Intelligence',
+      subtitle: 'AI-powered recruitment platform for finding local talent through intelligent matching',
+      badge: 'Effective July 10, 2025 – October 10, 2025',
+    },
+    tiers: [
+      {
+        id: 'standard',
+        name: 'Standard',
+        price: '$198',
+        period: 'month',
+        description: 'Perfect for small businesses getting started with AI recruitment',
+        features: [
+          '1 user included',
+          'Additional users: $10/month',
+          '2 hours/month email support',
+          'Basic branding customization',
+          'Basic analytics & reports',
+          'Guided setup onboarding',
+          '7-day free trial',
+        ],
+        ctaText: 'Start Standard Plan',
+      },
+      {
+        id: 'professional',
+        name: 'Professional',
+        price: '$298',
+        period: 'month',
+        description: 'Advanced features for growing businesses',
+        features: [
+          'Up to 3 users included',
+          'Additional users: $8/month',
+          '3 hours/month email + chat support',
+          'Advanced branding customization',
+          'Cross-platform integration',
+          'Standard analytics & reports',
+          'Advanced guided setup',
+          '14-day free trial',
+        ],
+        ctaText: 'Choose Professional',
+        popular: true,
+      },
+      {
+        id: 'enterprise',
+        name: 'Enterprise',
+        price: '$548',
+        period: 'month',
+        description: 'Complete solution for established businesses',
+        features: [
+          'Unlimited users included',
+          '5 hours/month email + chat support',
+          'Full white-labeling',
+          'Full integration (Rippling +)',
+          'Advanced analytics & reports',
+          'Dedicated support onboarding',
+          '21-day free trial + strategic call',
+        ],
+        ctaText: 'Go Enterprise',
+      },
+    ],
+    additionalFeatures: [
+      {
+        title: 'AI Matching Technology',
+        description: 'Advanced AI algorithms match candidates based on neighborhood proximity and community connection for better local hiring.',
+      },
+      {
+        title: 'Cost Efficiency',
+        description: 'Reduce internal operational costs by 20-30% compared to traditional recruitment methods.',
+      },
+      {
+        title: 'Integrated Platform',
+        description: 'All recruitment tools in one AI-driven management interface for enhanced user experience and immediate ROI.',
+      },
+      {
+        title: 'Competitive Advantage',
+        description: 'Cost-effective solution compared to competitors ranging from $35,000 to $200,000 for mid-range solutions.',
+      },
+    ],
+    cta: {
+      title: 'Unlock Your Hiring Potential with Apply!',
+      description: 'Most SMB solutions can be deployed within 2-4 weeks, delivering immediate ROI without disrupting your operations.',
+      primaryButton: 'Schedule Your Complimentary 30-Minute Call Today!',
+      secondaryButton: 'Learn More',
+    },
+    contact: {
+      name: 'Martin Moreno',
+      email: 'martin@apply.co',
+      phone: '(301) 639-2545',
+    },
+    seo: {
+      title: 'SMB Hiring Enterprise Recruitment Intelligence Pricing | apply.codes',
+      description: 'AI-powered recruitment platform for Blue Zones Health. Find local talent through intelligent matching based on neighborhood proximity and community connection.',
+    },
+  },
 };
 
 export const getPricingConfig = (clientSlug: string): PricingConfig | null => {
