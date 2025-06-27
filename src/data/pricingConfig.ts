@@ -1,5 +1,39 @@
 
-import { PricingConfig } from '../types/pricing';
+import { PricingConfig, PricingTier } from '../types/pricing';
+
+// Helper function to create standard tiers
+const createTier = (
+  id: string,
+  name: string,
+  price: string,
+  description: string,
+  features: string[],
+  ctaText: string,
+  period?: string,
+  popular?: boolean
+): PricingTier => ({
+  id,
+  name,
+  price,
+  period,
+  description,
+  features,
+  ctaText,
+  popular
+});
+
+// Common feature sets
+const commonFeatures = {
+  basicSupport: ['Email support'],
+  phoneSupport: ['Phone support', 'Email support'],
+  prioritySupport: ['Priority support', 'Phone support', 'Email support'],
+  basicReporting: ['Weekly reports'],
+  advancedReporting: ['Daily automated reports'],
+  customReporting: ['Custom reporting dashboards'],
+  basicConsultation: ['Monthly consultation'],
+  regularConsultation: ['Bi-weekly strategy sessions'],
+  dedicatedSupport: ['Dedicated account manager', 'Weekly strategy sessions']
+};
 
 const pricingConfigs: Record<string, PricingConfig> = {
   'regional-coffee-chain': {
@@ -11,56 +45,55 @@ const pricingConfigs: Record<string, PricingConfig> = {
       badge: 'Tailored for Regional Coffee Chains',
     },
     tiers: [
-      {
-        id: 'starter',
-        name: 'Market Insights',
-        price: '$2,500',
-        period: 'month',
-        description: 'Perfect for getting started with local customer analytics',
-        features: [
+      createTier(
+        'starter',
+        'Market Insights',
+        '$2,500',
+        'Perfect for getting started with local customer analytics',
+        [
           'Customer preference tracking for 2-3 locations',
           'Basic neighborhood demographic analysis',
-          'Weekly trend reports',
-          'Email support',
-          'Monthly strategy consultation',
+          ...commonFeatures.basicReporting,
+          ...commonFeatures.basicSupport,
+          ...commonFeatures.basicConsultation,
         ],
-        ctaText: 'Start with Insights',
-      },
-      {
-        id: 'growth',
-        name: 'Multi-Location AI',
-        price: '$4,500',
-        period: 'month',
-        description: 'Scale across all your locations with advanced AI',
-        features: [
+        'Start with Insights',
+        'month'
+      ),
+      createTier(
+        'growth',
+        'Multi-Location AI',
+        '$4,500',
+        'Scale across all your locations with advanced AI',
+        [
           'Customer preference tracking for up to 10 locations',
           'Advanced neighborhood trend prediction',
           'Real-time inventory optimization',
           'Custom menu recommendations by location',
-          'Daily automated reports',
-          'Priority phone support',
-          'Bi-weekly strategy sessions',
+          ...commonFeatures.advancedReporting,
+          ...commonFeatures.phoneSupport,
+          ...commonFeatures.regularConsultation,
         ],
-        ctaText: 'Scale Your Business',
-        popular: true,
-      },
-      {
-        id: 'enterprise',
-        name: 'Regional Dominance',
-        price: 'Custom',
-        description: 'Complete AI-powered regional market control',
-        features: [
+        'Scale Your Business',
+        'month',
+        true
+      ),
+      createTier(
+        'enterprise',
+        'Regional Dominance',
+        'Custom',
+        'Complete AI-powered regional market control',
+        [
           'Unlimited locations',
           'Competitive intelligence tracking',
           'Predictive market expansion analysis',
           'Custom AI model training',
           'Real-time customer behavior analysis',
-          'Dedicated success manager',
-          'Weekly strategy sessions',
+          ...commonFeatures.dedicatedSupport,
           'White-label reporting',
         ],
-        ctaText: 'Contact for Pricing',
-      },
+        'Contact for Pricing'
+      )
     ],
     additionalFeatures: [
       {
@@ -96,6 +129,7 @@ const pricingConfigs: Record<string, PricingConfig> = {
       description: 'Discover custom AI pricing for your regional coffee chain. Hyper-local customer analytics, trend prediction, and market intelligence tailored for your business.',
     },
   },
+
   'local-hardware-store': {
     clientSlug: 'local-hardware-store',
     clientName: 'Local Hardware Store',
@@ -105,58 +139,57 @@ const pricingConfigs: Record<string, PricingConfig> = {
       badge: 'Built for Local Hardware Stores',
     },
     tiers: [
-      {
-        id: 'basic',
-        name: 'Inventory Intelligence',
-        price: '$1,800',
-        period: 'month',
-        description: 'Essential inventory management for single-location stores',
-        features: [
+      createTier(
+        'basic',
+        'Inventory Intelligence',
+        '$1,800',
+        'Essential inventory management for single-location stores',
+        [
           'AI-powered demand forecasting',
           'Seasonal inventory planning',
           'Stockout prevention alerts',
           'Basic supplier optimization',
-          'Weekly inventory reports',
-          'Email support',
+          ...commonFeatures.basicReporting,
+          ...commonFeatures.basicSupport,
         ],
-        ctaText: 'Optimize Inventory',
-      },
-      {
-        id: 'advanced',
-        name: 'Smart Store Operations',
-        price: '$3,200',
-        period: 'month',
-        description: 'Complete store optimization with advanced analytics',
-        features: [
+        'Optimize Inventory',
+        'month'
+      ),
+      createTier(
+        'advanced',
+        'Smart Store Operations',
+        '$3,200',
+        'Complete store optimization with advanced analytics',
+        [
           'Advanced demand forecasting',
           'Local project trend analysis',
           'Dynamic pricing recommendations',
           'Supplier performance tracking',
           'Customer behavior insights',
-          'Daily automated reports',
-          'Phone support',
+          ...commonFeatures.advancedReporting,
+          ...commonFeatures.phoneSupport,
           'Monthly consultation calls',
         ],
-        ctaText: 'Transform Operations',
-        popular: true,
-      },
-      {
-        id: 'enterprise',
-        name: 'Multi-Store Network',
-        price: 'Custom',
-        description: 'Full-scale AI for hardware store chains',
-        features: [
+        'Transform Operations',
+        'month',
+        true
+      ),
+      createTier(
+        'enterprise',
+        'Multi-Store Network',
+        'Custom',
+        'Full-scale AI for hardware store chains',
+        [
           'Multi-location inventory optimization',
           'Regional demand pattern analysis',
           'Supply chain optimization',
           'Competitive pricing intelligence',
-          'Custom reporting dashboards',
-          'Dedicated account manager',
-          'Priority support',
-          'Weekly strategy sessions',
+          ...commonFeatures.customReporting,
+          ...commonFeatures.dedicatedSupport,
+          ...commonFeatures.prioritySupport,
         ],
-        ctaText: 'Contact for Pricing',
-      },
+        'Contact for Pricing'
+      )
     ],
     additionalFeatures: [
       {
@@ -192,6 +225,7 @@ const pricingConfigs: Record<string, PricingConfig> = {
       description: 'Custom AI inventory management solutions for local hardware stores. Eliminate stockouts, optimize inventory, and increase profits with smart demand forecasting.',
     },
   },
+
   'blue-zones-health': {
     clientSlug: 'blue-zones-health',
     clientName: 'Blue Zones Health',
@@ -201,13 +235,12 @@ const pricingConfigs: Record<string, PricingConfig> = {
       badge: 'Effective July 10, 2025 – October 10, 2025',
     },
     tiers: [
-      {
-        id: 'standard',
-        name: 'Standard',
-        price: '$198',
-        period: 'month',
-        description: 'Perfect for small businesses getting started with AI recruitment',
-        features: [
+      createTier(
+        'standard',
+        'Standard',
+        '$198',
+        'Perfect for small businesses getting started with AI recruitment',
+        [
           '1 user included',
           'Additional users: $10/month',
           '2 hours/month email support',
@@ -216,15 +249,15 @@ const pricingConfigs: Record<string, PricingConfig> = {
           'Guided setup onboarding',
           '7-day free trial',
         ],
-        ctaText: 'Start Standard Plan',
-      },
-      {
-        id: 'professional',
-        name: 'Professional',
-        price: '$298',
-        period: 'month',
-        description: 'Advanced features for growing businesses',
-        features: [
+        'Start Standard Plan',
+        'month'
+      ),
+      createTier(
+        'professional',
+        'Professional',
+        '$298',
+        'Advanced features for growing businesses',
+        [
           'Up to 3 users included',
           'Additional users: $8/month',
           '3 hours/month email + chat support',
@@ -234,16 +267,16 @@ const pricingConfigs: Record<string, PricingConfig> = {
           'Advanced guided setup',
           '14-day free trial',
         ],
-        ctaText: 'Choose Professional',
-        popular: true,
-      },
-      {
-        id: 'enterprise',
-        name: 'Enterprise',
-        price: '$548',
-        period: 'month',
-        description: 'Complete solution for established businesses',
-        features: [
+        'Choose Professional',
+        'month',
+        true
+      ),
+      createTier(
+        'enterprise',
+        'Enterprise',
+        '$548',
+        'Complete solution for established businesses',
+        [
           'Unlimited users included',
           '5 hours/month email + chat support',
           'Full white-labeling',
@@ -252,8 +285,9 @@ const pricingConfigs: Record<string, PricingConfig> = {
           'Dedicated support onboarding',
           '21-day free trial + strategic call',
         ],
-        ctaText: 'Go Enterprise',
-      },
+        'Go Enterprise',
+        'month'
+      )
     ],
     additionalFeatures: [
       {
