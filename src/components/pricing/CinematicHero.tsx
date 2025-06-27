@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { ArrowDown, ArrowUp } from 'lucide-react';
 import { PricingConfig } from '../../types/pricing';
 
 interface CinematicHeroProps {
@@ -9,10 +10,29 @@ interface CinematicHeroProps {
 const CinematicHero = ({ config }: CinematicHeroProps) => {
   const [scrollY, setScrollY] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
+  const [scrollDirection, setScrollDirection] = useState<'down' | 'up' | 'both'>('down');
 
   useEffect(() => {
+    let lastScrollY = 0;
+
     const handleScroll = () => {
-      setScrollY(window.scrollY);
+      const currentScrollY = window.scrollY;
+      setScrollY(currentScrollY);
+
+      // Determine scroll direction and position
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      const scrollProgress = currentScrollY / (documentHeight - windowHeight);
+
+      if (currentScrollY === 0) {
+        setScrollDirection('down');
+      } else if (scrollProgress > 0.85) {
+        setScrollDirection('up');
+      } else {
+        setScrollDirection('both');
+      }
+
+      lastScrollY = currentScrollY;
     };
 
     const throttledScroll = () => {
@@ -31,6 +51,24 @@ const CinematicHero = ({ config }: CinematicHeroProps) => {
   const diffusionOpacity = Math.min(scrollY / 600, 0.95);
   const contentOpacity = Math.max(1 - (scrollY / 400), 0);
   const parallaxOffset = scrollY * 0.5;
+
+  const renderScrollIcon = () => {
+    switch (scrollDirection) {
+      case 'down':
+        return <ArrowDown className="w-4 h-4 text-white/70" />;
+      case 'up':
+        return <ArrowUp className="w-4 h-4 text-white/70" />;
+      case 'both':
+        return (
+          <div className="flex flex-col items-center space-y-1">
+            <ArrowUp className="w-3 h-3 text-white/50" />
+            <ArrowDown className="w-3 h-3 text-white/50" />
+          </div>
+        );
+      default:
+        return <ArrowDown className="w-4 h-4 text-white/70" />;
+    }
+  };
 
   return (
     <section className="relative h-screen overflow-hidden">
@@ -71,15 +109,17 @@ const CinematicHero = ({ config }: CinematicHeroProps) => {
               Revolutionizing healthcare recruitment through AI-powered talent matching
             </p>
           </div>
-          
-          {/* Scroll Indicator */}
-          <div className="animate-bounce">
-            <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
-              <div className="w-1 h-3 bg-white/70 rounded-full mt-2 animate-pulse"></div>
-            </div>
-            <p className="text-white/70 text-sm mt-2">Scroll to explore</p>
+        </div>
+      </div>
+
+      {/* Scroll Indicator - Far Right */}
+      <div className="absolute right-8 bottom-12 z-20 flex flex-col items-center space-y-3">
+        <div className="animate-slow-bounce">
+          <div className="w-8 h-12 border border-white/40 rounded-full flex justify-center items-center backdrop-blur-sm bg-white/10">
+            {renderScrollIcon()}
           </div>
         </div>
+        <p className="text-white/60 text-xs font-medium tracking-wide">SCROLL</p>
       </div>
       
       {/* Gradient Bottom Edge */}

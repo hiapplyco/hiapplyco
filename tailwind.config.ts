@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -109,6 +108,16 @@ export default {
           "40%": { transform: "translateY(-8px)" },
           "60%": { transform: "translateY(-4px)" },
         },
+        "slow-bounce": {
+          "0%, 100%": { 
+            transform: "translateY(0)",
+            "animation-timing-function": "cubic-bezier(0.8, 0, 1, 1)"
+          },
+          "50%": { 
+            transform: "translateY(-12px)",
+            "animation-timing-function": "cubic-bezier(0, 0, 0.2, 1)"
+          },
+        },
       },
       animation: {
         "fade-up": "fade-up 0.6s ease-out",
@@ -121,6 +130,7 @@ export default {
         "shimmer": "shimmer 2s infinite linear",
         "cinematic-entrance": "cinematic-entrance 1.2s ease-out",
         "scroll-bounce": "scroll-bounce 2s infinite",
+        "slow-bounce": "slow-bounce 3s infinite",
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
