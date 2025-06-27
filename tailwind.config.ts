@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -93,6 +94,21 @@ export default {
           "0%": { backgroundPosition: "-500px 0" },
           "100%": { backgroundPosition: "500px 0" },
         },
+        "cinematic-entrance": {
+          "0%": { 
+            opacity: "0",
+            transform: "translateY(30px) scale(0.95)"
+          },
+          "100%": {
+            opacity: "1",
+            transform: "translateY(0) scale(1)"
+          },
+        },
+        "scroll-bounce": {
+          "0%, 20%, 50%, 80%, 100%": { transform: "translateY(0)" },
+          "40%": { transform: "translateY(-8px)" },
+          "60%": { transform: "translateY(-4px)" },
+        },
       },
       animation: {
         "fade-up": "fade-up 0.6s ease-out",
@@ -103,11 +119,14 @@ export default {
         "float": "float 3s ease-in-out infinite",
         "pulse": "pulse 2s ease-in-out infinite",
         "shimmer": "shimmer 2s infinite linear",
+        "cinematic-entrance": "cinematic-entrance 1.2s ease-out",
+        "scroll-bounce": "scroll-bounce 2s infinite",
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'grid-pattern': 'linear-gradient(to right, rgba(75, 85, 99, 0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(75, 85, 99, 0.1) 1px, transparent 1px)',
         'shimmer': 'linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 25%, rgba(255,255,255,0.2) 75%, rgba(255,255,255,0) 100%)',
+        'cinematic-overlay': 'linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 100%)',
       },
       backgroundSize: {
         'grid': '24px 24px',

@@ -3,6 +3,7 @@ import React from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import PricingHero from '../components/pricing/PricingHero';
+import CinematicHero from '../components/pricing/CinematicHero';
 import PricingTiers from '../components/pricing/PricingTiers';
 import PricingFeatures from '../components/pricing/PricingFeatures';
 import PricingCTA from '../components/pricing/PricingCTA';
@@ -21,6 +22,9 @@ const Pricing = () => {
     return <Navigate to="/404" replace />;
   }
 
+  // Use cinematic hero for Blue Zones Health
+  const isBlueZones = clientSlug === 'blue-zones-health';
+
   return (
     <>
       <Helmet>
@@ -31,10 +35,17 @@ const Pricing = () => {
       </Helmet>
       
       <div className="min-h-screen bg-background">
-        <PricingHero config={pricingConfig} />
-        <PricingTiers config={pricingConfig} />
-        <PricingFeatures config={pricingConfig} />
-        <PricingCTA config={pricingConfig} />
+        {isBlueZones ? (
+          <CinematicHero config={pricingConfig} />
+        ) : (
+          <PricingHero config={pricingConfig} />
+        )}
+        
+        <div className={isBlueZones ? 'relative z-20 bg-white' : ''}>
+          <PricingTiers config={pricingConfig} />
+          <PricingFeatures config={pricingConfig} />
+          <PricingCTA config={pricingConfig} />
+        </div>
       </div>
     </>
   );
