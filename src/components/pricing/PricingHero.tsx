@@ -8,19 +8,19 @@ interface PricingHeroProps {
 
 const PricingHero = ({ config }: PricingHeroProps) => {
   return (
-    <section className="section-spacing px-6 text-center">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-up">
-          {config.hero.title}
-        </h1>
-        <p className="text-xl text-muted-foreground mb-8 animate-fade-up animation-delay-100">
-          {config.hero.subtitle}
-        </p>
+    <section className="section-spacing px-6 text-center bg-gradient-to-b from-background to-muted/20">
+      <div className="max-w-5xl mx-auto">
         {config.hero.badge && (
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-accent/10 text-accent text-sm font-medium mb-8 animate-fade-up animation-delay-200">
+          <div className="inline-flex items-center px-6 py-3 rounded-full bg-accent/10 text-accent text-sm font-semibold mb-8 animate-fade-up border border-accent/20">
             {config.hero.badge}
           </div>
         )}
+        <h1 className="text-5xl md:text-7xl font-bold mb-8 animate-fade-up leading-tight bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+          {config.hero.title}
+        </h1>
+        <p className="text-xl md:text-2xl text-muted-foreground mb-12 animate-fade-up animation-delay-100 max-w-4xl mx-auto leading-relaxed">
+          {config.hero.subtitle}
+        </p>
       </div>
     </section>
   );
