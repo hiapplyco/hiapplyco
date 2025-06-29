@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { useParams, Navigate } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
 import PricingHero from '../components/pricing/PricingHero';
 import CinematicHero from '../components/pricing/CinematicHero';
 import PricingTiers from '../components/pricing/PricingTiers';
@@ -27,12 +26,6 @@ const Pricing = () => {
 
   return (
     <>
-      <Helmet>
-        <title>{pricingConfig.seo.title}</title>
-        <meta name="description" content={pricingConfig.seo.description} />
-        <meta property="og:title" content={pricingConfig.seo.title} />
-        <meta property="og:description" content={pricingConfig.seo.description} />
-      </Helmet>
       
       <div className="min-h-screen bg-background">
         {isBlueZones ? (
