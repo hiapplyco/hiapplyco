@@ -1,36 +1,42 @@
 
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Send, Mail, Building, Clock } from 'lucide-react';
+import { Send, Mail, Building, Clock, DollarSign } from 'lucide-react';
 import EnhancedButton from './EnhancedButton';
+import { supabase } from '@/integrations/supabase/client';
 
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);
     try {
-      // First try the local API endpoint which should proxy to Supabase
-      const response = await fetch('/api/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...data,
-          source: 'pricing-page'
-        }),
+      // Call Supabase edge function directly
+      const { data: result, error } = await supabase.functions.invoke('send-email', {
+        body: {
+          name: data.name,
+          email: data.email,
+          message: data.message,
+          source: 'contact-form'
+        }
       });
 
-      if (response.ok) {
+      if (!error) {
         setIsSuccess(true);
+        reset(); // Clear form
+        // Reset success message after 3 seconds
+        setTimeout(() => {
+          setIsSuccess(false);
+        }, 3000);
       } else {
-        console.error('Failed to send email');
+        console.error('Failed to send email:', error);
+        alert('Failed to send message. Please try again.');
       }
     } catch (error) {
       console.error('Error sending email:', error);
+      alert('An error occurred. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -72,16 +78,26 @@ const Contact = () => {
                 <textarea {...register('message', { required: true })} placeholder="Message" className="w-full bg-secondary/20 border-none rounded-lg px-4 py-3" rows={4}></textarea>
                 {errors.message && <span className="text-red-500 text-sm">This field is required</span>}
               </div>
-              <div className="flex justify-center sm:justify-start">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center sm:justify-start">
                 <EnhancedButton
                   type="submit"
                   variant="accent"
                   icon={<Send className="h-4 w-4" />}
                   isLoading={isSubmitting}
                   loadingText="Sending..."
+                  className="gradient-purple-green text-white hover:gradient-purple-green-hover"
                 >
                   Schedule SMB Consultation
                 </EnhancedButton>
+                <a
+                  href="https://www.apply.codes/pricing"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-background/80 backdrop-blur-sm text-foreground border border-border/50 rounded-lg font-medium hover:bg-background/90 transition-all duration-200"
+                >
+                  <DollarSign className="h-4 w-4" />
+                  View Pricing
+                </a>
               </div>
             </form>
           )}
