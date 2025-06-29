@@ -15,11 +15,6 @@ export class Effect {
     lastMoveTime: number;
     isStatic: boolean;
   };
-  logoPosition: {
-    x: number;
-    y: number;
-    radius: number;
-  };
 
   constructor(width: number, height: number, context: CanvasRenderingContext2D) {
     this.width = width;
@@ -35,20 +30,7 @@ export class Effect {
       lastMoveTime: 0,
       isStatic: false
     };
-    this.logoPosition = {
-      x: this.width / 2,
-      y: this.height / 2,
-      radius: 200
-    };
     this.init();
-  }
-
-  updateLogoPosition(scrollProgress: number) {
-    // Update logo position based on scroll progress
-    const startY = this.height / 2;
-    const endY = 50; // Header height
-    this.logoPosition.y = startY + (endY - startY) * scrollProgress;
-    this.logoPosition.radius = 200 * (1 - scrollProgress * 0.7); // Shrink radius as logo moves
   }
 
   init() {

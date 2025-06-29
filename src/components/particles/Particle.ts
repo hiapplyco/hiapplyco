@@ -57,27 +57,10 @@ export class Particle {
   }
 
   update() {
-    // Calculate distance from both mouse and logo
-    const mouseDx = this.effect.mouse.x - this.x;
-    const mouseDy = this.effect.mouse.y - this.y;
-    const mouseDistance = mouseDx * mouseDx + mouseDy * mouseDy;
-    
-    const logoDx = this.effect.logoPosition.x - this.x;
-    const logoDy = this.effect.logoPosition.y - this.y;
-    const logoDistance = logoDx * logoDx + logoDy * logoDy;
-    
-    // Use the closer interaction point
-    if (logoDistance < mouseDistance && logoDistance < this.effect.logoPosition.radius * this.effect.logoPosition.radius) {
-      this.dx = logoDx;
-      this.dy = logoDy;
-      this.distance = logoDistance;
-      this.force = -this.effect.logoPosition.radius / this.distance * 12; // Stronger force for logo
-    } else {
-      this.dx = mouseDx;
-      this.dy = mouseDy;
-      this.distance = mouseDistance;
-      this.force = -this.effect.mouse.radius / this.distance * 8;
-    }
+    this.dx = this.effect.mouse.x - this.x;
+    this.dy = this.effect.mouse.y - this.y;
+    this.distance = this.dx * this.dx + this.dy * this.dy;
+    this.force = -this.effect.mouse.radius / this.distance * 8;
 
     // Calculate normalized distance for gradient effect
     if (this.distance < this.effect.mouse.radius) {
