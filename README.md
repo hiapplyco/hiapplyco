@@ -1,4 +1,6 @@
-# Welcome to your Lovable project
+# Welcome to hiapply.co - AI Solutions for SMBs
+
+Last updated: 2025-06-29
 
 ## Project info
 
