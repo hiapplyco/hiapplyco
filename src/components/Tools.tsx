@@ -80,20 +80,23 @@ const Tools = () => {
             return (
               <div 
                 key={index} 
-                className="glass glass-hover p-8 rounded-xl animate-fade-up hover:scale-[1.02] transition-all duration-300 relative"
+                className="group glass glass-hover p-8 rounded-xl animate-fade-up hover:scale-[1.02] transition-all duration-300 relative overflow-hidden"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 {/* Visual accent element */}
                 <div className="absolute top-0 left-0 right-0 h-1 bg-accent/20 rounded-t-xl overflow-hidden">
                   <div 
-                    className="h-full bg-accent" 
+                    className="h-full bg-accent transition-all duration-500 group-hover:w-full" 
                     style={{ width: `${30 + index * 15}%` }}
                   ></div>
                 </div>
                 
-                <div className="mb-6">
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-accent/10 text-accent mb-2">
-                    <Icon className="w-6 h-6" />
+                {/* Hover background gradient */}
+                <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                
+                <div className="mb-6 relative">
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-accent/10 text-accent mb-2 transition-all duration-300 group-hover:bg-accent/20 group-hover:scale-110">
+                    <Icon className="w-6 h-6 transition-transform duration-300 group-hover:rotate-12" />
                   </div>
                 </div>
                 
@@ -104,9 +107,9 @@ const Tools = () => {
                 
                 <div className="space-y-2 mb-6">
                   {area.skills.map((skill, skillIndex) => (
-                    <div key={skillIndex} className="flex items-center">
-                      <div className="w-1.5 h-1.5 rounded-full bg-accent mr-2"></div>
-                      <span className="text-sm">{skill}</span>
+                    <div key={skillIndex} className="flex items-center group/skill">
+                      <div className="w-1.5 h-1.5 rounded-full bg-accent mr-2 transition-all duration-300 group-hover/skill:w-3 group-hover/skill:h-3"></div>
+                      <span className="text-sm transition-colors duration-300 group-hover/skill:text-accent">{skill}</span>
                     </div>
                   ))}
                 </div>
@@ -121,7 +124,7 @@ const Tools = () => {
                       {area.caseStudy.tags.map((tag, tagIndex) => (
                         <span 
                           key={tagIndex} 
-                          className="bg-accent/10 text-accent px-3 py-1 rounded-full text-sm animate-scale-in" 
+                          className="bg-accent/10 text-accent px-3 py-1 rounded-full text-sm animate-scale-in transition-all duration-300 hover:bg-accent hover:text-accent-foreground hover:scale-110 cursor-pointer" 
                           style={{ animationDelay: `${300 + tagIndex * 50}ms` }}
                         >
                           {tag}

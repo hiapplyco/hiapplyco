@@ -10,6 +10,8 @@ import NotFound from "./pages/NotFound";
 import AnimationDemo from "./pages/AnimationDemo";
 import Pricing from "./pages/Pricing";
 import ProtectedPricing from "./pages/ProtectedPricing";
+import CinematicIntro from "./components/CinematicIntro";
+import CustomCursor from "./components/CustomCursor";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +21,8 @@ const App = () => (
       <TooltipProvider>
         <Toaster />
         <Sonner />
+        <CustomCursor />
+        <CinematicIntro />
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />

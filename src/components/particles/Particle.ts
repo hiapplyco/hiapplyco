@@ -18,6 +18,8 @@ export class Particle {
   force: number;
   angle: number;
   size: number;
+  radius: number;
+  opacity: number;
   color: string;
   settlingFactor: number;
   
@@ -38,15 +40,20 @@ export class Particle {
     this.force = 0;
     this.angle = 0;
     this.size = Math.floor(Math.random() * 3) + 2;
+    this.radius = this.size; // Initialize radius same as size
+    this.opacity = 0.8; // Default opacity
     this.color = '#d1d1d1'; // Default light grey color
     this.settlingFactor = 0.05; // Controls how quickly particles settle
   }
 
   draw() {
+    this.ctx.save();
+    this.ctx.globalAlpha = this.opacity;
     this.ctx.fillStyle = this.color;
     this.ctx.beginPath();
-    this.ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
     this.ctx.fill();
+    this.ctx.restore();
   }
 
   update() {

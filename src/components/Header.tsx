@@ -25,7 +25,7 @@ const Header = () => {
             <img src="https://kxghaajojntkqrmvsngn.supabase.co/storage/v1/object/public/logos/Apply2025logo.png" alt="Apply Logo" className="h-28 transform transition-all duration-300 hover:scale-110 hover:rotate-2 hover:brightness-110" />
           </a>
           
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden md:flex items-center space-x-8">
             {['Projects', 'Tools', 'Process', 'About', 'Contact'].map((item, index) => <a key={item} href={`#${item.toLowerCase()}`} className={`text-sm font-medium relative px-1 py-2 transition-all
                   after:absolute after:w-0 after:h-0.5 after:bg-accent after:bottom-0 after:left-0 
                   after:transition-all after:duration-300 hover:after:w-full hover:text-accent`} style={{
@@ -33,7 +33,14 @@ const Header = () => {
           }}>
                 {item}
               </a>)}
-            
+            <a 
+              href="https://www.apply.codes" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="ml-4 px-4 py-2 bg-accent text-accent-foreground font-medium rounded-md hover:bg-accent/90 transition-all duration-300 hover:scale-105 hover:shadow-lg"
+            >
+              Visit our Platform
+            </a>
           </nav>
 
           <button className={`md:hidden p-1 rounded-md transition-colors ${scrolled ? 'text-foreground hover:bg-muted' : 'text-foreground hover:bg-background/20'}`} onClick={toggleMenu} aria-label="Toggle menu">
@@ -50,6 +57,15 @@ const Header = () => {
             <Link to="/animation-demo" className="block text-lg font-medium hover:text-accent transition-colors py-2" onClick={toggleMenu}>
               Animations
             </Link>
+            <a 
+              href="https://www.apply.codes" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="block w-full text-center px-4 py-3 mt-4 bg-accent text-accent-foreground font-medium rounded-md hover:bg-accent/90 transition-all duration-300"
+              onClick={toggleMenu}
+            >
+              Visit our Platform
+            </a>
           </nav>}
       </div>
     </header>

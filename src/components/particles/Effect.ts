@@ -58,4 +58,32 @@ export class Effect {
       this.particlesArray[i].update();
     }
   }
+
+  pulse() {
+    const centerX = this.width / 2;
+    const centerY = this.height / 2;
+    
+    this.particlesArray.forEach((particle, index) => {
+      const dx = particle.x - centerX;
+      const dy = particle.y - centerY;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      const delay = distance * 2; // Increased delay for slower ripple
+      
+      setTimeout(() => {
+        // Store original values
+        const originalRadius = particle.radius;
+        const originalOpacity = particle.opacity;
+        
+        // Create pulse effect
+        particle.radius = 8; // Increased size during pulse
+        particle.opacity = 1;
+        
+        // Reset after pulse
+        setTimeout(() => {
+          particle.radius = originalRadius;
+          particle.opacity = originalOpacity;
+        }, 600);
+      }, delay);
+    });
+  }
 }

@@ -1,8 +1,37 @@
 
-import React from 'react';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { Send, Mail, Building, Clock } from 'lucide-react';
+import EnhancedButton from './EnhancedButton';
 
 const Contact = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const { register, handleSubmit, formState: { errors } } = useForm();
+
+  const onSubmit = async (data) => {
+    setIsSubmitting(true);
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        setIsSuccess(true);
+      } else {
+        // Handle error
+      }
+    } catch (error) {
+      // Handle error
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section id="contact" className="section-spacing px-6 relative overflow-hidden">
       {/* Decorative background elements */}
@@ -18,46 +47,40 @@ const Contact = () => {
         </div>
         
         <div className="glass p-8 md:p-10 rounded-2xl animate-fade-up shadow-lg">
-          <div className="flex items-center gap-3 mb-8 text-accent">
-            <Mail className="h-5 w-5" />
-            <span className="font-medium">hello@hiapply.co</span>
-          </div>
-          
-          <div className="mb-8 space-y-4">
-            <div className="flex items-start gap-3 p-4 rounded-lg bg-secondary/20">
-              <Building className="h-5 w-5 text-accent flex-shrink-0 mt-1" />
-              <div>
-                <h3 className="font-medium mb-1">Free SMB Assessment</h3>
-                <p className="text-sm text-muted-foreground">
-                  Schedule a complimentary 30-minute call to identify the highest-impact AI opportunities for your local business
-                </p>
-              </div>
+          {isSuccess ? (
+            <div className="text-center">
+              <h3 className="text-2xl font-bold mb-4">Thank you!</h3>
+              <p className="text-muted-foreground">Your message has been sent. We'll be in touch shortly.</p>
             </div>
-            
-            <div className="flex items-start gap-3 p-4 rounded-lg bg-secondary/20">
-              <Clock className="h-5 w-5 text-accent flex-shrink-0 mt-1" />
-              <div>
-                <h3 className="font-medium mb-1">Quick-Start Implementation</h3>
-                <p className="text-sm text-muted-foreground">
-                  Most SMB solutions can be deployed within 2-4 weeks, delivering immediate ROI without disrupting your operations
-                </p>
+          ) : (
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+              <div className="flex flex-col sm:flex-row gap-4">
+                <div className="w-full">
+                  <input {...register('name', { required: true })} placeholder="Name" className="w-full bg-secondary/20 border-none rounded-lg px-4 py-3" />
+                  {errors.name && <span className="text-red-500 text-sm">This field is required</span>}
+                </div>
+                <div className="w-full">
+                  <input {...register('email', { required: true, pattern: /\S+@\S+\.\S+/ })} placeholder="Email" className="w-full bg-secondary/20 border-none rounded-lg px-4 py-3" />
+                  {errors.email && <span className="text-red-500 text-sm">Please enter a valid email</span>}
+                </div>
               </div>
-            </div>
-          </div>
-          
-          <p className="text-lg mb-8">
-            Let's discuss how we can implement hyper-local AI solutions designed specifically for your small business needs and budget.
-          </p>
-          
-          <div className="flex justify-center sm:justify-start">
-            <a
-              href="mailto:hello@hiapply.co?subject=SMB%20AI%20Consultation"
-              className="inline-flex items-center justify-center gap-2 bg-accent text-white px-8 py-3 rounded-lg font-medium transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] hover:bg-accent/90"
-            >
-              <Send className="h-4 w-4" />
-              Schedule SMB Consultation
-            </a>
-          </div>
+              <div>
+                <textarea {...register('message', { required: true })} placeholder="Message" className="w-full bg-secondary/20 border-none rounded-lg px-4 py-3" rows={4}></textarea>
+                {errors.message && <span className="text-red-500 text-sm">This field is required</span>}
+              </div>
+              <div className="flex justify-center sm:justify-start">
+                <EnhancedButton
+                  type="submit"
+                  variant="accent"
+                  icon={<Send className="h-4 w-4" />}
+                  isLoading={isSubmitting}
+                  loadingText="Sending..."
+                >
+                  Schedule SMB Consultation
+                </EnhancedButton>
+              </div>
+            </form>
+          )}
         </div>
       </div>
     </section>

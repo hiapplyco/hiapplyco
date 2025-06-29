@@ -3,7 +3,11 @@ import React, { useEffect, useRef } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Effect } from './Effect';
 
-const ParticleBackground = () => {
+interface ParticleBackgroundProps {
+  onEffectReady?: (effect: Effect) => void;
+}
+
+const ParticleBackground = ({ onEffectReady }: ParticleBackgroundProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const effectRef = useRef<Effect | null>(null);
   const animationFrameRef = useRef<number>();
@@ -47,6 +51,11 @@ const ParticleBackground = () => {
 
     handleResize();
     effectRef.current = new Effect(canvas.width, canvas.height, ctx);
+    
+    // Notify parent component when effect is ready
+    if (onEffectReady && effectRef.current) {
+      onEffectReady(effectRef.current);
+    }
 
     const animate = () => {
       if (effectRef.current) {
@@ -68,7 +77,7 @@ const ParticleBackground = () => {
       window.removeEventListener('mousemove', handleMouseMove);
       canvas.removeEventListener('mouseleave', handleMouseLeave);
     };
-  }, [isMobile]);
+  }, [isMobile, onEffectReady]);
 
   if (isMobile) return null;
 

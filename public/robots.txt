@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /animation-demo
+
+# Sitemap location
+Sitemap: https://hiapply.co/sitemap.xml

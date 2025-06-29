@@ -34,10 +34,16 @@
   
   body {
     @apply bg-background text-foreground font-['Inter',sans-serif];
+    cursor: none;
   }
 
   ::selection {
     @apply bg-accent/20 text-accent;
+  }
+  
+  /* Custom cursor styles */
+  a, button, [role="button"], input, textarea, select {
+    cursor: none;
   }
 }
 
@@ -88,4 +94,117 @@
   .interactive-element {
     @apply transition-all duration-300 hover:scale-[1.02] active:scale-[0.98];
   }
+}
+
+@keyframes ripple {
+  0% {
+    width: 8rem;
+    height: 8rem;
+    opacity: 0.8;
+  }
+  100% {
+    width: 40rem;
+    height: 40rem;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.animate-ripple {
+  animation: ripple 2s ease-out forwards;
+}
+
+.duration-2000 {
+  transition-duration: 2000ms;
+}
+
+/* Scroll-based animations */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.6s ease-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.6s ease-out forwards;
+}
+
+.animate-slide-in-up {
+  animation: slideInUp 0.6s ease-out forwards;
+}
+
+.animate-scale-in-scroll {
+  animation: scaleIn 0.6s ease-out forwards;
+}
+
+.scroll-hidden {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.scroll-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
