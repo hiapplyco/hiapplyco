@@ -74,10 +74,8 @@ const ContactCTA = ({
           Schedule SMB Consultation
         </EnhancedButton>
         <a
-          href="https://www.apply.codes/pricing"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-6 py-3 bg-background/80 backdrop-blur-sm text-foreground border border-border/50 rounded-lg font-medium hover:bg-background/90 transition-all duration-200"
+          href="/pricing/hiapplyco"
+          className="inline-flex items-center gap-2 px-6 py-3 bg-background/80 backdrop-blur-sm text-foreground border-2 border-foreground/80 rounded-lg font-medium hover:bg-foreground hover:text-background transition-all duration-200 interactive-element"
         >
           <DollarSign className="h-4 w-4" />
           View Pricing
@@ -98,20 +96,20 @@ const ContactCTA = ({
             placeholder="Your Name"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            className="w-full bg-background/50 border border-border/50 rounded-lg px-4 py-3"
+            className="w-full bg-background/50 border-2 border-border/80 focus:border-accent rounded-lg px-4 py-3 outline-none transition-colors duration-200"
           />
           <input
             type="email"
             placeholder="Your Email"
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-            className="w-full bg-background/50 border border-border/50 rounded-lg px-4 py-3"
+            className="w-full bg-background/50 border-2 border-border/80 focus:border-accent rounded-lg px-4 py-3 outline-none transition-colors duration-200"
           />
           <textarea
             placeholder="Brief message (optional)"
             value={formData.message}
             onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-            className="w-full bg-background/50 border border-border/50 rounded-lg px-4 py-3"
+            className="w-full bg-background/50 border-2 border-border/80 focus:border-accent rounded-lg px-4 py-3 outline-none transition-colors duration-200"
             rows={3}
           />
         </div>
@@ -129,10 +127,8 @@ const ContactCTA = ({
           {showForm ? 'Send Message' : 'Schedule SMB Consultation'}
         </EnhancedButton>
         <a
-          href="https://www.apply.codes/pricing"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-6 py-3 bg-background/80 backdrop-blur-sm text-foreground border border-border/50 rounded-lg font-medium hover:bg-background/90 transition-all duration-200"
+          href="/pricing/hiapplyco"
+          className="inline-flex items-center gap-2 px-6 py-3 bg-background/80 backdrop-blur-sm text-foreground border-2 border-foreground/80 rounded-lg font-medium hover:bg-foreground hover:text-background transition-all duration-200 interactive-element"
         >
           <DollarSign className="h-4 w-4" />
           View Pricing

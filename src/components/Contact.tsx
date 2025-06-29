@@ -56,8 +56,11 @@ const Contact = () => {
       <div className="max-w-3xl mx-auto relative z-10">
         <div className="text-center mb-10 animate-fade-up">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">SMB AI Consultation</h2>
-          <p className="text-muted-foreground max-w-xl mx-auto">
+          <p className="text-muted-foreground max-w-xl mx-auto mb-4">
             Ready to transform your small or medium business with locally-optimized AI solutions?
+          </p>
+          <p className="text-sm text-muted-foreground">
+            Contact us at <a href="mailto:martin@hiapply.co" className="text-accent hover:underline">martin@hiapply.co</a>
           </p>
         </div>
         
@@ -71,16 +74,16 @@ const Contact = () => {
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               <div className="flex flex-col sm:flex-row gap-4">
                 <div className="w-full">
-                  <input {...register('name', { required: true })} placeholder="Name" className="w-full bg-secondary/20 border-none rounded-lg px-4 py-3" />
+                  <input {...register('name', { required: true })} placeholder="Name" className="w-full bg-secondary/20 border-2 border-border/80 focus:border-accent rounded-lg px-4 py-3 outline-none transition-colors duration-200" />
                   {errors.name && <span className="text-red-500 text-sm">This field is required</span>}
                 </div>
                 <div className="w-full">
-                  <input {...register('email', { required: true, pattern: /\S+@\S+\.\S+/ })} placeholder="Email" className="w-full bg-secondary/20 border-none rounded-lg px-4 py-3" />
+                  <input {...register('email', { required: true, pattern: /\S+@\S+\.\S+/ })} placeholder="Email" className="w-full bg-secondary/20 border-2 border-border/80 focus:border-accent rounded-lg px-4 py-3 outline-none transition-colors duration-200" />
                   {errors.email && <span className="text-red-500 text-sm">Please enter a valid email</span>}
                 </div>
               </div>
               <div>
-                <textarea {...register('message', { required: true })} placeholder="Message" className="w-full bg-secondary/20 border-none rounded-lg px-4 py-3" rows={4}></textarea>
+                <textarea {...register('message', { required: true })} placeholder="Message" className="w-full bg-secondary/20 border-2 border-border/80 focus:border-accent rounded-lg px-4 py-3 outline-none transition-colors duration-200" rows={4}></textarea>
                 {errors.message && <span className="text-red-500 text-sm">This field is required</span>}
               </div>
               <div className="flex flex-col sm:flex-row gap-4 justify-center sm:justify-start">
@@ -95,10 +98,8 @@ const Contact = () => {
                   Schedule SMB Consultation
                 </EnhancedButton>
                 <a
-                  href="https://www.apply.codes/pricing"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-background/80 backdrop-blur-sm text-foreground border border-border/50 rounded-lg font-medium hover:bg-background/90 transition-all duration-200"
+                  href="/pricing/hiapplyco"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-background/80 backdrop-blur-sm text-foreground border-2 border-foreground/80 rounded-lg font-medium hover:bg-foreground hover:text-background transition-all duration-200 interactive-element"
                 >
                   <DollarSign className="h-4 w-4" />
                   View Pricing
