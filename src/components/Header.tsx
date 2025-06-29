@@ -22,8 +22,7 @@ const Header = () => {
   const navItems = [
     { name: 'Projects', href: '#projects', homeHref: '/#projects', icon: Store },
     { name: 'Tools', href: '#tools', homeHref: '/#tools', icon: Wrench },
-    { name: 'Process', href: '#process', homeHref: '/#process', icon: Workflow },
-    { name: 'Pricing', href: '/pricing/hiapplyco', icon: DollarSign, isRoute: true },
+    { name: 'Pricing', href: '#pricing', homeHref: '/#pricing', icon: DollarSign },
     { name: 'About', href: '#about', homeHref: '/#about', icon: Info },
     { name: 'Contact', href: '#contact', homeHref: '/#contact', icon: MessageSquare },
   ];

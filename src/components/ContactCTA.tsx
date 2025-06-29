@@ -62,20 +62,20 @@ const ContactCTA = ({
 
   if (compact) {
     return (
-      <div className="flex flex-col sm:flex-row gap-4 items-center">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <EnhancedButton
           onClick={handleQuickContact}
           variant="accent"
           icon={<Send className="h-4 w-4" />}
           isLoading={isSubmitting}
           loadingText="Sending..."
-          className="gradient-purple-green text-white hover:gradient-purple-green-hover"
+          className="w-full gradient-purple-green text-white hover:bg-foreground hover:text-background"
         >
           Schedule SMB Consultation
         </EnhancedButton>
         <a
-          href="/pricing/hiapplyco"
-          className="inline-flex items-center gap-2 px-6 py-3 bg-background/80 backdrop-blur-sm text-foreground border-2 border-foreground/80 rounded-lg font-medium hover:bg-foreground hover:text-background transition-all duration-200 interactive-element"
+          href="#pricing"
+          className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-background/80 backdrop-blur-sm text-foreground border-2 border-foreground/80 rounded-lg font-medium hover:bg-foreground hover:text-background transition-all duration-200 interactive-element"
         >
           <DollarSign className="h-4 w-4" />
           View Pricing
@@ -115,20 +115,20 @@ const ContactCTA = ({
         </div>
       )}
       
-      <div className="flex flex-col sm:flex-row gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <EnhancedButton
           onClick={handleQuickContact}
           variant="accent"
           icon={<Send className="h-4 w-4" />}
           isLoading={isSubmitting}
           loadingText="Sending..."
-          className="gradient-purple-green text-white hover:gradient-purple-green-hover"
+          className="w-full gradient-purple-green text-white hover:bg-foreground hover:text-background"
         >
           {showForm ? 'Send Message' : 'Schedule SMB Consultation'}
         </EnhancedButton>
         <a
-          href="/pricing/hiapplyco"
-          className="inline-flex items-center gap-2 px-6 py-3 bg-background/80 backdrop-blur-sm text-foreground border-2 border-foreground/80 rounded-lg font-medium hover:bg-foreground hover:text-background transition-all duration-200 interactive-element"
+          href="#pricing"
+          className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-background/80 backdrop-blur-sm text-foreground border-2 border-foreground/80 rounded-lg font-medium hover:bg-foreground hover:text-background transition-all duration-200 interactive-element"
         >
           <DollarSign className="h-4 w-4" />
           View Pricing

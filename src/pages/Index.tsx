@@ -2,6 +2,7 @@
 import Header from '@/components/Header';
 import Projects from '@/components/Projects';
 import Tools from '@/components/Tools';
+import Pricing from '@/components/Pricing';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import ParticleBackground from '@/components/ParticleBackground';
@@ -34,11 +35,11 @@ const Index = () => {
           <p className="text-xl md:text-2xl text-muted-foreground mb-10 animate-fade-up animation-delay-200 max-w-2xl mx-auto">
             Hyper-local AI that understands your market. Built specifically for SMBs.
           </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <a href="#projects" className="inline-block gradient-purple-green text-white px-8 py-4 rounded-lg font-medium hover:gradient-purple-green-hover transition-all duration-200 animate-fade-up animation-delay-300">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
+            <a href="#projects" className="inline-flex items-center justify-center gradient-purple-green text-white px-8 py-4 rounded-lg font-medium hover:bg-foreground hover:text-background transition-all duration-200 animate-fade-up animation-delay-300">
               View Success Stories
             </a>
-            <a href="#contact" className="inline-block bg-background/80 backdrop-blur-sm text-foreground border border-border/50 px-8 py-4 rounded-lg font-medium hover:bg-background/90 transition-all duration-200 animate-fade-up animation-delay-400">
+            <a href="#contact" className="inline-flex items-center justify-center bg-background/80 backdrop-blur-sm text-foreground border-2 border-foreground/80 px-8 py-4 rounded-lg font-medium hover:bg-foreground hover:text-background transition-all duration-200 animate-fade-up animation-delay-400">
               Get Started
             </a>
           </div>
@@ -59,8 +60,13 @@ const Index = () => {
           <AIPartnersSection />
         </section>
         
-        {/* Section 3: Get Started */}
+        {/* Section 3: Pricing */}
         <section className="section-spacing">
+          <Pricing />
+        </section>
+        
+        {/* Section 4: Get Started */}
+        <section className="section-spacing bg-muted/30">
           <Contact />
         </section>
         
