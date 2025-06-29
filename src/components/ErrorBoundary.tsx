@@ -21,6 +21,8 @@ class ErrorBoundary extends Component<Props, State> {
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     console.error('Error caught by boundary:', error, errorInfo);
+    console.error('Error stack:', error.stack);
+    console.error('Component stack:', errorInfo.componentStack);
   }
 
   render() {
@@ -37,7 +39,7 @@ class ErrorBoundary extends Component<Props, State> {
                 Error details
               </summary>
               <pre className="mt-2 text-xs overflow-auto p-4 bg-muted rounded">
-                {this.state.error?.toString()}
+                {this.state.error?.stack || this.state.error?.toString()}
               </pre>
             </details>
             <button
