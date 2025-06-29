@@ -18,12 +18,12 @@ const queryClient = new QueryClient();
 const App = () => (
   <ErrorBoundary>
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <CustomCursor />
-        <CinematicIntro />
-        <BrowserRouter>
+      <BrowserRouter>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <CustomCursor />
+          <CinematicIntro />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/animation-demo" element={<AnimationDemo />} />
@@ -31,8 +31,8 @@ const App = () => (
             <Route path="/protected-pricing/:clientSlug" element={<ProtectedPricing />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
+        </TooltipProvider>
+      </BrowserRouter>
     </QueryClientProvider>
   </ErrorBoundary>
 );
