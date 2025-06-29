@@ -18,9 +18,8 @@ const CinematicIntro = () => {
     document.body.style.overflow = 'hidden';
     window.scrollTo(0, 0);
 
-    const handleInteraction = (e: Event) => {
+    const handleInteraction = () => {
       if (!fadeOut) {
-        e.preventDefault();
         setFadeOut(true);
         
         // Start fade out animation
@@ -34,20 +33,29 @@ const CinematicIntro = () => {
     };
 
     // Listen for any scroll attempt or click
-    window.addEventListener('wheel', handleInteraction, { passive: false });
-    window.addEventListener('touchstart', handleInteraction, { passive: false });
-    window.addEventListener('click', handleInteraction);
-    window.addEventListener('keydown', (e) => {
+    const handleWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      handleInteraction();
+    };
+    
+    const handleKey = (e: KeyboardEvent) => {
       if (e.key === 'ArrowDown' || e.key === ' ' || e.key === 'Enter') {
-        handleInteraction(e);
+        e.preventDefault();
+        handleInteraction();
       }
-    });
+    };
+    
+    window.addEventListener('wheel', handleWheel, { passive: false });
+    window.addEventListener('touchstart', handleInteraction);
+    window.addEventListener('click', handleInteraction);
+    window.addEventListener('keydown', handleKey);
 
     return () => {
       document.body.style.overflow = '';
-      window.removeEventListener('wheel', handleInteraction);
+      window.removeEventListener('wheel', handleWheel);
       window.removeEventListener('touchstart', handleInteraction);
       window.removeEventListener('click', handleInteraction);
+      window.removeEventListener('keydown', handleKey);
     };
   }, [fadeOut]);
 
