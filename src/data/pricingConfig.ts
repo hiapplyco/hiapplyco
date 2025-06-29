@@ -323,6 +323,105 @@ const pricingConfigs: Record<string, PricingConfig> = {
       description: 'AI-powered recruitment platform for Blue Zones Health. Find local talent through intelligent matching based on neighborhood proximity and community connection.',
     },
   },
+
+  'hiapplyco': {
+    clientSlug: 'hiapplyco',
+    clientName: 'apply.codes',
+    hero: {
+      title: 'AI-Powered Local Hiring Platform',
+      subtitle: 'Transform your SMB recruitment with intelligent matching that finds the best local talent',
+      badge: 'Trusted by 500+ Local Businesses',
+      logoUrl: 'https://kxghaajojntkqrmvsngn.supabase.co/storage/v1/object/public/logos/APPLYFullwordlogo2025.png',
+    },
+    tiers: [
+      createTier(
+        'standard',
+        'Standard',
+        '$198',
+        'Perfect for small businesses getting started with AI recruitment',
+        [
+          '1 user included',
+          'Additional users: $10/month',
+          '2 hours/month email support',
+          'Basic branding customization',
+          'Basic analytics & reports',
+          'Guided setup onboarding',
+          '7-day free trial',
+        ],
+        'Start Standard Plan',
+        'month'
+      ),
+      createTier(
+        'professional',
+        'Professional',
+        '$298',
+        'Advanced features for growing businesses',
+        [
+          'Up to 3 users included',
+          'Additional users: $8/month',
+          '3 hours/month email + chat support',
+          'Advanced branding customization',
+          'Cross-platform integration',
+          'Standard analytics & reports',
+          'Advanced guided setup',
+          '14-day free trial',
+        ],
+        'Choose Professional',
+        'month',
+        true
+      ),
+      createTier(
+        'enterprise',
+        'Enterprise',
+        '$548',
+        'Complete solution for established businesses',
+        [
+          'Unlimited users included',
+          '5 hours/month email + chat support',
+          'Full white-labeling',
+          'Full integration (Rippling +)',
+          'Advanced analytics & reports',
+          'Dedicated support onboarding',
+          '21-day free trial + strategic call',
+        ],
+        'Go Enterprise',
+        'month'
+      )
+    ],
+    additionalFeatures: [
+      {
+        title: 'AI Matching Technology',
+        description: 'Advanced AI algorithms match candidates based on neighborhood proximity and community connection for better local hiring.',
+      },
+      {
+        title: 'Cost Efficiency',
+        description: 'Reduce internal operational costs by 20-30% compared to traditional recruitment methods.',
+      },
+      {
+        title: 'Integrated Platform',
+        description: 'All recruitment tools in one AI-driven management interface for enhanced user experience and immediate ROI.',
+      },
+      {
+        title: 'Competitive Advantage',
+        description: 'Cost-effective solution compared to competitors ranging from $35,000 to $200,000 for mid-range solutions.',
+      },
+    ],
+    cta: {
+      title: 'Transform Your Local Hiring Today',
+      description: 'Most SMB solutions can be deployed within 2-4 weeks, delivering immediate ROI without disrupting your operations.',
+      primaryButton: 'Schedule Your Free Demo',
+      secondaryButton: 'View Case Studies',
+    },
+    contact: {
+      name: 'apply.codes Team',
+      email: 'contact@hiapply.co',
+      phone: '(301) 639-2545',
+    },
+    seo: {
+      title: 'AI-Powered Local Hiring Platform Pricing | apply.codes',
+      description: 'Transform your SMB recruitment with apply.codes AI-powered hiring platform. Find the best local talent through intelligent matching. Plans starting at $198/month.',
+    },
+  },
 };
 
 export const getPricingConfig = (clientSlug: string): PricingConfig | null => {

@@ -9,7 +9,6 @@ import NotFound from "./pages/NotFound";
 import AnimationDemo from "./pages/AnimationDemo";
 import Pricing from "./pages/Pricing";
 import ProtectedPricing from "./pages/ProtectedPricing";
-import CinematicIntro from "./components/CinematicIntro";
 import CustomCursor from "./components/CustomCursor";
 import ErrorBoundary from "./components/ErrorBoundary";
 
@@ -30,7 +29,6 @@ const App = () => (
             <Route path="/protected-pricing/:clientSlug" element={<ProtectedPricing />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-          <CinematicIntro />
         </TooltipProvider>
       </BrowserRouter>
     </QueryClientProvider>

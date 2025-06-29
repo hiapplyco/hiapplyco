@@ -10,6 +10,15 @@ const PricingHero = ({ config }: PricingHeroProps) => {
   return (
     <section className="py-8 px-6 text-center bg-gradient-to-b from-background to-muted/5">
       <div className="max-w-3xl mx-auto">
+        {config.hero.logoUrl && (
+          <div className="mb-6">
+            <img 
+              src={config.hero.logoUrl} 
+              alt={`${config.clientName} logo`}
+              className="h-16 md:h-20 mx-auto object-contain"
+            />
+          </div>
+        )}
         {config.hero.badge && (
           <div className="inline-flex items-center px-3 py-1 rounded-full bg-accent/10 text-accent text-sm font-medium mb-4 border border-accent/20">
             {config.hero.badge}

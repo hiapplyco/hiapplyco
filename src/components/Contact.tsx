@@ -12,21 +12,25 @@ const Contact = () => {
   const onSubmit = async (data) => {
     setIsSubmitting(true);
     try {
+      // First try the local API endpoint which should proxy to Supabase
       const response = await fetch('/api/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          ...data,
+          source: 'pricing-page'
+        }),
       });
 
       if (response.ok) {
         setIsSuccess(true);
       } else {
-        // Handle error
+        console.error('Failed to send email');
       }
     } catch (error) {
-      // Handle error
+      console.error('Error sending email:', error);
     } finally {
       setIsSubmitting(false);
     }

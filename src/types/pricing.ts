@@ -28,6 +28,7 @@ export interface PricingConfig {
     title: string;
     subtitle: string;
     badge?: string;
+    logoUrl?: string;
   };
   tiers: PricingTier[];
   additionalFeatures?: AdditionalFeature[];

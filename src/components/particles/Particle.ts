@@ -41,8 +41,8 @@ export class Particle {
     this.angle = 0;
     this.size = Math.floor(Math.random() * 3) + 2;
     this.radius = this.size; // Initialize radius same as size
-    this.opacity = 0.8; // Default opacity
-    this.color = '#d1d1d1'; // Default light grey color
+    this.opacity = 0.3; // Default opacity
+    this.color = 'rgba(200, 200, 200, 0.3)'; // Default subtle grey color
     this.settlingFactor = 0.05; // Controls how quickly particles settle
   }
 
@@ -99,7 +99,7 @@ export class Particle {
       }
     } else {
       // Default color when outside radius
-      this.color = '#d1d1d1'; // Light grey
+      this.color = 'rgba(200, 200, 200, 0.3)'; // Subtle grey
     }
 
     // Apply more friction when mouse is inactive
@@ -128,17 +128,29 @@ export class Particle {
   }
 
   getGradientColor(normalizedDistance: number, opacityMultiplier: number = 1.0) {
-    // Create more vibrant gradient colors
-    const purple = { r: 128, g: 0, b: 255 }; // Bright purple #8000ff
-    const pink = { r: 255, g: 0, b: 128 }; // Vibrant pink #ff0080
+    // Create vibrant multicolor gradient
+    const colors = [
+      { r: 59, g: 130, b: 246 },   // Blue
+      { r: 147, g: 51, b: 234 },   // Purple
+      { r: 236, g: 72, b: 153 },   // Pink
+      { r: 251, g: 146, b: 60 },   // Orange
+      { r: 34, g: 197, b: 94 }     // Green
+    ];
     
-    // Interpolate between the colors based on distance
-    const r = Math.floor(purple.r + (pink.r - purple.r) * normalizedDistance);
-    const g = Math.floor(purple.g + (pink.g - purple.g) * normalizedDistance);
-    const b = Math.floor(purple.b + (pink.b - purple.b) * normalizedDistance);
+    // Use particle position to determine base color
+    const colorIndex = Math.abs(this.originX + this.originY) % colors.length;
+    const nextColorIndex = (colorIndex + 1) % colors.length;
+    
+    const baseColor = colors[colorIndex];
+    const nextColor = colors[nextColorIndex];
+    
+    // Interpolate between colors based on distance
+    const r = Math.floor(baseColor.r + (nextColor.r - baseColor.r) * normalizedDistance);
+    const g = Math.floor(baseColor.g + (nextColor.g - baseColor.g) * normalizedDistance);
+    const b = Math.floor(baseColor.b + (nextColor.b - baseColor.b) * normalizedDistance);
     
     // Adjust opacity based on mouse activity
-    const opacity = 1.0 * opacityMultiplier;
+    const opacity = 0.8 * opacityMultiplier;
     
     return `rgba(${r}, ${g}, ${b}, ${opacity})`;
   }

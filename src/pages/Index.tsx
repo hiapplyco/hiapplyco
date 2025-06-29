@@ -2,16 +2,10 @@
 import Header from '@/components/Header';
 import Projects from '@/components/Projects';
 import Tools from '@/components/Tools';
-import About from '@/components/About';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
-import Process from '@/components/Process';
-import LogosSection from '@/components/LogosSection';
 import ParticleBackground from '@/components/ParticleBackground';
-import DeploymentTimeline from '@/components/DeploymentTimeline';
-import SuccessStories from '@/components/SuccessStories';
-import AgentEcosystemVisualization from '@/components/AgentEcosystemVisualization';
-import AgenticRecruitmentPlatform from '@/components/AgenticRecruitmentPlatform';
+import AIPartnersSection from '@/components/ai-partners';
 
 const Index = () => {
   return (
@@ -31,33 +25,21 @@ const Index = () => {
 
       {/* Hero Section */}
       <section id="home" className="relative min-h-screen flex items-center justify-center pt-20 px-6 overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute inset-0 bg-grid-pattern bg-grid opacity-10 pointer-events-none" style={{
-        zIndex: 1
-      }}></div>
-        <div className="absolute top-20 right-16 w-64 h-64 bg-accent/10 rounded-full blur-3xl animate-pulse pointer-events-none" style={{
-        zIndex: 3
-      }}></div>
-        <div className="absolute bottom-20 left-16 w-80 h-80 bg-primary/5 rounded-full blur-3xl animate-pulse pointer-events-none" style={{
-        zIndex: 3
-      }}></div>
-        
-        <div className="relative max-w-3xl mx-auto text-center glass p-8 rounded-xl" style={{
+        <div className="relative max-w-4xl mx-auto text-center" style={{
         zIndex: 10
       }}>
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-up text-balance">
-            AI Agent Solutions <span className="text-accent">Built for SMBs</span>
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-up text-balance">
+            AI Solutions for <span className="text-accent">Small Business</span>
           </h1>
-          <p className="text-lg md:text-xl text-muted-foreground mb-10 animate-fade-up animation-delay-200 md:px-6 text-balance">
-            Experts in hyper-local AI deployment specifically for small and medium businesses. 
-            <span className="block mt-2 font-medium">Delivering measurable ROI with localized intelligence that understands your market.</span>
+          <p className="text-xl md:text-2xl text-muted-foreground mb-10 animate-fade-up animation-delay-200 max-w-2xl mx-auto">
+            Hyper-local AI that understands your market. Built specifically for SMBs.
           </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
-            <a href="#projects" className="inline-block bg-primary text-primary-foreground px-8 py-3.5 rounded-lg font-medium interactive-element animate-fade-up animation-delay-300">
-              SMB Success Stories
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="#projects" className="inline-block bg-accent text-accent-foreground px-8 py-4 rounded-lg font-medium hover:bg-accent/90 transition-all duration-200 animate-fade-up animation-delay-300">
+              View Success Stories
             </a>
-            <a href="#contact" className="inline-block bg-secondary text-foreground border border-border/50 px-8 py-3.5 rounded-lg font-medium interactive-element animate-fade-up animation-delay-400">
-              Free SMB Consultation
+            <a href="#contact" className="inline-block bg-background/80 backdrop-blur-sm text-foreground border border-border/50 px-8 py-4 rounded-lg font-medium hover:bg-background/90 transition-all duration-200 animate-fade-up animation-delay-400">
+              Get Started
             </a>
           </div>
         </div>
@@ -66,16 +48,22 @@ const Index = () => {
       <div className="relative" style={{
       zIndex: 10
     }}>
-        <AgenticRecruitmentPlatform />
-        <Process />
-        <Projects />
-        <AgentEcosystemVisualization />
-        <Tools />
-        <SuccessStories />
-        <DeploymentTimeline />
-        <LogosSection />
-        <About />
-        <Contact />
+        {/* Section 1: What We Do */}
+        <section className="section-spacing">
+          <Projects />
+        </section>
+        
+        {/* Section 2: How We Work */}
+        <section className="section-spacing bg-muted/30">
+          <Tools />
+          <AIPartnersSection />
+        </section>
+        
+        {/* Section 3: Get Started */}
+        <section className="section-spacing">
+          <Contact />
+        </section>
+        
         <Footer />
       </div>
     </div>

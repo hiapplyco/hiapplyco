@@ -8,6 +8,14 @@ interface PricingCTAProps {
 }
 
 const PricingCTA = ({ config }: PricingCTAProps) => {
+  const handlePrimaryClick = () => {
+    // Scroll to contact form
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className="py-8 px-6 bg-gradient-to-r from-accent/5 to-accent/10">
       <div className="max-w-3xl mx-auto text-center">
@@ -19,7 +27,11 @@ const PricingCTA = ({ config }: PricingCTAProps) => {
         </p>
         
         <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6">
-          <Button size="lg" className="px-6 py-2 font-semibold bg-accent hover:bg-accent/90 text-accent-foreground">
+          <Button 
+            size="lg" 
+            className="px-6 py-2 font-semibold bg-accent hover:bg-accent/90 text-accent-foreground"
+            onClick={handlePrimaryClick}
+          >
             {config.cta.primaryButton}
           </Button>
           {config.cta.secondaryButton && (
