@@ -1,6 +1,8 @@
 
 import React from 'react';
 import { useParams, Navigate } from 'react-router-dom';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 import PricingHero from '../components/pricing/PricingHero';
 import CinematicHero from '../components/pricing/CinematicHero';
 import PricingTiers from '../components/pricing/PricingTiers';
@@ -26,7 +28,7 @@ const Pricing = () => {
 
   return (
     <>
-      
+      <Header />
       <div className="min-h-screen bg-background">
         {isBlueZones ? (
           <CinematicHero config={pricingConfig} />
@@ -40,6 +42,7 @@ const Pricing = () => {
           <PricingCTA config={pricingConfig} />
         </div>
       </div>
+      <Footer />
     </>
   );
 };

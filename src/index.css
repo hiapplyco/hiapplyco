@@ -16,11 +16,11 @@
     --secondary-foreground: 240 5.9% 10%;
     --muted: 240 4.8% 95.9%;
     --muted-foreground: 240 3.8% 46.1%;
-    --accent: 230 100% 66%;
+    --accent: 270 60% 50%;
     --accent-foreground: 0 0% 98%;
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
-    --ring: 142 71% 45%;
+    --ring: 270 60% 50%;
     --radius: 1rem;
   }
  
@@ -58,6 +58,21 @@
   
   .text-balance {
     text-wrap: balance;
+  }
+  
+  .gradient-purple-green {
+    background: linear-gradient(135deg, #8B5CF6 0%, #10B981 100%);
+  }
+  
+  .gradient-purple-green-hover {
+    background: linear-gradient(135deg, #7C3AED 0%, #059669 100%);
+  }
+  
+  .text-gradient-purple-green {
+    background: linear-gradient(135deg, #8B5CF6 0%, #10B981 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
   
   .animation-delay-100 {

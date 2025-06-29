@@ -29,13 +29,13 @@ const Index = () => {
         zIndex: 10
       }}>
           <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-up text-balance">
-            AI Solutions for <span className="text-accent">Small Business</span>
+            AI Solutions for <span className="text-gradient-purple-green">Small Business</span>
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground mb-10 animate-fade-up animation-delay-200 max-w-2xl mx-auto">
             Hyper-local AI that understands your market. Built specifically for SMBs.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <a href="#projects" className="inline-block bg-accent text-accent-foreground px-8 py-4 rounded-lg font-medium hover:bg-accent/90 transition-all duration-200 animate-fade-up animation-delay-300">
+            <a href="#projects" className="inline-block gradient-purple-green text-white px-8 py-4 rounded-lg font-medium hover:gradient-purple-green-hover transition-all duration-200 animate-fade-up animation-delay-300">
               View Success Stories
             </a>
             <a href="#contact" className="inline-block bg-background/80 backdrop-blur-sm text-foreground border border-border/50 px-8 py-4 rounded-lg font-medium hover:bg-background/90 transition-all duration-200 animate-fade-up animation-delay-400">

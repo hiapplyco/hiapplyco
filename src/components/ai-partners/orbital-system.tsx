@@ -55,14 +55,14 @@ export const AIPartnersOrbitalSystem = () => {
       >
         <div className="relative w-40 h-40 bg-white/10 rounded-full backdrop-blur-md flex items-center justify-center">
           <img 
-            src="/ApplyLogoNoBackground.png" 
-            alt="Apply, Co." 
-            className="w-32 h-32 object-contain"
+            src="https://kxghaajojntkqrmvsngn.supabase.co/storage/v1/object/public/logos/Apply2025logo.png" 
+            alt="Apply Logo" 
+            className="w-28 h-28 object-contain"
           />
           <motion.div 
             className="absolute inset-0 rounded-full"
             animate={{ 
-              boxShadow: ['0 0 0 rgba(155, 135, 245, 0.3)', '0 0 30px rgba(155, 135, 245, 0.7)', '0 0 10px rgba(155, 135, 245, 0.3)']
+              boxShadow: ['0 0 0 rgba(139, 92, 246, 0.3)', '0 0 30px rgba(16, 185, 129, 0.7)', '0 0 10px rgba(139, 92, 246, 0.3)']
             }}
             transition={{ duration: 3, repeat: Infinity }}
           />

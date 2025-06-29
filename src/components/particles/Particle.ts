@@ -41,8 +41,8 @@ export class Particle {
     this.angle = 0;
     this.size = Math.floor(Math.random() * 3) + 2;
     this.radius = this.size; // Initialize radius same as size
-    this.opacity = 0.3; // Default opacity
-    this.color = 'rgba(200, 200, 200, 0.3)'; // Default subtle grey color
+    this.opacity = 0.6; // Default opacity
+    this.color = 'rgba(200, 200, 200, 0.6)'; // Default subtle grey color
     this.settlingFactor = 0.05; // Controls how quickly particles settle
   }
 
@@ -99,7 +99,7 @@ export class Particle {
       }
     } else {
       // Default color when outside radius
-      this.color = 'rgba(200, 200, 200, 0.3)'; // Subtle grey
+      this.color = 'rgba(200, 200, 200, 0.6)'; // Subtle grey
     }
 
     // Apply more friction when mouse is inactive
@@ -150,7 +150,7 @@ export class Particle {
     const b = Math.floor(baseColor.b + (nextColor.b - baseColor.b) * normalizedDistance);
     
     // Adjust opacity based on mouse activity
-    const opacity = 0.8 * opacityMultiplier;
+    const opacity = 1.0 * opacityMultiplier;
     
     return `rgba(${r}, ${g}, ${b}, ${opacity})`;
   }

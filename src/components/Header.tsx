@@ -1,12 +1,14 @@
 
 import { useState, useEffect } from 'react';
 import { Menu, X, Store, Wrench, Workflow, MessageSquare, Info, DollarSign } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const toggleMenu = () => setIsOpen(!isOpen);
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
   // Handle scroll effect for header
   useEffect(() => {
@@ -18,25 +20,25 @@ const Header = () => {
   }, []);
 
   const navItems = [
-    { name: 'Projects', href: '#projects', icon: Store },
-    { name: 'Tools', href: '#tools', icon: Wrench },
-    { name: 'Process', href: '#process', icon: Workflow },
+    { name: 'Projects', href: '#projects', homeHref: '/#projects', icon: Store },
+    { name: 'Tools', href: '#tools', homeHref: '/#tools', icon: Wrench },
+    { name: 'Process', href: '#process', homeHref: '/#process', icon: Workflow },
     { name: 'Pricing', href: '/pricing/hiapplyco', icon: DollarSign, isRoute: true },
-    { name: 'About', href: '#about', icon: Info },
-    { name: 'Contact', href: '#contact', icon: MessageSquare },
+    { name: 'About', href: '#about', homeHref: '/#about', icon: Info },
+    { name: 'Contact', href: '#contact', homeHref: '/#contact', icon: MessageSquare },
   ];
 
   return (
     <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'backdrop-blur-md bg-background/90 shadow-sm border-b border-border/40' : 'bg-transparent'}`}>
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
-          <a href="#home" className="hover:opacity-80 transition-opacity flex items-center gap-2">
+          <Link to="/" className="hover:opacity-80 transition-opacity flex items-center gap-2">
             <img 
               src="https://kxghaajojntkqrmvsngn.supabase.co/storage/v1/object/public/logos/Apply2025logo.png" 
               alt="Apply Logo" 
               className="h-10 md:h-12 transform transition-all duration-300 hover:scale-110 hover:rotate-2 hover:brightness-110" 
             />
-          </a>
+          </Link>
           
           <nav className="hidden md:flex items-center space-x-1">
             {navItems.map((item, index) => 
@@ -51,7 +53,7 @@ const Header = () => {
                     {item.name}
                   </span>
                 </Link>
-              ) : (
+              ) : isHomePage ? (
                 <a 
                   key={item.name} 
                   href={item.href} 
@@ -62,13 +64,24 @@ const Header = () => {
                     {item.name}
                   </span>
                 </a>
+              ) : (
+                <Link
+                  key={item.name} 
+                  to={item.homeHref || item.href} 
+                  className="text-sm font-medium px-4 py-2 rounded-lg transition-all duration-200 hover:bg-accent/10 hover:text-accent group"
+                >
+                  <span className="flex items-center gap-2">
+                    <item.icon className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                    {item.name}
+                  </span>
+                </Link>
               )
             )}
             <a 
               href="https://www.apply.codes" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="ml-2 px-5 py-2 bg-accent text-accent-foreground font-medium rounded-lg hover:bg-accent/90 transition-all duration-200 hover:shadow-lg"
+              className="ml-2 px-5 py-2 gradient-purple-green text-white font-medium rounded-lg hover:gradient-purple-green-hover transition-all duration-200 hover:shadow-lg"
             >
               Visit Platform
             </a>
@@ -123,7 +136,7 @@ const Header = () => {
                   <Icon className="w-5 h-5 opacity-60 group-hover:opacity-100 transition-opacity" />
                   <span className="text-base font-medium">{item.name}</span>
                 </Link>
-              ) : (
+              ) : isHomePage ? (
                 <a 
                   key={item.name} 
                   href={item.href} 
@@ -137,6 +150,20 @@ const Header = () => {
                   <Icon className="w-5 h-5 opacity-60 group-hover:opacity-100 transition-opacity" />
                   <span className="text-base font-medium">{item.name}</span>
                 </a>
+              ) : (
+                <Link
+                  key={item.name} 
+                  to={item.homeHref || item.href} 
+                  className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-accent/10 hover:text-accent transition-all duration-200 group"
+                  onClick={toggleMenu}
+                  style={{
+                    animation: isOpen ? `slideInRight ${300 + index * 50}ms ease-out forwards` : 'none',
+                    opacity: isOpen ? 1 : 0
+                  }}
+                >
+                  <Icon className="w-5 h-5 opacity-60 group-hover:opacity-100 transition-opacity" />
+                  <span className="text-base font-medium">{item.name}</span>
+                </Link>
               );
             })}
             
@@ -145,7 +172,7 @@ const Header = () => {
                 href="https://www.apply.codes" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 w-full px-4 py-3 bg-accent text-accent-foreground font-medium rounded-lg hover:bg-accent/90 transition-all duration-200"
+                className="flex items-center justify-center gap-2 w-full px-4 py-3 gradient-purple-green text-white font-medium rounded-lg hover:gradient-purple-green-hover transition-all duration-200"
                 onClick={toggleMenu}
               >
                 Visit Platform
