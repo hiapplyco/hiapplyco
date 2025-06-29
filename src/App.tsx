@@ -23,7 +23,6 @@ const App = () => (
           <Toaster />
           <Sonner />
           <CustomCursor />
-          <CinematicIntro />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/animation-demo" element={<AnimationDemo />} />
@@ -31,6 +30,7 @@ const App = () => (
             <Route path="/protected-pricing/:clientSlug" element={<ProtectedPricing />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
+          <CinematicIntro />
         </TooltipProvider>
       </BrowserRouter>
     </QueryClientProvider>
