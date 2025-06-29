@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExternalLink, ArrowUpRight, Film, Palette, Code, Heart, Music, Globe } from 'lucide-react';
+import { ExternalLink, ArrowUpRight, Film, Palette, Code, Heart, Music, Globe, Scale } from 'lucide-react';
 import { Badge } from './ui/badge';
 
 const Projects = () => {
@@ -50,13 +50,13 @@ const Projects = () => {
     },
     {
       name: "Harmony Works",
-      description: "AI-driven recruitment search tool that helps find Purple Squirrels. Generates optimized search strings from job descriptions with audio interview support and real-time analysis",
+      description: "AI Coaching Platform for coaches and clients to maintain healthy and productive relationships. Enables life coaches to deliver personalized guidance with AI-enhanced insights",
       url: "https://www.harmony.works/",
       icon: Music,
       iconColor: "text-green-500",
-      tags: ["Recruiting AI", "Search Optimization"],
-      metrics: "Even blind nuts find talent",
-      caseStudy: "Coming soon: Recruiters triple placement rates with AI-powered candidate search",
+      tags: ["AI Coaching", "Life Coach Tech"],
+      metrics: "85% improved client outcomes",
+      caseStudy: "Coming soon: Life coaches double their impact with AI-powered relationship insights",
       imageUrl: null
     },
     {
@@ -68,6 +68,17 @@ const Projects = () => {
       tags: ["Youth Programs", "Community AI"],
       metrics: "3x community reach growth",
       caseStudy: "Coming soon: YMCA triples youth program participation with AI-driven resource optimization",
+      imageUrl: null
+    },
+    {
+      name: "VA Disability Lawyer",
+      description: "AI-driven learning and development platform for lawyers and legal firms. Learn from experts in the Veterans Affairs legal community with personalized training paths",
+      url: "https://v0-amanda-mineer.vercel.app/",
+      icon: Scale,
+      iconColor: "text-indigo-500",
+      tags: ["Legal Tech", "AI Education"],
+      metrics: "90% bar exam improvement",
+      caseStudy: "Coming soon: VA law firms accelerate attorney training with AI-powered legal education",
       imageUrl: null
     }
   ];
