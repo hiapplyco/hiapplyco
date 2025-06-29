@@ -10,6 +10,7 @@ import Process from '@/components/Process';
 import LogosSection from '@/components/LogosSection';
 import ParticleBackground from '@/components/ParticleBackground';
 import DeploymentTimeline from '@/components/DeploymentTimeline';
+import SuccessStories from '@/components/SuccessStories';
 import AgentEcosystemVisualization from '@/components/AgentEcosystemVisualization';
 import AgenticRecruitmentPlatform from '@/components/AgenticRecruitmentPlatform';
 
@@ -183,6 +184,7 @@ const Index = () => {
         <AgentEcosystemVisualization />
         <Tools />
         <SuccessStories />
+        <DeploymentTimeline />
         <LogosSection />
         <About />
         <Contact />
