@@ -5,64 +5,70 @@ import { Badge } from './ui/badge';
 const Projects = () => {
   const featuredProjects = [
     {
-      name: "Muchado Productions",
-      description: "AI-powered creative production studio specializing in multimedia content creation and automated video production workflows for SMBs",
+      name: "The Studio & BEAT",
+      description: "AI-powered invention development platform and Black Box Theatre system. Transform ideas into fully realized inventions with multimodal AI visualization and expert analysis",
       url: "https://www.muchado.productions/",
       icon: Film,
       iconColor: "text-purple-500",
-      tags: ["AI Video", "Content Creation"],
-      metrics: "75% faster production time",
-      caseStudy: "Coming soon: How a local restaurant chain increased engagement by 400% with AI-generated video content"
+      tags: ["AI Innovation", "Creative Tech"],
+      metrics: "From idea to 3D model in minutes",
+      caseStudy: "Coming soon: How inventors accelerated product development with AI-powered visualization",
+      imageUrl: null
     },
     {
       name: "Strength Design",
-      description: "AI-enhanced design system and branding platform that creates cohesive visual identities optimized for local market appeal",
+      description: "Intelligent workout programming platform combining exercise science with intuitive software. Creates personalized strength training programs using data-driven algorithms",
       url: "https://www.strength.design/",
       icon: Palette,
       iconColor: "text-pink-500",
-      tags: ["AI Design", "Branding"],
-      metrics: "10x more design iterations",
-      caseStudy: "Coming soon: Regional retail chain achieves brand consistency across 15 locations"
+      tags: ["Fitness AI", "Training Tech"],
+      metrics: "Science-backed program optimization",
+      caseStudy: "Coming soon: How gyms increased member retention with personalized AI programming",
+      imageUrl: null
     },
     {
       name: "Apply Codes",
-      description: "Comprehensive AI recruitment platform transforming how SMBs find and hire talent with hyper-local market intelligence",
+      description: "Comprehensive AI recruitment platform transforming how SMBs find and hire talent with hyper-local market intelligence and automated candidate matching",
       url: "https://www.apply.codes/",
       icon: Code,
       iconColor: "text-blue-500",
       tags: ["AI Recruitment", "Local Hiring"],
       metrics: "73% faster hiring process",
-      caseStudy: "Coming soon: Tech startup reduces hiring costs by 80% while improving candidate quality"
+      caseStudy: "Coming soon: Tech startup reduces hiring costs by 80% while improving candidate quality",
+      imageUrl: null
     },
     {
       name: "Empath Care",
-      description: "Advanced healthcare AI platform providing empathetic patient communication and intelligent care coordination for local clinics",
+      description: "Revolutionary caregiving platform connecting hearts and empowering care. Features AI-driven care needs assessment, smart caregiver matching, and family coordination tools",
       url: "https://empath.care/",
       icon: Heart,
       iconColor: "text-red-500",
-      tags: ["Healthcare AI", "Patient Care"],
-      metrics: "96% patient satisfaction",
-      caseStudy: "Coming soon: Local clinic network improves patient outcomes with AI-powered care coordination"
+      tags: ["Healthcare AI", "Care Coordination"],
+      metrics: "96% care satisfaction rating",
+      caseStudy: "Coming soon: How families improved care outcomes with intelligent matching and monitoring",
+      imageUrl: null
     },
     {
       name: "Harmony Works",
-      description: "Intelligent workflow orchestration platform that adapts to your business processes and scales with local market demands",
+      description: "AI-driven recruitment search tool that helps find Purple Squirrels. Generates optimized search strings from job descriptions with audio interview support and real-time analysis",
       url: "https://www.harmony.works/",
       icon: Music,
       iconColor: "text-green-500",
-      tags: ["Workflow AI", "Automation"],
-      metrics: "67% efficiency gain",
-      caseStudy: "Coming soon: Multi-location service business streamlines operations across all branches"
+      tags: ["Recruiting AI", "Search Optimization"],
+      metrics: "Even blind nuts find talent",
+      caseStudy: "Coming soon: Recruiters triple placement rates with AI-powered candidate search",
+      imageUrl: null
     },
     {
-      name: "Hoya Hoya",
-      description: "Community-focused AI platform connecting local organizations with resources and optimizing social impact initiatives",
+      name: "Adventure Clubs",
+      description: "YMCA-powered community platform optimizing youth programs and social impact initiatives. Connects local organizations with resources for maximum community reach",
       url: "https://hoya-hoya.org/",
       icon: Globe,
       iconColor: "text-orange-500",
-      tags: ["Social Impact", "Community AI"],
+      tags: ["Youth Programs", "Community AI"],
       metrics: "3x community reach growth",
-      caseStudy: "Coming soon: Local non-profit triples its community impact with AI-driven resource optimization"
+      caseStudy: "Coming soon: YMCA triples youth program participation with AI-driven resource optimization",
+      imageUrl: null
     }
   ];
   
@@ -93,13 +99,21 @@ const Projects = () => {
                   className="group mb-6"
                 >
                   <div className="w-full h-36 mb-6 rounded-lg flex items-center justify-center transition-transform group-hover:scale-[1.03] relative overflow-hidden bg-gradient-to-br from-accent/5 to-accent/10 border border-accent/20">
-                    <div className="flex flex-col items-center gap-2">
-                      <Icon className={`w-12 h-12 ${project.iconColor} transition-transform group-hover:scale-110`} />
-                      <span className="text-xl font-semibold text-foreground flex items-center gap-2">
-                        {project.name}
-                        <ExternalLink className="opacity-0 group-hover:opacity-100 transition-opacity" size={18} />
-                      </span>
-                    </div>
+                    {project.imageUrl ? (
+                      <img 
+                        src={project.imageUrl} 
+                        alt={`${project.name} preview`}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="flex flex-col items-center gap-2">
+                        <Icon className={`w-12 h-12 ${project.iconColor} transition-transform group-hover:scale-110`} />
+                        <span className="text-xl font-semibold text-foreground flex items-center gap-2">
+                          {project.name}
+                          <ExternalLink className="opacity-0 group-hover:opacity-100 transition-opacity" size={18} />
+                        </span>
+                      </div>
+                    )}
                   </div>
                 </a>
                 
