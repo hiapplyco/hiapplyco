@@ -12,8 +12,11 @@ const Contact = () => {
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);
+    console.log('Submitting form with data:', data);
+    
     try {
       // Call Supabase edge function directly
+      console.log('Calling Supabase function send-email...');
       const { data: result, error } = await supabase.functions.invoke('send-email', {
         body: {
           name: data.name,
@@ -23,7 +26,8 @@ const Contact = () => {
         }
       });
 
-      if (!error) {
+      if (!error && result) {
+        console.log('Email sent successfully:', result);
         setIsSuccess(true);
         reset(); // Clear form
         // Reset success message after 3 seconds
@@ -32,7 +36,8 @@ const Contact = () => {
         }, 3000);
       } else {
         console.error('Failed to send email:', error);
-        alert('Failed to send message. Please try again.');
+        console.error('Error details:', error?.message || 'Unknown error');
+        alert(`Failed to send message: ${error?.message || 'Unknown error'}. Please check the console for details.`);
       }
     } catch (error) {
       console.error('Error sending email:', error);
