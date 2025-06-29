@@ -6,14 +6,23 @@ import { Link } from 'react-router-dom';
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [logoVisible, setLogoVisible] = useState(false);
   const toggleMenu = () => setIsOpen(!isOpen);
 
   // Handle scroll effect for header
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      const scrollY = window.scrollY;
+      setScrolled(scrollY > 20);
+      
+      // Show logo after transition completes (50vh scroll)
+      const threshold = window.innerHeight * 0.5;
+      setLogoVisible(scrollY >= threshold);
     };
+    
     window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check initial state
+    
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -22,7 +31,13 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
           <a href="#home" className="hover:opacity-80 transition-opacity flex items-center gap-2">
-            <img src="https://kxghaajojntkqrmvsngn.supabase.co/storage/v1/object/public/logos/Apply2025logo.png" alt="Apply Logo" className="h-28 transform transition-all duration-300 hover:scale-110 hover:rotate-2 hover:brightness-110" />
+            <img 
+              src="https://kxghaajojntkqrmvsngn.supabase.co/storage/v1/object/public/logos/Apply2025logo.png" 
+              alt="Apply Logo" 
+              className={`h-10 md:h-12 transform transition-all duration-500 hover:scale-110 hover:rotate-2 hover:brightness-110 ${
+                logoVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
+              }`} 
+            />
           </a>
           
           <nav className="hidden md:flex items-center space-x-8">
