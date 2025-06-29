@@ -77,12 +77,10 @@ const Header = () => {
               )
             )}
             <a 
-              href="https://www.apply.codes" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="ml-2 px-5 py-2 gradient-purple-green text-white font-medium rounded-lg hover:gradient-purple-green-hover transition-all duration-200 hover:shadow-lg"
+              href="#projects"
+              className="ml-2 px-5 py-2 gradient-purple-green text-white font-medium rounded-lg hover:bg-foreground hover:text-background transition-all duration-200 hover:shadow-lg"
             >
-              Visit Platform
+              View Projects
             </a>
           </nav>
 
@@ -168,13 +166,11 @@ const Header = () => {
             
             <div className="pt-6 mt-6 border-t border-border/50">
               <a 
-                href="https://www.apply.codes" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 w-full px-4 py-3 gradient-purple-green text-white font-medium rounded-lg hover:gradient-purple-green-hover transition-all duration-200"
+                href="#projects"
+                className="flex items-center justify-center gap-2 w-full px-4 py-3 gradient-purple-green text-white font-medium rounded-lg hover:bg-foreground hover:text-background transition-all duration-200"
                 onClick={toggleMenu}
               >
-                Visit Platform
+                View Projects
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
