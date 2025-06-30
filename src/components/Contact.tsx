@@ -54,9 +54,9 @@ const Contact = () => {
       <div className="absolute bottom-0 right-10 w-80 h-80 bg-primary/5 rounded-full blur-3xl animate-pulse pointer-events-none"></div>
       
       <div className="max-w-3xl mx-auto relative z-10">
-        <div className="text-center mb-10 animate-fade-up">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">SMB AI Consultation</h2>
-          <p className="text-muted-foreground max-w-xl mx-auto mb-4">
+        <div className="text-center mb-6 animate-fade-up">
+          <h2 className="text-3xl md:text-4xl font-bold mb-3">SMB AI Consultation</h2>
+          <p className="text-muted-foreground max-w-xl mx-auto mb-3">
             Ready to transform your small or medium business with locally-optimized AI solutions?
           </p>
           <p className="text-sm text-muted-foreground">
@@ -71,7 +71,7 @@ const Contact = () => {
               <p className="text-muted-foreground">Your message has been sent. We'll be in touch shortly.</p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
               <div className="flex flex-col sm:flex-row gap-4">
                 <div className="w-full">
                   <input {...register('name', { required: true })} placeholder="Name" className="w-full bg-secondary/20 border-2 border-border/80 focus:border-accent rounded-lg px-4 py-3 outline-none transition-colors duration-200" />

@@ -3,11 +3,11 @@ import { AIPartnersOrbitalSystem } from './orbital-system';
 
 const AIPartnersSection = () => {
   return (
-    <div className="py-20 relative overflow-hidden">
+    <div className="py-12 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         {/* Section heading */}
-        <div className="mb-16 text-center">
-          <h3 className="text-2xl md:text-3xl font-bold mb-4 animate-fade-up">
+        <div className="mb-8 text-center">
+          <h3 className="text-2xl md:text-3xl font-bold mb-3 animate-fade-up">
             Our Technology Stack
           </h3>
           

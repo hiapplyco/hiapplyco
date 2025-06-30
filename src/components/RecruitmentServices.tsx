@@ -30,15 +30,15 @@ const benefits = [
 
 const RecruitmentServices = () => {
   return (
-    <div className="container mx-auto px-4 py-12">
-      <div className="text-center mb-12">
+    <div className="container mx-auto px-4 py-8">
+      <div className="text-center mb-8">
         <h2 className="text-4xl font-bold tracking-tight">Recruitment & Staffing</h2>
-        <p className="mt-4 text-lg text-muted-foreground max-w-3xl mx-auto">
+        <p className="mt-3 text-lg text-muted-foreground max-w-3xl mx-auto">
           Whether you need to hire one key person or build an entire team, we provide the human resources to help you scale.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         {services.map((service) => (
           <Card key={service.title} className="bg-card hover:shadow-lg transition-all duration-300">
             <CardHeader>

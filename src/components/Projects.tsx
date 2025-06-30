@@ -86,15 +86,15 @@ const Projects = () => {
   return (
     <section id="projects" className="section-spacing px-6 bg-background relative">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-16 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 animate-fade-up">Our Product Portfolio</h2>
+        <div className="mb-8 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-3 animate-fade-up">Our Product Portfolio</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto animate-fade-up animation-delay-100">
             A comprehensive suite of AI-powered solutions designed specifically for small and medium businesses
           </p>
         </div>
         
         {/* Featured Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {featuredProjects.map((project, index) => {
             const Icon = project.icon;
             return (

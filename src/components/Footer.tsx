@@ -4,9 +4,9 @@ import { Github, Linkedin, Twitter, Rss } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="py-12 px-6 border-t border-border/40 bg-background/50 backdrop-blur-sm">
+    <footer className="py-8 px-6 border-t border-border/40 bg-background/50 backdrop-blur-sm">
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex flex-col items-center md:items-start">
             <a href="#home" className="mb-2">
               <img 
@@ -68,7 +68,7 @@ const Footer = () => {
           </div>
         </div>
         
-        <div className="mt-12 pt-8 border-t border-border/40">
+        <div className="mt-8 pt-6 border-t border-border/40">
           <div className="text-center mb-6">
             <p className="text-sm text-muted-foreground mb-4">
               Ready to transform your hiring with AI-powered recruitment?

@@ -52,14 +52,14 @@ const Pricing = () => {
   return (
     <section id="pricing" className="section-spacing px-6 relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12 animate-fade-up">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Simple, Transparent Pricing</h2>
+        <div className="text-center mb-8 animate-fade-up">
+          <h2 className="text-3xl md:text-4xl font-bold mb-3">Simple, Transparent Pricing</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Choose the perfect plan for your SMB. All plans include hyper-local AI optimization and can be deployed within 2-4 weeks.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {plans.map((plan, index) => (
             <div
               key={plan.name}
@@ -122,8 +122,8 @@ const Pricing = () => {
           ))}
         </div>
 
-        <div className="mt-12 text-center animate-fade-up" style={{ animationDelay: '400ms' }}>
-          <p className="text-muted-foreground mb-4">
+        <div className="mt-8 text-center animate-fade-up" style={{ animationDelay: '400ms' }}>
+          <p className="text-muted-foreground mb-3">
             All plans include a 30-day money-back guarantee
           </p>
           <p className="text-sm text-muted-foreground">

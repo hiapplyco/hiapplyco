@@ -4,6 +4,7 @@ import { motion, useAnimationFrame, useInView } from 'framer-motion';
 import { AIPartnerOrbit } from './partner-orbit';
 import { AIPartnerIcon } from './partner-icon';
 import { aiPartnersData } from './partners-data';
+import { Center3DLogo } from './center-3d-logo';
 
 export const AIPartnersOrbitalSystem = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -44,29 +45,15 @@ export const AIPartnersOrbitalSystem = () => {
 
   return (
     <div className="flex justify-center items-center relative" style={{ height: '700px' }} ref={sectionRef}>
-      {/* Center Apply Logo */}
+      {/* Center 3D Logo */}
       <motion.div 
-        className="absolute z-30 cursor-pointer"
+        className="absolute z-30"
         initial={{ opacity: 0, scale: 0 }}
         animate={isInView ? { opacity: 1, scale: 1 } : {}}
         transition={{ duration: 1, delay: 0.5, type: "spring" }}
-        onClick={handleApplyClick}
         whileTap={{ scale: 0.95 }}
       >
-        <div className="relative w-40 h-40 bg-white/10 rounded-full backdrop-blur-md flex items-center justify-center">
-          <img 
-            src="https://kxghaajojntkqrmvsngn.supabase.co/storage/v1/object/public/logos/Apply2025logo.png" 
-            alt="Apply Logo" 
-            className="w-28 h-28 object-contain"
-          />
-          <motion.div 
-            className="absolute inset-0 rounded-full"
-            animate={{ 
-              boxShadow: ['0 0 0 rgba(139, 92, 246, 0.3)', '0 0 30px rgba(16, 185, 129, 0.7)', '0 0 10px rgba(139, 92, 246, 0.3)']
-            }}
-            transition={{ duration: 3, repeat: Infinity }}
-          />
-        </div>
+        <Center3DLogo onClick={handleApplyClick} />
       </motion.div>
       
       {/* Orbits container */}

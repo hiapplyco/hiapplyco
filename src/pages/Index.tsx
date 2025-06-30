@@ -27,12 +27,12 @@ const Index = () => {
         </div>
 
         {/* Hero Section */}
-        <section id="home" className="relative min-h-screen flex items-center justify-center pt-20 px-6 overflow-hidden">
+        <section id="home" className="relative min-h-[70vh] flex items-center justify-center pt-20 px-6 overflow-hidden">
           <div className="relative max-w-4xl mx-auto text-center" style={{ zIndex: 10 }}>
             <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-up text-balance">
               Scale Faster with Apply, Co.: <span className="text-gradient-purple-green">Human and AI Solutions</span>
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-10 animate-fade-up animation-delay-200 max-w-2xl mx-auto">
+            <p className="text-xl md:text-2xl text-muted-foreground mb-8 animate-fade-up animation-delay-200 max-w-2xl mx-auto">
               Hire top-tier talent or automate critical tasks with custom AI agents, tailored for your business growth.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-md mx-auto">
