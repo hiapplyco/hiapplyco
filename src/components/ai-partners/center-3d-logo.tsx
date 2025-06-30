@@ -115,7 +115,7 @@ function Model({ url }: { url: string }) {
     <Center>
       <group 
         ref={meshRef} 
-        scale={isLoaded ? 3.5 : 0} 
+        scale={isLoaded ? 2.8 : 0} 
         visible={isLoaded}
       >
         <primitive object={scene} />
@@ -132,11 +132,11 @@ interface Center3DLogoProps {
 export const Center3DLogo = ({ onClick }: Center3DLogoProps) => {
   return (
     <div 
-      className="relative w-40 h-40 cursor-pointer overflow-hidden rounded-full"
+      className="relative w-48 h-48 cursor-pointer overflow-hidden rounded-full shadow-lg shadow-yellow-500/50"
       onClick={onClick}
     >
       <Canvas
-        camera={{ position: [0, 0, 5], fov: 45 }}
+        camera={{ position: [0, 0, 6], fov: 40 }}
         style={{ background: 'transparent' }}
         dpr={[1, 2]}
         gl={{ antialias: true, alpha: true }}
@@ -150,13 +150,14 @@ export const Center3DLogo = ({ onClick }: Center3DLogoProps) => {
         <OrbitControls enableZoom={false} enablePan={false} enableRotate={false} />
       </Canvas>
       
-      {/* Purple-green glow effect */}
-      <div className="absolute inset-0 rounded-full pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-radial from-purple-500/30 via-green-500/15 to-transparent rounded-full blur-xl" />
-        <div className="absolute inset-0 bg-gradient-radial from-green-500/20 via-purple-500/15 to-transparent rounded-full blur-2xl animate-pulse" />
-      </div>
+      {/* Yellow sun background */}
+      <div className="absolute inset-0 bg-yellow-400/90 rounded-full -z-10" />
       
-      <div className="absolute inset-0 bg-white/10 rounded-full backdrop-blur-sm -z-10" />
+      {/* Sun glow effect */}
+      <div className="absolute inset-0 rounded-full pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-radial from-yellow-300/50 via-yellow-400/30 to-transparent rounded-full blur-xl" />
+        <div className="absolute inset-0 bg-gradient-radial from-orange-400/30 via-yellow-500/20 to-transparent rounded-full blur-2xl animate-pulse" />
+      </div>
     </div>
   );
 };
