@@ -4,9 +4,9 @@ const UniqueOffer = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="text-center">
-        <h2 className="text-4xl font-bold tracking-tight">One Partner, Two Paths to Scale</h2>
-        <p className="mt-3 text-lg text-muted-foreground max-w-3xl mx-auto">
-          Apply, Co. is the industry's first integrated provider of talent recruitment and AI agent development. We empower businesses to scale efficiently by providing the right solution for the job—whether it's a person or a process.
+        <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">One Partner, Two Paths to Scale</h2>
+        <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          Apply, Co. is the industry's first <span className="font-semibold text-foreground">integrated provider</span> of talent recruitment and AI agent development. We empower businesses to scale efficiently by providing the right solution for the job—<span className="font-medium text-foreground">whether it's a person or a process</span>.
         </p>
       </div>
     </div>

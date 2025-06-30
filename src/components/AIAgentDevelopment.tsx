@@ -55,8 +55,13 @@ const AIAgentDevelopment = () => {
             </ul>
           </CardContent>
         </Card>
-        <div className="prose prose-lg text-muted-foreground">
-          <p>Our team handles the full lifecycle of AI agent creation, from initial consultation and development to deployment, integration, and ongoing optimization. We ensure your AI solutions are not only powerful but also seamlessly integrated into your existing workflows.</p>
+        <div className="space-y-4">
+          <p className="text-lg leading-relaxed text-foreground/90">
+            Our team handles the <span className="font-semibold text-foreground">full lifecycle</span> of AI agent creation, from initial consultation and development to deployment, integration, and ongoing optimization.
+          </p>
+          <p className="text-base text-muted-foreground leading-relaxed">
+            We ensure your AI solutions are not only powerful but also seamlessly integrated into your existing workflows.
+          </p>
         </div>
       </div>
 
@@ -76,7 +81,18 @@ const AIAgentDevelopment = () => {
               <p className="text-muted-foreground">{tier.description}</p>
             </CardContent>
             <div className="p-6 pt-0">
-              <Button variant="outline" className="w-full">Request Info</Button>
+              <Button 
+                variant="outline" 
+                className="w-full"
+                onClick={() => {
+                  const contactSection = document.getElementById('contact');
+                  if (contactSection) {
+                    contactSection.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+              >
+                Request Info
+              </Button>
             </div>
           </Card>
         ))}

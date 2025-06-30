@@ -42,16 +42,8 @@ export class Particle {
     this.size = Math.floor(Math.random() * 3) + 2;
     this.radius = this.size; // Initialize radius same as size
     this.opacity = 0.8; // Default opacity increased for better visibility
-    // Set initial color based on position for more colorful default state
-    const colorIndex = Math.abs(this.originX + this.originY) % 5;
-    const defaultColors = [
-      'rgba(139, 92, 246, 0.3)',  // Purple
-      'rgba(16, 185, 129, 0.3)',  // Green
-      'rgba(59, 130, 246, 0.3)',  // Blue
-      'rgba(236, 72, 153, 0.3)',  // Pink
-      'rgba(251, 146, 60, 0.3)'   // Orange
-    ];
-    this.color = defaultColors[colorIndex];
+    // Start with purple color for all particles
+    this.color = 'rgba(139, 92, 246, 0.3)';  // Purple
     this.settlingFactor = 0.05; // Controls how quickly particles settle
   }
 
@@ -107,16 +99,8 @@ export class Particle {
         }
       }
     } else {
-      // Default color when outside radius - use colorful particles
-      const colorIndex = Math.abs(this.originX + this.originY) % 5;
-      const defaultColors = [
-        'rgba(139, 92, 246, 0.3)',  // Purple
-        'rgba(16, 185, 129, 0.3)',  // Green
-        'rgba(59, 130, 246, 0.3)',  // Blue
-        'rgba(236, 72, 153, 0.3)',  // Pink
-        'rgba(251, 146, 60, 0.3)'   // Orange
-      ];
-      this.color = defaultColors[colorIndex];
+      // Default purple color when outside radius
+      this.color = 'rgba(139, 92, 246, 0.3)';  // Purple
     }
 
     // Apply more friction when mouse is inactive
@@ -151,23 +135,27 @@ export class Particle {
       { r: 147, g: 51, b: 234 },   // Purple
       { r: 236, g: 72, b: 153 },   // Pink
       { r: 251, g: 146, b: 60 },   // Orange
-      { r: 34, g: 197, b: 94 }     // Green
+      { r: 34, g: 197, b: 94 },     // Green
+      { r: 239, g: 68, b: 68 },     // Red
+      { r: 245, g: 158, b: 11 }     // Amber
     ];
     
-    // Use particle position to determine base color
-    const colorIndex = Math.abs(this.originX + this.originY) % colors.length;
+    // Use particle position and time to create dynamic color selection
+    const time = Date.now() * 0.001;
+    const colorIndex = Math.floor((this.originX * 0.01 + this.originY * 0.01 + time * 0.5) % colors.length);
     const nextColorIndex = (colorIndex + 1) % colors.length;
     
     const baseColor = colors[colorIndex];
     const nextColor = colors[nextColorIndex];
     
-    // Interpolate between colors based on distance
-    const r = Math.floor(baseColor.r + (nextColor.r - baseColor.r) * normalizedDistance);
-    const g = Math.floor(baseColor.g + (nextColor.g - baseColor.g) * normalizedDistance);
-    const b = Math.floor(baseColor.b + (nextColor.b - baseColor.b) * normalizedDistance);
+    // Create more vibrant interpolation
+    const intensity = 1 - normalizedDistance; // Invert so closer = more intense
+    const r = Math.floor(baseColor.r + (nextColor.r - baseColor.r) * (0.5 + Math.sin(time + this.originX * 0.01) * 0.5));
+    const g = Math.floor(baseColor.g + (nextColor.g - baseColor.g) * (0.5 + Math.sin(time + this.originY * 0.01) * 0.5));
+    const b = Math.floor(baseColor.b + (nextColor.b - baseColor.b) * (0.5 + Math.sin(time + this.originX * 0.01 + this.originY * 0.01) * 0.5));
     
-    // Adjust opacity based on mouse activity
-    const opacity = 1.0 * opacityMultiplier;
+    // Increase opacity for affected particles
+    const opacity = Math.min(1.0, (0.8 + intensity * 0.2) * opacityMultiplier);
     
     return `rgba(${r}, ${g}, ${b}, ${opacity})`;
   }

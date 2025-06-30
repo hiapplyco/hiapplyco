@@ -67,7 +67,7 @@ const RecruitmentServices = () => {
           <div className="text-center md:text-left p-6 bg-card rounded-lg gradient-border">
             <h4 className="text-xl font-semibold mb-2">Transparent Pricing</h4>
             <p className="text-muted-foreground">
-              Our pricing is based on a standard industry markup (typically 15-25%) over candidate salaries or hourly rates. We also offer customized pricing for specialized and high-volume recruitment projects.
+              Our pricing is based on a standard industry markup (typically 25-35%) over candidate salaries or hourly rates. We also offer customized pricing for specialized and high-volume recruitment projects.
             </p>
           </div>
         </CardContent>
