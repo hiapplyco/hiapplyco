@@ -9,17 +9,15 @@ function Model({ url }: { url: string }) {
   const [isLoaded, setIsLoaded] = React.useState(false);
   
   useEffect(() => {
-    // Apply purple-green gradient material to all meshes in the model
+    // Apply bright orange material to match the logo
     scene.traverse((child) => {
       if (child instanceof THREE.Mesh) {
-        child.material = new THREE.MeshPhysicalMaterial({
-          color: new THREE.Color('#8B5CF6'),
-          emissive: new THREE.Color('#10B981'),
-          emissiveIntensity: 0.3,
-          metalness: 0.8,
-          roughness: 0.2,
-          clearcoat: 1,
-          clearcoatRoughness: 0.1,
+        child.material = new THREE.MeshStandardMaterial({
+          color: new THREE.Color('#FF6B35'),  // Bright orange like the logo
+          emissive: new THREE.Color('#FF6B35'),
+          emissiveIntensity: 0.2,
+          metalness: 0.3,
+          roughness: 0.5,
         });
       }
     });
@@ -38,7 +36,7 @@ function Model({ url }: { url: string }) {
     <Center>
       <group 
         ref={meshRef} 
-        scale={isLoaded ? 2 : 0} 
+        scale={isLoaded ? 3.5 : 0} 
         visible={isLoaded}
       >
         <primitive object={scene} />
@@ -61,11 +59,11 @@ function SolarFlare() {
   
   return (
     <mesh ref={flareRef} position={[0, 0, -1]}>
-      <planeGeometry args={[5, 5]} />
+      <planeGeometry args={[4, 4]} />
       <meshBasicMaterial
-        color="#8B5CF6"
+        color="#FF6B35"
         transparent
-        opacity={0.3}
+        opacity={0.15}
         blending={THREE.AdditiveBlending}
       />
     </mesh>
@@ -87,28 +85,19 @@ export const Center3DLogo = ({ onClick }: Center3DLogoProps) => {
         style={{ background: 'transparent' }}
         dpr={[1, 2]}
       >
-        <ambientLight intensity={0.5} />
-        <pointLight position={[10, 10, 10]} intensity={1} color="#8B5CF6" />
-        <pointLight position={[-10, -10, -10]} intensity={0.5} color="#10B981" />
+        <ambientLight intensity={0.8} />
+        <pointLight position={[10, 10, 10]} intensity={1.2} color="#FFFFFF" />
+        <pointLight position={[-10, -10, -10]} intensity={0.8} color="#FF6B35" />
         <spotLight
           position={[0, 5, 0]}
           angle={0.5}
           penumbra={1}
-          intensity={0.5}
-          color="#8B5CF6"
+          intensity={0.7}
+          color="#FF6B35"
         />
         
         {/* Solar flare effects */}
         <SolarFlare />
-        <mesh position={[0, 0, -2]} scale={3}>
-          <ringGeometry args={[1.5, 2, 32]} />
-          <meshBasicMaterial
-            color="#10B981"
-            transparent
-            opacity={0.2}
-            blending={THREE.AdditiveBlending}
-          />
-        </mesh>
         
         <Model url="/sample3.glb" />
         <OrbitControls enableZoom={false} enablePan={false} enableRotate={false} />
@@ -116,15 +105,15 @@ export const Center3DLogo = ({ onClick }: Center3DLogoProps) => {
       
       {/* Solar glow effect */}
       <div className="absolute inset-0 rounded-full pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-radial from-purple-500/20 via-green-500/10 to-transparent rounded-full blur-xl" />
-        <div className="absolute inset-0 bg-gradient-radial from-green-500/20 via-purple-500/10 to-transparent rounded-full blur-2xl animate-pulse" />
+        <div className="absolute inset-0 bg-gradient-radial from-orange-500/20 via-amber-500/10 to-transparent rounded-full blur-xl" />
+        <div className="absolute inset-0 bg-gradient-radial from-amber-500/15 via-orange-500/10 to-transparent rounded-full blur-2xl animate-pulse" />
       </div>
       
-      <div className="absolute inset-0 bg-white/5 rounded-full backdrop-blur-sm -z-10" />
+      <div className="absolute inset-0 bg-white/10 rounded-full backdrop-blur-sm -z-10" />
       <div 
         className="absolute inset-0 rounded-full pointer-events-none"
         style={{
-          background: 'radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, rgba(16, 185, 129, 0.2) 50%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(255, 107, 53, 0.3) 0%, rgba(255, 178, 53, 0.15) 50%, transparent 70%)',
           animation: 'pulse 4s infinite'
         }}
       />
