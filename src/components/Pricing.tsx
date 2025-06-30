@@ -63,10 +63,10 @@ const Pricing = () => {
           {plans.map((plan, index) => (
             <div
               key={plan.name}
-              className={`relative bg-background/50 backdrop-blur-sm border-2 rounded-xl p-8 animate-fade-up ${
+              className={`relative bg-card rounded-xl p-8 animate-fade-up gradient-border ${
                 plan.popular 
-                  ? 'border-accent shadow-lg scale-105' 
-                  : 'border-border/50'
+                  ? 'shadow-lg scale-105' 
+                  : ''
               }`}
               style={{ animationDelay: `${index * 100}ms` }}
             >

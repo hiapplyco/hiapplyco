@@ -56,6 +56,24 @@
     @apply hover:shadow-md hover:border-border/80 hover:bg-background/70 transition-all duration-300;
   }
   
+  .gradient-border {
+    position: relative;
+    background: hsl(var(--card));
+  }
+  
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    padding: 1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, #8B5CF6 0%, #10B981 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+  
   .text-balance {
     text-wrap: balance;
   }
@@ -103,7 +121,7 @@
   }
   
   .section-spacing {
-    @apply py-16 md:py-24;
+    @apply py-8 md:py-12;
   }
   
   .interactive-element {

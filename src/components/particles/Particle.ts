@@ -41,8 +41,17 @@ export class Particle {
     this.angle = 0;
     this.size = Math.floor(Math.random() * 3) + 2;
     this.radius = this.size; // Initialize radius same as size
-    this.opacity = 0.6; // Default opacity
-    this.color = 'rgba(200, 200, 200, 0.6)'; // Default subtle grey color
+    this.opacity = 0.8; // Default opacity increased for better visibility
+    // Set initial color based on position for more colorful default state
+    const colorIndex = Math.abs(this.originX + this.originY) % 5;
+    const defaultColors = [
+      'rgba(139, 92, 246, 0.3)',  // Purple
+      'rgba(16, 185, 129, 0.3)',  // Green
+      'rgba(59, 130, 246, 0.3)',  // Blue
+      'rgba(236, 72, 153, 0.3)',  // Pink
+      'rgba(251, 146, 60, 0.3)'   // Orange
+    ];
+    this.color = defaultColors[colorIndex];
     this.settlingFactor = 0.05; // Controls how quickly particles settle
   }
 
@@ -98,8 +107,16 @@ export class Particle {
         }
       }
     } else {
-      // Default color when outside radius
-      this.color = 'rgba(200, 200, 200, 0.6)'; // Subtle grey
+      // Default color when outside radius - use colorful particles
+      const colorIndex = Math.abs(this.originX + this.originY) % 5;
+      const defaultColors = [
+        'rgba(139, 92, 246, 0.3)',  // Purple
+        'rgba(16, 185, 129, 0.3)',  // Green
+        'rgba(59, 130, 246, 0.3)',  // Blue
+        'rgba(236, 72, 153, 0.3)',  // Pink
+        'rgba(251, 146, 60, 0.3)'   // Orange
+      ];
+      this.color = defaultColors[colorIndex];
     }
 
     // Apply more friction when mouse is inactive

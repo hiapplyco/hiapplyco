@@ -21,16 +21,16 @@ const Footer = () => {
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-4 text-sm">
-            <a href="#projects" className="text-muted-foreground hover:text-accent transition-colors">Projects</a>
-            <a href="#tools" className="text-muted-foreground hover:text-accent transition-colors">Expertise</a>
-            <a href="#process" className="text-muted-foreground hover:text-accent transition-colors">Process</a>
+            <a href="#case-studies" className="text-muted-foreground hover:text-accent transition-colors">Projects</a>
+            <a href="#ai-development" className="text-muted-foreground hover:text-accent transition-colors">Expertise</a>
+            <a href="#pricing" className="text-muted-foreground hover:text-accent transition-colors">Pricing</a>
             <a href="#about" className="text-muted-foreground hover:text-accent transition-colors">About</a>
             <a href="#contact" className="text-muted-foreground hover:text-accent transition-colors">Contact</a>
           </div>
           
           <div className="flex space-x-6">
             <a
-              href="https://www.linkedin.com/in/jamesschlauch/"
+              href="https://www.linkedin.com/company/hiapplyco"
               className="text-muted-foreground hover:text-accent transition-colors"
               target="_blank"
               rel="noopener noreferrer"

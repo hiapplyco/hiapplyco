@@ -40,7 +40,7 @@ const RecruitmentServices = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
         {services.map((service) => (
-          <Card key={service.title} className="bg-background/50 backdrop-blur-sm">
+          <Card key={service.title} className="bg-card hover:shadow-lg transition-all duration-300">
             <CardHeader>
               <CardTitle>{service.title}</CardTitle>
             </CardHeader>
@@ -51,7 +51,7 @@ const RecruitmentServices = () => {
         ))}
       </div>
 
-      <Card className="bg-muted/30">
+      <Card className="bg-card">
         <CardHeader>
           <CardTitle className="text-2xl text-center">Key Benefits & Pricing</CardTitle>
         </CardHeader>
@@ -64,7 +64,7 @@ const RecruitmentServices = () => {
               </li>
             ))}
           </ul>
-          <div className="text-center md:text-left p-6 bg-background/50 rounded-lg">
+          <div className="text-center md:text-left p-6 bg-card rounded-lg gradient-border">
             <h4 className="text-xl font-semibold mb-2">Transparent Pricing</h4>
             <p className="text-muted-foreground">
               Our pricing is based on a standard industry markup (typically 15-25%) over candidate salaries or hourly rates. We also offer customized pricing for specialized and high-volume recruitment projects.

@@ -9,6 +9,8 @@ import AIAgentDevelopment from '@/components/AIAgentDevelopment';
 import Projects from '@/components/Projects';
 import WhyChooseUs from '@/components/WhyChooseUs';
 import AIPartnersSection from '@/components/ai-partners';
+import Pricing from '@/components/Pricing';
+import About from '@/components/About';
 
 const Index = () => {
   return (
@@ -69,6 +71,16 @@ const Index = () => {
           {/* Section 5: Why Choose Apply, Co.? */}
           <section className="section-spacing">
             <WhyChooseUs />
+          </section>
+          
+          {/* Section 6: Pricing */}
+          <section className="section-spacing bg-muted/30">
+            <Pricing />
+          </section>
+          
+          {/* Section 7: About */}
+          <section id="about" className="section-spacing">
+            <About />
           </section>
           
           {/* Call-to-Action Footer */}
