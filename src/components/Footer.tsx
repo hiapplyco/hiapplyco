@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Github, Linkedin, Twitter, Rss } from 'lucide-react';
+import ColorfulApplyLogo from './ColorfulApplyLogo';
 
 const Footer = () => {
   return (
@@ -9,11 +10,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex flex-col items-center md:items-start">
             <a href="#home" className="mb-2">
-              <img 
-                src="https://kxghaajojntkqrmvsngn.supabase.co/storage/v1/object/public/logos/Apply2025logo.png" 
-                alt="Apply Logo" 
-                className="h-10" 
-              />
+              <ColorfulApplyLogo className="h-10" />
             </a>
             <p className="text-muted-foreground text-sm max-w-md text-center md:text-left">
               Strategic AI agent development for businesses looking to harness the power of artificial intelligence.
