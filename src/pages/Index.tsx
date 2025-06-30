@@ -37,6 +37,9 @@ const Index = () => {
               <a href="#contact" className="inline-flex items-center justify-center gradient-purple-green text-white px-8 py-4 rounded-lg font-medium hover:bg-foreground hover:text-background transition-all duration-200 animate-fade-up animation-delay-300">
                 Schedule a Consultation
               </a>
+              <a href="#case-studies" className="inline-flex items-center justify-center border-2 border-purple-600/50 text-foreground px-8 py-4 rounded-lg font-medium hover:bg-purple-600/10 transition-all duration-200 animate-fade-up animation-delay-400">
+                View Work
+              </a>
             </div>
           </div>
         </section>
