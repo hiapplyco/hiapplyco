@@ -9,16 +9,19 @@ function Model({ url }: { url: string }) {
   const [isLoaded, setIsLoaded] = React.useState(false);
   
   useEffect(() => {
-    // Apply bright orange material to match the logo
+    // Apply purple-green gradient material
     scene.traverse((child) => {
       if (child instanceof THREE.Mesh) {
+        // Create gradient material with purple base
         child.material = new THREE.MeshStandardMaterial({
-          color: new THREE.Color('#FF6B35'),  // Bright orange like the logo
-          emissive: new THREE.Color('#FF6B35'),
-          emissiveIntensity: 0.2,
-          metalness: 0.3,
-          roughness: 0.5,
+          color: new THREE.Color('#8B5CF6'),  // Purple
+          emissive: new THREE.Color('#10B981'),  // Green emissive
+          emissiveIntensity: 0.15,
+          metalness: 0.4,
+          roughness: 0.6,
         });
+        // Remove any outlines or edges
+        child.material.wireframe = false;
       }
     });
     setIsLoaded(true);
@@ -45,30 +48,6 @@ function Model({ url }: { url: string }) {
   );
 }
 
-// Solar flare effect component
-function SolarFlare() {
-  const flareRef = useRef<THREE.Mesh>(null);
-  
-  useFrame((state) => {
-    if (flareRef.current) {
-      flareRef.current.rotation.z = state.clock.elapsedTime * 0.2;
-      const scale = 1 + Math.sin(state.clock.elapsedTime * 2) * 0.1;
-      flareRef.current.scale.set(scale, scale, 1);
-    }
-  });
-  
-  return (
-    <mesh ref={flareRef} position={[0, 0, -1]}>
-      <planeGeometry args={[4, 4]} />
-      <meshBasicMaterial
-        color="#FF6B35"
-        transparent
-        opacity={0.15}
-        blending={THREE.AdditiveBlending}
-      />
-    </mesh>
-  );
-}
 
 interface Center3DLogoProps {
   onClick: () => void;
@@ -77,46 +56,31 @@ interface Center3DLogoProps {
 export const Center3DLogo = ({ onClick }: Center3DLogoProps) => {
   return (
     <div 
-      className="relative w-40 h-40 cursor-pointer"
+      className="relative w-40 h-40 cursor-pointer overflow-hidden rounded-full"
       onClick={onClick}
     >
       <Canvas
         camera={{ position: [0, 0, 5], fov: 45 }}
         style={{ background: 'transparent' }}
         dpr={[1, 2]}
+        gl={{ antialias: true, alpha: true }}
       >
-        <ambientLight intensity={0.8} />
-        <pointLight position={[10, 10, 10]} intensity={1.2} color="#FFFFFF" />
-        <pointLight position={[-10, -10, -10]} intensity={0.8} color="#FF6B35" />
-        <spotLight
-          position={[0, 5, 0]}
-          angle={0.5}
-          penumbra={1}
-          intensity={0.7}
-          color="#FF6B35"
-        />
-        
-        {/* Solar flare effects */}
-        <SolarFlare />
+        <ambientLight intensity={1} />
+        <pointLight position={[10, 10, 10]} intensity={1} color="#8B5CF6" />
+        <pointLight position={[-10, -10, -10]} intensity={0.8} color="#10B981" />
+        <directionalLight position={[0, 5, 5]} intensity={0.5} color="#FFFFFF" />
         
         <Model url="/sample3.glb" />
         <OrbitControls enableZoom={false} enablePan={false} enableRotate={false} />
       </Canvas>
       
-      {/* Solar glow effect */}
+      {/* Purple-green glow effect */}
       <div className="absolute inset-0 rounded-full pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-radial from-orange-500/20 via-amber-500/10 to-transparent rounded-full blur-xl" />
-        <div className="absolute inset-0 bg-gradient-radial from-amber-500/15 via-orange-500/10 to-transparent rounded-full blur-2xl animate-pulse" />
+        <div className="absolute inset-0 bg-gradient-radial from-purple-500/30 via-green-500/15 to-transparent rounded-full blur-xl" />
+        <div className="absolute inset-0 bg-gradient-radial from-green-500/20 via-purple-500/15 to-transparent rounded-full blur-2xl animate-pulse" />
       </div>
       
       <div className="absolute inset-0 bg-white/10 rounded-full backdrop-blur-sm -z-10" />
-      <div 
-        className="absolute inset-0 rounded-full pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle, rgba(255, 107, 53, 0.3) 0%, rgba(255, 178, 53, 0.15) 50%, transparent 70%)',
-          animation: 'pulse 4s infinite'
-        }}
-      />
     </div>
   );
 };
