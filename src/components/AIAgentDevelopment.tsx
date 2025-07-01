@@ -1,30 +1,11 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 
 const agentExamples = [
   'Automated Customer Support & Triage',
   'Real-time Data Analysis & Reporting',
   'Intelligent Document Processing & Summarization',
   'Automated Lead Generation & Outreach',
-];
-
-const pricingTiers = [
-  {
-    name: 'Starter Pack',
-    agents: '1-3 Agents',
-    description: 'Perfect for automating a few key tasks and proving ROI.',
-  },
-  {
-    name: 'Growth Pack',
-    agents: '4-10 Agents',
-    description: 'Ideal for scaling automation across multiple departments.',
-  },
-  {
-    name: 'Enterprise Pack',
-    agents: '11+ Agents',
-    description: 'Custom solutions for large-scale, complex automation needs.',
-  },
 ];
 
 const AIAgentDevelopment = () => {
@@ -65,37 +46,19 @@ const AIAgentDevelopment = () => {
         </div>
       </div>
 
-      <div className="text-center mb-6">
-        <h3 className="text-3xl font-bold">Pricing Tiers</h3>
-        <p className="mt-2 text-md text-muted-foreground">Based on the number of agents developed and deployed.</p>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {pricingTiers.map((tier) => (
-          <Card key={tier.name} className="flex flex-col">
-            <CardHeader>
-              <CardTitle>{tier.name}</CardTitle>
-              <p className="font-semibold text-lg">{tier.agents}</p>
-            </CardHeader>
-            <CardContent className="flex-grow">
-              <p className="text-muted-foreground">{tier.description}</p>
-            </CardContent>
-            <div className="p-6 pt-0">
-              <Button 
-                variant="outline" 
-                className="w-full"
-                onClick={() => {
-                  const contactSection = document.getElementById('contact');
-                  if (contactSection) {
-                    contactSection.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
-              >
-                Request Info
-              </Button>
-            </div>
-          </Card>
-        ))}
+      <div className="text-center mt-8">
+        <p className="text-lg text-muted-foreground mb-6">
+          Ready to explore how AI agents can transform your business? Check out our pricing options below.
+        </p>
+        <a 
+          href="#pricing" 
+          className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-accent-foreground font-medium rounded-lg hover:bg-accent/90 transition-all duration-300 hover:scale-105"
+        >
+          View Pricing Plans
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </a>
       </div>
     </div>
   );

@@ -34,7 +34,7 @@ const RecruitmentServices = () => {
       <div className="text-center mb-8">
         <h2 className="text-4xl font-bold tracking-tight">Recruitment & Staffing</h2>
         <p className="mt-3 text-lg text-muted-foreground max-w-3xl mx-auto">
-          Whether you need to hire one key person or build an entire team, we provide the human resources to help you scale.
+          Whether you need to hire one key person or build an entire team, we provide the human resources to help you scale. We specialize in recruiting people who know how to find people, professionals who can build AI solutions, and the domain experts who guide AI development.
         </p>
       </div>
 

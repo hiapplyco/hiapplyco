@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 const reasons = [
   {
     title: 'Dual Expertise',
-    description: 'We are uniquely positioned with deep experience in both niche talent acquisition and advanced AI agent development.',
+    description: 'We are uniquely positioned with deep experience in both niche talent acquisition and advanced AI agent development. We know how to find the recruiters who find people, the engineers who build AI, and the domain experts who make it all work.',
   },
   {
     title: 'Proven Track Record',

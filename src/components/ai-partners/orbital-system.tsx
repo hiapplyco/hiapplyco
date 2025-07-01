@@ -1,5 +1,4 @@
-
-import { useRef, useState } from 'react';
+import { useRef, useState, useCallback, useMemo } from 'react';
 import { motion, useAnimationFrame, useInView } from 'framer-motion';
 import { AIPartnerOrbit } from './partner-orbit';
 import { AIPartnerIcon } from './partner-icon';
@@ -11,23 +10,34 @@ export const AIPartnersOrbitalSystem = () => {
   const isInView = useInView(sectionRef, { once: false, amount: 0.2 });
   const orbitRef = useRef<HTMLDivElement>(null);
   const [isBouncing, setIsBouncing] = useState(false);
+  const rotationRef = useRef(0);
+  const lastFrameTimeRef = useRef(0);
   
   // Store the rotation positions of each partner
   const iconPositionsRef = useRef<{ [key: number]: number }>({});
 
-  // Animation for the solar system effect
+  // Memoize partners data to prevent re-renders
+  const partners = useMemo(() => aiPartnersData, []);
+
+  // Optimized animation frame with performance monitoring
   useAnimationFrame((time) => {
-    if (!orbitRef.current || isBouncing) return;
+    if (!orbitRef.current || isBouncing || !isInView) return;
     
-    // Very gentle rotation of the entire orbit system
-    orbitRef.current.style.transform = `rotate(${time * 0.005}deg)`;
+    // Skip frames if running slow (target 30fps minimum)
+    const currentTime = performance.now();
+    if (currentTime - lastFrameTimeRef.current < 33) return;
+    lastFrameTimeRef.current = currentTime;
+    
+    // Use transform3d for GPU acceleration
+    rotationRef.current = (rotationRef.current + 0.005) % 360;
+    orbitRef.current.style.transform = `rotate3d(0, 0, 1, ${rotationRef.current}deg)`;
   });
 
-  const handleApplyClick = () => {
+  const handleApplyClick = useCallback(() => {
     setIsBouncing(true);
 
     // Store current rotation positions before chaos
-    aiPartnersData.forEach((partner, index) => {
+    partners.forEach((partner, index) => {
       const element = document.getElementById(`partner-${index}`);
       if (element) {
         const style = window.getComputedStyle(element);
@@ -40,11 +50,19 @@ export const AIPartnersOrbitalSystem = () => {
     // After animation completes, set back to normal rotation from current position
     setTimeout(() => {
       setIsBouncing(false);
-    }, 3000); // Animation duration + a bit extra
-  };
+    }, 3000);
+  }, [partners]);
 
   return (
-    <div className="flex justify-center items-center relative" style={{ height: '700px' }} ref={sectionRef}>
+    <div 
+      className="flex justify-center items-center relative" 
+      style={{ 
+        height: '700px',
+        willChange: 'transform',
+        transform: 'translateZ(0)', // Force GPU layer
+      }} 
+      ref={sectionRef}
+    >
       {/* Center 3D Logo */}
       <motion.div 
         className="absolute z-30"
@@ -52,6 +70,10 @@ export const AIPartnersOrbitalSystem = () => {
         animate={isInView ? { opacity: 1, scale: 1 } : {}}
         transition={{ duration: 1, delay: 0.5, type: "spring" }}
         whileTap={{ scale: 0.95 }}
+        style={{
+          willChange: 'transform',
+          transform: 'translateZ(0)',
+        }}
       >
         <Center3DLogo onClick={handleApplyClick} />
       </motion.div>
@@ -60,10 +82,15 @@ export const AIPartnersOrbitalSystem = () => {
       <div 
         ref={orbitRef} 
         className="absolute w-full h-full"
-        style={{ maxWidth: '800px', maxHeight: '800px' }}
+        style={{ 
+          maxWidth: '800px', 
+          maxHeight: '800px',
+          willChange: 'transform',
+          transformStyle: 'preserve-3d',
+        }}
       >
         {/* Orbit paths */}
-        {aiPartnersData.map((partner, index) => (
+        {partners.map((partner, index) => (
           <AIPartnerOrbit
             key={`orbit-${index}`}
             partner={partner}
@@ -72,7 +99,7 @@ export const AIPartnersOrbitalSystem = () => {
         ))}
 
         {/* AI Partner Icons */}
-        {aiPartnersData.map((partner, index) => (
+        {partners.map((partner, index) => (
           <AIPartnerIcon
             key={`partner-${index}`}
             partner={partner}
