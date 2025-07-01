@@ -20,10 +20,7 @@ const Index = () => {
         
         {/* Fixed particle background that covers the entire page */}
         <div className="fixed inset-0" style={{ zIndex: 1 }}>
-          <ParticleBackground onEffectReady={(effect) => {
-            // Store effect reference if needed for animations
-            window.particleEffect = effect;
-          }} />
+          <ParticleBackground />
         </div>
 
         {/* Hero Section */}

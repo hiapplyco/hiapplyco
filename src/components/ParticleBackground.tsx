@@ -1,3 +1,5 @@
+import ParticleBackgroundFinal from './particles/ParticleBackgroundFinal';
 
-import ParticleBackground from './particles/ParticleBackground';
-export default ParticleBackground;
+// Using the new tsparticles-based implementation for better stability
+// This version fixes the particle shifting issue when cursor is static
+export default ParticleBackgroundFinal;
