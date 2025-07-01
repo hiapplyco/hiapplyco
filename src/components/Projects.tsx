@@ -28,13 +28,13 @@ const Projects = () => {
     },
     {
       name: "Apply Codes",
-      description: "Comprehensive AI recruitment platform transforming how SMBs find and hire talent with hyper-local market intelligence and automated candidate matching",
+      description: "Comprehensive AI platform transforming how businesses find domain experts and build intelligent solutions with market intelligence and automated matching",
       url: "https://www.apply.codes/",
       icon: Code,
       iconColor: "text-blue-500",
-      tags: ["AI Recruitment", "Local Hiring"],
-      metrics: "73% faster hiring process",
-      caseStudy: "Coming soon: Tech startup reduces hiring costs by 80% while improving candidate quality",
+      tags: ["AI Platform", "Expert Matching"],
+      metrics: "73% faster expert deployment",
+      caseStudy: "Coming soon: Tech startup reduces talent acquisition costs by 80% while accessing top domain experts",
       imageUrl: null
     },
     {
@@ -89,7 +89,7 @@ const Projects = () => {
         <div className="mb-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-3 animate-fade-up">Our Product Portfolio</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto animate-fade-up animation-delay-100">
-            A comprehensive suite of AI-powered solutions designed specifically for small and medium businesses
+            A comprehensive suite of AI-powered solutions and expert talent platforms designed for businesses across every industry vertical
           </p>
         </div>
         

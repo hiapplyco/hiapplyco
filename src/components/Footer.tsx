@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex flex-col items-center md:items-start">
             <p className="text-muted-foreground text-sm max-w-md text-center md:text-left">
-              Strategic AI agent development for businesses looking to harness the power of artificial intelligence.
+              Transform your business with industry-specific AI solutions and expert talent.
             </p>
           </div>
           
@@ -64,7 +64,7 @@ const Footer = () => {
         <div className="mt-8 pt-6 border-t border-border/40">
           <div className="text-center mb-6">
             <p className="text-sm text-muted-foreground mb-4">
-              Ready to transform your hiring with AI-powered recruitment?
+              Transforming businesses across healthcare, finance, legal, manufacturing, retail, education, and more.
             </p>
             <a 
               href="https://www.apply.codes" 
@@ -72,7 +72,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-accent-foreground font-medium rounded-lg hover:bg-accent/90 transition-all duration-300 hover:scale-105 hover:shadow-lg"
             >
-              Visit apply.codes
+              Explore Industry Solutions at apply.codes
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
               </svg>

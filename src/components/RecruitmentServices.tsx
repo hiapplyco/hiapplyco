@@ -4,37 +4,37 @@ import { CheckCircle } from 'lucide-react';
 
 const services = [
   {
-    title: 'Staffing',
-    description: 'Flexible and temporary workforce solutions to meet immediate operational needs.',
+    title: 'Strategic Expertise',
+    description: 'Deploy industry veterans for critical projects and transformational initiatives.',
   },
   {
-    title: 'Contingent Hiring',
-    description: 'Access to a contractual workforce for projects with defined timelines and deliverables.',
+    title: 'Technical Specialists',
+    description: 'Access professionals with deep domain knowledge and technical capabilities specific to your sector.',
   },
   {
-    title: 'Permanent Hiring',
-    description: 'Full-time employees sourced to fill specialized, long-term, or executive roles.',
+    title: 'Leadership Placement',
+    description: 'Find executives and managers who understand your industry\'s unique dynamics and opportunities.',
   },
   {
-    title: 'Staff Augmentation',
-    description: 'Integrating skilled professionals into your existing teams to fill talent gaps.',
+    title: 'Team Transformation',
+    description: 'Build high-performance teams with the right mix of industry experience and innovative thinking.',
   },
 ];
 
 const benefits = [
-  'Rapidly scale your workforce up or down',
-  'Access to a pipeline of high-quality, vetted talent',
-  'Customized hiring solutions tailored to your goals',
-  'Reduced time-to-hire for critical roles',
+  'Industry-specific expertise on demand',
+  'Pre-vetted professionals who understand your sector',
+  'Flexible engagement models for any business need',
+  'Rapid deployment of specialized knowledge',
 ];
 
 const RecruitmentServices = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="text-center mb-8">
-        <h2 className="text-4xl font-bold tracking-tight">Recruitment & Staffing</h2>
+        <h2 className="text-4xl font-bold tracking-tight">Industry Expert Solutions</h2>
         <p className="mt-3 text-lg text-muted-foreground max-w-3xl mx-auto">
-          Whether you need to hire one key person or build an entire team, we provide the human resources to help you scale. We specialize in recruiting people who know how to find people, professionals who can build AI solutions, and the domain experts who guide AI development.
+          Access specialized professionals who understand your industry's unique challenges. From strategic advisors to technical specialists, domain architects to transformation leaders, we connect you with experts who speak your language and deliver immediate value—whether you need one key person or an entire team transformation.
         </p>
       </div>
 
@@ -67,7 +67,7 @@ const RecruitmentServices = () => {
           <div className="text-center md:text-left p-6 bg-card rounded-lg gradient-border">
             <h4 className="text-xl font-semibold mb-2">Transparent Pricing</h4>
             <p className="text-muted-foreground">
-              Our pricing is based on a standard industry markup (typically 25-35%) over candidate salaries or hourly rates. We also offer customized pricing for specialized and high-volume recruitment projects.
+              Our pricing is based on a standard industry markup (typically 25-35%) over professional fees or project rates. We also offer customized pricing for specialized engagements, transformation initiatives, and strategic partnerships across all industries.
             </p>
           </div>
         </CardContent>

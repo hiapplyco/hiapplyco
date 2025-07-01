@@ -12,11 +12,11 @@ const About = () => {
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div className="space-y-6 animate-fade-right">
-            <h2 className="text-3xl md:text-4xl font-bold">Multi-Sector AI Expertise for SMB Success</h2>
+            <h2 className="text-3xl md:text-4xl font-bold">Cross-Industry AI Excellence for Business Growth</h2>
             
             <div className="prose prose-neutral">
               <p className="text-lg text-muted-foreground">
-                Drawing from diverse experience across federal government, enterprise, and academic institutions, our team specializes in deploying hyper-local AI solutions that deliver measurable success for small and medium businesses. We leverage cutting-edge generational knowledge to navigate current marketing streams and validate MVPs with precision and efficiency.
+                Our diverse team brings expertise from healthcare, finance, legal, manufacturing, and technology sectors. This cross-pollination of ideas allows us to identify innovative solutions that industry insiders might miss. We combine deep domain knowledge with cutting-edge AI capabilities to deliver transformative results for businesses in any sector.
               </p>
             </div>
 
@@ -38,8 +38,8 @@ const About = () => {
                 <div className="flex items-start gap-4">
                   <Building className="h-6 w-6 text-accent flex-shrink-0" />
                   <div>
-                    <h3 className="font-semibold mb-2">SMB-First Design Philosophy</h3>
-                    <p className="text-muted-foreground">Solutions built specifically for small business realities – budget-conscious, efficient, and immediately impactful.</p>
+                    <h3 className="font-semibold mb-2">Industry-Agnostic Innovation</h3>
+                    <p className="text-muted-foreground">We adapt best practices from multiple industries to create breakthrough solutions for your specific challenges.</p>
                   </div>
                 </div>
               </div>
@@ -48,8 +48,8 @@ const About = () => {
                 <div className="flex items-start gap-4">
                   <CheckCircle className="h-6 w-6 text-accent flex-shrink-0" />
                   <div>
-                    <h3 className="font-semibold mb-2">MVP Validation Specialists</h3>
-                    <p className="text-muted-foreground">Our team excels at rapidly validating AI concepts for SMBs, ensuring market fit before significant investment.</p>
+                    <h3 className="font-semibold mb-2">Compliance-First Development</h3>
+                    <p className="text-muted-foreground">Whether it's HIPAA, SOC2, or industry-specific regulations, we build with compliance in mind from day one.</p>
                   </div>
                 </div>
               </div>
@@ -58,8 +58,8 @@ const About = () => {
                 <div className="flex items-start gap-4">
                   <Users className="h-6 w-6 text-accent flex-shrink-0" />
                   <div>
-                    <h3 className="font-semibold mb-2">Cross-Sector Experience</h3>
-                    <p className="text-muted-foreground">Our diverse background from federal, enterprise, and academic sectors brings unique insights to SMB AI deployment challenges.</p>
+                    <h3 className="font-semibold mb-2">Sector-Specific ROI</h3>
+                    <p className="text-muted-foreground">We measure success using your industry's KPIs, ensuring our solutions deliver value in terms that matter to your business.</p>
                   </div>
                 </div>
               </div>

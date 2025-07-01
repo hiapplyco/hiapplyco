@@ -2,10 +2,12 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const agentExamples = [
-  'Automated Customer Support & Triage',
-  'Real-time Data Analysis & Reporting',
-  'Intelligent Document Processing & Summarization',
-  'Automated Lead Generation & Outreach',
+  'Healthcare: Patient intake automation & appointment optimization',
+  'Finance: Risk assessment & compliance automation',
+  'Legal: Contract analysis & case research acceleration',
+  'Manufacturing: Predictive maintenance & quality control',
+  'Retail: Inventory optimization & personalized recommendations',
+  'Education: Adaptive learning paths & automated assessment',
 ];
 
 const AIAgentDevelopment = () => {
@@ -14,7 +16,7 @@ const AIAgentDevelopment = () => {
       <div className="text-center mb-8">
         <h2 className="text-4xl font-bold tracking-tight">AI Agent Development</h2>
         <p className="mt-3 text-lg text-muted-foreground max-w-3xl mx-auto">
-          Reduce overhead, increase productivity, and optimize your workflows with custom AI agents built for your specific business needs.
+          Transform your industry-specific challenges into competitive advantages with custom AI agents designed for your unique workflows and compliance requirements.
         </p>
       </div>
 

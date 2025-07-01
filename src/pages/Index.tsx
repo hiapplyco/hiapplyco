@@ -11,6 +11,8 @@ import WhyChooseUs from '@/components/WhyChooseUs';
 import AIPartnersSection from '@/components/ai-partners';
 import Pricing from '@/components/Pricing';
 import About from '@/components/About';
+import DualValueProposition from '@/components/DualValueProposition';
+import IndustryShowcase from '@/components/IndustryShowcase';
 
 const Index = () => {
   return (
@@ -27,10 +29,10 @@ const Index = () => {
         <section id="home" className="relative min-h-[70vh] flex items-center justify-center pt-20 px-6 overflow-hidden">
           <div className="relative max-w-4xl mx-auto text-center" style={{ zIndex: 10 }}>
             <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-up text-balance">
-              Scale Faster with Apply, Co.: <span className="text-gradient-purple-green">Human and AI Solutions</span>
+              Custom AI Agents & Industry Experts for <span className="text-gradient-purple-green">Every Business</span>
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground mb-8 animate-fade-up animation-delay-200 max-w-2xl mx-auto">
-              Hire top-tier talent or automate critical tasks with custom AI agents, tailored for your business growth.
+              Transform healthcare, finance, legal, manufacturing, retail, or education businesses with specialized AI solutions and expert talent. Rapid deployment, measurable ROI.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-md mx-auto">
               <a href="#contact" className="inline-flex items-center justify-center gradient-purple-green text-white px-8 py-4 rounded-lg font-medium hover:bg-foreground hover:text-background transition-all duration-200 animate-fade-up animation-delay-300">
@@ -50,32 +52,42 @@ const Index = () => {
             <AIPartnersSection />
           </section>
           
-          {/* Section 2: Recruitment & Staffing */}
-          <section id="recruitment" className="section-spacing bg-muted/30">
+          {/* Section 2: Dual Value Proposition */}
+          <section className="section-spacing bg-muted/30">
+            <DualValueProposition />
+          </section>
+          
+          {/* Section 3: Recruitment & Staffing */}
+          <section id="recruitment" className="section-spacing">
             <RecruitmentServices />
           </section>
 
-          {/* Section 3: AI Agent Development */}
-          <section id="ai-development" className="section-spacing">
+          {/* Section 4: AI Agent Development */}
+          <section id="ai-development" className="section-spacing bg-muted/30">
             <AIAgentDevelopment />
           </section>
           
-          {/* Section 4: Case Studies & Success Stories */}
-          <section id="case-studies" className="section-spacing bg-muted/30">
+          {/* Section 5: Case Studies & Success Stories */}
+          <section id="case-studies" className="section-spacing">
             <Projects />
           </section>
 
-          {/* Section 5: Why Choose Apply, Co.? */}
+          {/* Section 6: Industry Solutions */}
+          <section className="section-spacing bg-muted/30">
+            <IndustryShowcase />
+          </section>
+          
+          {/* Section 7: Why Choose Apply, Co.? */}
           <section className="section-spacing">
             <WhyChooseUs />
           </section>
           
-          {/* Section 6: Pricing */}
+          {/* Section 8: Pricing */}
           <section className="section-spacing bg-muted/30">
             <Pricing />
           </section>
           
-          {/* Section 7: About */}
+          {/* Section 9: About */}
           <section id="about" className="section-spacing">
             <About />
           </section>

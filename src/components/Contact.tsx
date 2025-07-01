@@ -21,6 +21,7 @@ const Contact = () => {
         body: {
           name: data.name,
           email: data.email,
+          industry: data.industry,
           message: data.message,
           source: 'contact-form'
         }
@@ -55,9 +56,9 @@ const Contact = () => {
       
       <div className="max-w-3xl mx-auto relative z-10">
         <div className="text-center mb-6 animate-fade-up">
-          <h2 className="text-3xl md:text-4xl font-bold mb-3">SMB AI Consultation</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-3">Get Your Industry Solution</h2>
           <p className="text-muted-foreground max-w-xl mx-auto mb-3">
-            Ready to transform your small or medium business with locally-optimized AI solutions?
+            Ready to transform your business with custom AI solutions and expert talent tailored to your industry? Whether you need domain specialists, AI automation, or both—we deliver integrated solutions that drive growth.
           </p>
           <p className="text-sm text-muted-foreground">
             Contact us at <a href="mailto:martin@hiapply.co" className="text-accent hover:underline">martin@hiapply.co</a>
@@ -83,6 +84,20 @@ const Contact = () => {
                 </div>
               </div>
               <div>
+                <select {...register('industry', { required: true })} className="w-full bg-secondary/20 border-2 border-border/80 focus:border-accent rounded-lg px-4 py-3 outline-none transition-colors duration-200">
+                  <option value="">Select Your Industry</option>
+                  <option value="healthcare">Healthcare & Medical</option>
+                  <option value="finance">Finance & Banking</option>
+                  <option value="legal">Legal Services</option>
+                  <option value="manufacturing">Manufacturing</option>
+                  <option value="retail">Retail & E-commerce</option>
+                  <option value="education">Education</option>
+                  <option value="technology">Technology</option>
+                  <option value="other">Other</option>
+                </select>
+                {errors.industry && <span className="text-red-500 text-sm">Please select your industry</span>}
+              </div>
+              <div>
                 <textarea {...register('message', { required: true })} placeholder="Message" className="w-full bg-secondary/20 border-2 border-border/80 focus:border-accent rounded-lg px-4 py-3 outline-none transition-colors duration-200" rows={4}></textarea>
                 {errors.message && <span className="text-red-500 text-sm">This field is required</span>}
               </div>
@@ -95,7 +110,7 @@ const Contact = () => {
                   loadingText="Sending..."
                   className="w-full gradient-purple-green text-white hover:bg-foreground hover:text-background"
                 >
-                  Schedule SMB Consultation
+                  Get Industry-Specific Solution
                 </EnhancedButton>
                 <a
                   href="#pricing"

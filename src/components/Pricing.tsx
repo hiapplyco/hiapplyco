@@ -8,15 +8,15 @@ const Pricing = () => {
       name: "Starter",
       price: "$198",
       period: "/month",
-      description: "Perfect for small businesses getting started with AI",
-      subheading: "1-3 AI Agents",
+      description: "Perfect for businesses exploring AI transformation",
+      subheading: "1-3 Custom Solutions",
       features: [
-        { text: "1-3 Custom AI Agents", included: true },
-        { text: "Local market insights", included: true },
-        { text: "Basic analytics", included: true },
-        { text: "Email support", included: true },
+        { text: "1-3 Industry-Specific AI Agents", included: true },
+        { text: "Sector-specific optimization", included: true },
+        { text: "Compliance-aware deployment", included: true },
+        { text: "Industry expert consultation", included: true },
         { text: "Custom integrations", included: false },
-        { text: "Advanced training", included: false },
+        { text: "Team transformation services", included: false },
       ]
     },
     {
@@ -39,12 +39,12 @@ const Pricing = () => {
       name: "ISV Partner",
       price: "$998",
       period: "/month",
-      description: "For recruitment firms building AI-powered solutions",
+      description: "For industry partners & consultancies building AI-powered solutions",
       subheading: "2 Agents/Month Development",
       features: [
         { text: "2 Custom AI Agents/month", included: true },
         { text: "White-label deployment", included: true },
-        { text: "Recruitment-specific tools", included: true },
+        { text: "Industry-specific tools", included: true },
         { text: "Revenue sharing model", included: true },
         { text: "Partner portal access", included: true },
         { text: "Technical consultation", included: true },
@@ -73,7 +73,7 @@ const Pricing = () => {
         <div className="text-center mb-8 animate-fade-up">
           <h2 className="text-3xl md:text-4xl font-bold mb-3">Simple, Transparent Pricing</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Choose the perfect plan for your SMB. All plans include AI agent development, hyper-local optimization, and can be deployed within 2-4 weeks.
+            Choose the perfect plan for your business. All plans include AI agent development, industry-specific optimization, and expert talent matching. Deploy transformative solutions within 2-4 weeks.
           </p>
         </div>
 
@@ -145,14 +145,14 @@ const Pricing = () => {
 
         <div className="mt-12 max-w-4xl mx-auto animate-fade-up" style={{ animationDelay: '400ms' }}>
           <div className="bg-card rounded-xl p-8 gradient-border">
-            <h3 className="text-2xl font-bold mb-4 text-center">ISV Partner Program Explained</h3>
+            <h3 className="text-2xl font-bold mb-4 text-center">Industry Partner Program</h3>
             <p className="text-muted-foreground mb-4">
-              Our ISV Partner plan is designed for recruitment and staffing firms who want to become AI solution providers. As an ISV partner, you receive:
+              Our Partner plan is designed for consultancies, system integrators, and industry specialists who want to add AI capabilities and talent solutions to their offerings. As a partner, you receive:
             </p>
             <ul className="space-y-2 mb-6">
               <li className="flex items-start gap-2">
                 <span className="text-accent mt-1">•</span>
-                <span className="text-muted-foreground"><strong>2 custom AI agents developed monthly</strong> tailored to your clients' specific recruitment needs</span>
+                <span className="text-muted-foreground"><strong>2 custom AI solutions monthly</strong> tailored to your industry's specific needs</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-accent mt-1">•</span>
@@ -160,11 +160,11 @@ const Pricing = () => {
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-accent mt-1">•</span>
-                <span className="text-muted-foreground"><strong>Recruitment-specific tools</strong> for candidate matching, screening automation, and talent pipeline management</span>
+                <span className="text-muted-foreground"><strong>Industry-specific expertise</strong> combining AI tools and domain experts for your sector's unique workflows and compliance requirements</span>
               </li>
             </ul>
             <p className="text-sm text-muted-foreground text-center">
-              Perfect for firms looking to add AI capabilities to their service offerings and create new revenue streams.
+              Perfect for firms looking to add AI capabilities and expert talent solutions to their service offerings, creating new revenue streams across any industry vertical.
             </p>
           </div>
         </div>

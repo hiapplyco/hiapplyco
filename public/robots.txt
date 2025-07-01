@@ -1,6 +1,27 @@
 User-agent: *
 Allow: /
 Disallow: /animation-demo
+Disallow: /protected-pricing/
+Crawl-delay: 1
+
+# Search engine specific rules
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Block bad bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
 
 # Sitemap location
 Sitemap: https://hiapply.co/sitemap.xml
+
+# Host directive (for Yandex)
+Host: https://hiapply.co

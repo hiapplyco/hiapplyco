@@ -3,16 +3,16 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const reasons = [
   {
-    title: 'Dual Expertise',
-    description: 'We are uniquely positioned with deep experience in both niche talent acquisition and advanced AI agent development. We know how to find the recruiters who find people, the engineers who build AI, and the domain experts who make it all work.',
+    title: 'Industry-First Approach',
+    description: 'We start by understanding your industry\'s specific challenges, regulations, and opportunities. Our solutions are never generic—they\'re built for your exact business context.',
   },
   {
-    title: 'Proven Track Record',
-    description: 'We have a history of success serving diverse business sectors, from startups to enterprise-level clients.',
+    title: 'Proven Across Sectors',
+    description: 'From healthcare to legal, manufacturing to education, we\'ve successfully deployed solutions across diverse industries, each with measurable ROI within 90 days.',
   },
   {
-    title: 'Tailored, Scalable Solutions',
-    description: 'Our solutions are not one-size-fits-all. We tailor our approach to your specific business goals for maximum impact.',
+    title: 'Integrated Excellence',
+    description: 'Why juggle multiple vendors? Get both expert talent and AI automation from one partner who understands how to make them work together seamlessly.',
   },
 ];
 
