@@ -83,7 +83,7 @@ const Index = () => {
           </section>
           
           {/* Section 8: Pricing */}
-          <section className="section-spacing bg-muted/30">
+          <section id="pricing" className="section-spacing bg-muted/30">
             <Pricing />
           </section>
           
