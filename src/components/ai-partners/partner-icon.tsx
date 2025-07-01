@@ -41,8 +41,8 @@ export const AIPartnerIcon = memo<AIPartnerIconProps>(({
       initial={{ opacity: 0 }}
       animate={isInView ? { opacity: 1 } : {}}
       transition={{ 
-        duration: 0.8, 
-        delay: partner.delay + 0.5
+        duration: 0.6, 
+        delay: partner.delay * 0.5 + 0.2
       }}
     >
       <motion.div
@@ -75,26 +75,27 @@ export const AIPartnerIcon = memo<AIPartnerIconProps>(({
           }}
         >
           <div 
-            className="h-16 w-16 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center overflow-hidden shadow-lg"
+            className="h-20 w-20 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center overflow-hidden shadow-lg relative"
             style={{
-              transform: 'translateZ(0)', // Force GPU layer
+              transform: 'translateZ(0)',
               backfaceVisibility: 'hidden',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
-              boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1), inset 0 0 20px rgba(255, 255, 255, 0.1)',
+              border: '2px solid rgba(255, 255, 255, 0.3)',
+              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2), inset 0 0 20px rgba(255, 255, 255, 0.1)',
             }}
           >
+            <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent" />
             <img 
               src={partner.logo} 
               alt={partner.name}
-              className="max-h-10 max-w-10 object-contain"
-              loading="lazy"
+              className="w-14 h-14 object-contain z-10"
+              loading="eager"
               decoding="async"
               style={{
-                filter: 'brightness(1.1) contrast(1.1)',
+                filter: 'brightness(1.2) contrast(1.1)',
               }}
             />
           </div>
-          <p className="mt-1 text-xs text-center text-gray-400 w-20 mx-auto opacity-70">{partner.name}</p>
+          <p className="mt-2 text-xs text-center text-gray-300 w-24 mx-auto opacity-80 font-medium">{partner.name}</p>
         </motion.div>
       </motion.div>
     </motion.div>

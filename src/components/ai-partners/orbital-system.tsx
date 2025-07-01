@@ -7,7 +7,7 @@ import { Center3DLogo } from './center-3d-logo';
 
 export const AIPartnersOrbitalSystem = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, { once: false, amount: 0.2 });
+  const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
   const orbitRef = useRef<HTMLDivElement>(null);
   const [isBouncing, setIsBouncing] = useState(false);
   const rotationRef = useRef(0);
@@ -21,7 +21,7 @@ export const AIPartnersOrbitalSystem = () => {
 
   // Optimized animation frame with performance monitoring
   useAnimationFrame((time) => {
-    if (!orbitRef.current || isBouncing || !isInView) return;
+    if (!orbitRef.current || isBouncing) return;
     
     // Skip frames if running slow (target 30fps minimum)
     const currentTime = performance.now();
@@ -63,22 +63,7 @@ export const AIPartnersOrbitalSystem = () => {
       }} 
       ref={sectionRef}
     >
-      {/* Center 3D Logo */}
-      <motion.div 
-        className="absolute z-30"
-        initial={{ opacity: 0, scale: 0 }}
-        animate={isInView ? { opacity: 1, scale: 1 } : {}}
-        transition={{ duration: 1, delay: 0.5, type: "spring" }}
-        whileTap={{ scale: 0.95 }}
-        style={{
-          willChange: 'transform',
-          transform: 'translateZ(0)',
-        }}
-      >
-        <Center3DLogo onClick={handleApplyClick} />
-      </motion.div>
-      
-      {/* Orbits container */}
+      {/* Orbits container with proper z-index */}
       <div 
         ref={orbitRef} 
         className="absolute w-full h-full"
@@ -87,29 +72,46 @@ export const AIPartnersOrbitalSystem = () => {
           maxHeight: '800px',
           willChange: 'transform',
           transformStyle: 'preserve-3d',
+          zIndex: 20,
         }}
       >
-        {/* Orbit paths */}
-        {partners.map((partner, index) => (
-          <AIPartnerOrbit
-            key={`orbit-${index}`}
-            partner={partner}
-            isInView={isInView}
-          />
-        ))}
+        {/* Orbit paths - render first for proper layering */}
+        <div className="absolute inset-0" style={{ zIndex: 1 }}>
+          {partners.map((partner, index) => (
+            <AIPartnerOrbit
+              key={`orbit-${index}`}
+              partner={partner}
+              isInView={true} // Always show orbits
+            />
+          ))}
+        </div>
 
-        {/* AI Partner Icons */}
-        {partners.map((partner, index) => (
-          <AIPartnerIcon
-            key={`partner-${index}`}
-            partner={partner}
-            index={index}
-            isInView={isInView}
-            isBouncing={isBouncing}
-            iconPositionsRef={iconPositionsRef}
-          />
-        ))}
+        {/* AI Partner Icons - render on top of orbits */}
+        <div className="absolute inset-0" style={{ zIndex: 2 }}>
+          {partners.map((partner, index) => (
+            <AIPartnerIcon
+              key={`partner-${index}`}
+              partner={partner}
+              index={index}
+              isInView={isInView}
+              isBouncing={isBouncing}
+              iconPositionsRef={iconPositionsRef}
+            />
+          ))}
+        </div>
       </div>
+
+      {/* Center 3D Logo - highest z-index */}
+      <motion.div 
+        className="absolute"
+        style={{ zIndex: 30 }}
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, type: "spring" }}
+        whileTap={{ scale: 0.95 }}
+      >
+        <Center3DLogo onClick={handleApplyClick} />
+      </motion.div>
     </div>
   );
 };
