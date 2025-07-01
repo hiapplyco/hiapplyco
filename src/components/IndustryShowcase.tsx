@@ -98,9 +98,9 @@ const IndustryShowcase = () => {
         </p>
         <a 
           href="#contact" 
-          className="inline-flex items-center gap-2 px-6 py-3 gradient-purple-green text-white rounded-lg font-medium hover:bg-foreground hover:text-background transition-all duration-200"
+          className="inline-flex items-center gap-2 px-6 py-3 btn-gradient-border rounded-lg font-medium"
         >
-          Discuss Your Industry's Needs
+          <span>Discuss Your Industry's Needs</span>
         </a>
       </div>
     </div>

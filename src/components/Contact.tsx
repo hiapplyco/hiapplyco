@@ -108,16 +108,16 @@ const Contact = () => {
                   icon={<Send className="h-4 w-4" />}
                   isLoading={isSubmitting}
                   loadingText="Sending..."
-                  className="w-full gradient-purple-green text-white hover:bg-foreground hover:text-background"
+                  className="w-full"
                 >
                   Get Industry-Specific Solution
                 </EnhancedButton>
                 <a
                   href="#pricing"
-                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-background/80 backdrop-blur-sm text-foreground border-2 border-foreground/80 rounded-lg font-medium hover:bg-foreground hover:text-background transition-all duration-200 interactive-element"
+                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 btn-gradient-border rounded-lg font-medium"
                 >
                   <DollarSign className="h-4 w-4" />
-                  View Pricing
+                  <span>View Pricing</span>
                 </a>
               </div>
             </form>

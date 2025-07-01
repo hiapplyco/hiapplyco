@@ -24,12 +24,12 @@ const EnhancedButton = ({
   disabled,
   ...props
 }: EnhancedButtonProps) => {
-  const baseClasses = 'relative inline-flex items-center justify-center font-medium rounded-lg transition-all duration-300 interactive-element overflow-hidden group';
+  const baseClasses = 'relative inline-flex items-center justify-center font-medium rounded-lg transition-all duration-300 interactive-element overflow-hidden group btn-gradient-border';
   
   const variantClasses = {
-    primary: 'bg-primary text-primary-foreground hover:bg-primary/90',
-    secondary: 'bg-secondary text-foreground border border-border/50 hover:bg-secondary/80',
-    accent: 'bg-accent text-accent-foreground hover:bg-accent/90',
+    primary: '',
+    secondary: '',
+    accent: '',
   };
   
   const sizeClasses = {

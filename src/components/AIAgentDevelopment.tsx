@@ -54,9 +54,9 @@ const AIAgentDevelopment = () => {
         </p>
         <a 
           href="#pricing" 
-          className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-accent-foreground font-medium rounded-lg hover:bg-accent/90 transition-all duration-300 hover:scale-105"
+          className="inline-flex items-center gap-2 px-6 py-3 btn-gradient-border rounded-lg font-medium"
         >
-          View Pricing Plans
+          <span>View Pricing Plans</span>
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
           </svg>

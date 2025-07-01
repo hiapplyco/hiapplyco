@@ -37,7 +37,7 @@ const AgentEcosystemVisualization = () => {
       'yellow': 'text-amber-500',
       'red': 'text-rose-500'
     };
-    return <div className={`transition-all duration-700 delay-[${delay}ms] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+    return <div className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`} style={{ transitionDelay: `${delay}ms` }}>
         <div className="relative glass p-3 rounded-lg w-40 h-40 flex flex-col items-center justify-center border border-border/40">
           <Icon size={28} className={colorClasses[color]} />
           <h3 className="font-semibold text-sm mt-2 mb-1 text-center">{title}</h3>
@@ -60,7 +60,7 @@ const AgentEcosystemVisualization = () => {
     direction = 'right'
   }) => {
     return <div className="flex items-center w-10 h-20 mx-1">
-        <div className={`w-full h-[2px] bg-border relative transition-all duration-500 delay-[${delay + 100}ms] ${isVisible ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'}`}>
+        <div className={`w-full h-[2px] bg-border relative transition-all duration-500 ${isVisible ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'}`} style={{ transitionDelay: `${delay + 100}ms` }}>
           <ArrowRight size={12} className={`absolute top-1/2 -translate-y-1/2 ${direction === 'right' ? 'right-0' : 'left-0 rotate-180'} text-muted-foreground`} />
           
           {type === 'data' && <div className="absolute -top-1 left-1/2 w-2 h-2 rounded-full bg-accent/70 animate-pulse"></div>}
@@ -107,7 +107,7 @@ const AgentEcosystemVisualization = () => {
           </div>
           
           {/* Connection lines to SaaS tools below */}
-          <div className={`mt-4 glass rounded-lg p-4 transition-all duration-1000 delay-[900ms] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div className={`mt-4 glass rounded-lg p-4 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`} style={{ transitionDelay: '900ms' }}>
             <h3 className="text-sm font-medium mb-3 text-center">Connected SaaS Subscriptions</h3>
             
             <div className="grid grid-cols-5 gap-2">
@@ -125,7 +125,7 @@ const AgentEcosystemVisualization = () => {
         </div>
         
         {/* Data flow indicators */}
-        <div className={`mt-6 text-center transition-all duration-700 delay-[1100ms] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <div className={`mt-6 text-center transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`} style={{ transitionDelay: '1100ms' }}>
           
         </div>
       </div>

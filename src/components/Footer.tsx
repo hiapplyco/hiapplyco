@@ -62,22 +62,6 @@ const Footer = () => {
         </div>
         
         <div className="mt-8 pt-6 border-t border-border/40">
-          <div className="text-center mb-6">
-            <p className="text-sm text-muted-foreground mb-4">
-              Transforming businesses across healthcare, finance, legal, manufacturing, retail, education, and more.
-            </p>
-            <a 
-              href="https://www.apply.codes" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-accent-foreground font-medium rounded-lg hover:bg-accent/90 transition-all duration-300 hover:scale-105 hover:shadow-lg"
-            >
-              Explore Industry Solutions at apply.codes
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-            </a>
-          </div>
           <p className="text-muted-foreground text-sm text-center">
             © {new Date().getFullYear()} Apply, Co. All rights reserved.
           </p>

@@ -92,18 +92,18 @@ const AgenticRecruitmentPlatform = () => {
                   href="https://www.apply.codes" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="group flex items-center justify-center gap-3 w-full bg-accent text-accent-foreground px-6 py-4 rounded-lg font-medium hover:bg-accent/90 transition-all duration-300 hover:scale-105"
+                  className="group flex items-center justify-center gap-3 w-full px-6 py-4 btn-gradient-border rounded-lg font-medium"
                 >
-                  Explore apply.codes
+                  <span>Explore apply.codes</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </a>
                 <a 
                   href="https://www.apply.codes/demo" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-3 w-full bg-secondary text-foreground border border-border/50 px-6 py-4 rounded-lg font-medium hover:bg-secondary/80 transition-all duration-300"
+                  className="flex items-center justify-center gap-3 w-full px-6 py-4 btn-gradient-border rounded-lg font-medium"
                 >
-                  Watch 3-Minute Demo
+                  <span>Watch 3-Minute Demo</span>
                 </a>
               </div>
             </div>

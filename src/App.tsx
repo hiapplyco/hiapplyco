@@ -7,8 +7,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import AnimationDemo from "./pages/AnimationDemo";
-import Pricing from "./pages/Pricing";
-import ProtectedPricing from "./pages/ProtectedPricing";
 import CustomCursor from "./components/CustomCursor";
 import ErrorBoundary from "./components/ErrorBoundary";
 
@@ -25,8 +23,6 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/animation-demo" element={<AnimationDemo />} />
-            <Route path="/pricing/:clientSlug" element={<Pricing />} />
-            <Route path="/protected-pricing/:clientSlug" element={<ProtectedPricing />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </TooltipProvider>
