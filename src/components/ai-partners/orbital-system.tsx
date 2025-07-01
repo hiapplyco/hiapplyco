@@ -57,7 +57,7 @@ export const AIPartnersOrbitalSystem = () => {
     <div 
       className="flex justify-center items-center relative" 
       style={{ 
-        height: '700px',
+        height: '900px',
         willChange: 'transform',
         transform: 'translateZ(0)', // Force GPU layer
       }} 
