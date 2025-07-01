@@ -319,3 +319,40 @@
   width: 100% !important;
   height: 100% !important;
 }
+
+/* Solar system orbit animation */
+@keyframes orbit-glow {
+  0% {
+    opacity: 0.1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.2;
+    transform: translate(-50%, -50%) scale(1.02);
+  }
+  100% {
+    opacity: 0.1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.orbit-path {
+  animation: orbit-glow 4s ease-in-out infinite;
+}
+
+/* Sun glow animation */
+@keyframes sun-glow {
+  0% {
+    filter: blur(24px) brightness(1);
+  }
+  50% {
+    filter: blur(28px) brightness(1.1);
+  }
+  100% {
+    filter: blur(24px) brightness(1);
+  }
+}
+
+.sun-glow {
+  animation: sun-glow 4s ease-in-out infinite;
+}

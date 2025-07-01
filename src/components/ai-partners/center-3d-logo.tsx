@@ -132,31 +132,59 @@ interface Center3DLogoProps {
 export const Center3DLogo = ({ onClick }: Center3DLogoProps) => {
   return (
     <div 
-      className="relative w-48 h-48 cursor-pointer overflow-hidden rounded-full shadow-lg shadow-yellow-500/50"
+      className="relative w-48 h-48 cursor-pointer overflow-visible"
       onClick={onClick}
     >
-      <Canvas
-        camera={{ position: [0, 0, 6], fov: 40 }}
-        style={{ background: 'transparent' }}
-        dpr={[1, 2]}
-        gl={{ antialias: true, alpha: true }}
-      >
-        <ambientLight intensity={1} />
-        <pointLight position={[10, 10, 10]} intensity={1} color="#8B5CF6" />
-        <pointLight position={[-10, -10, -10]} intensity={0.8} color="#10B981" />
-        <directionalLight position={[0, 5, 5]} intensity={0.5} color="#FFFFFF" />
+      {/* Outer sun glow layers */}
+      <div className="absolute -inset-8 rounded-full opacity-40">
+        <div className="absolute inset-0 bg-yellow-300/30 rounded-full blur-3xl" />
+      </div>
+      <div className="absolute -inset-6 rounded-full opacity-60">
+        <div className="absolute inset-0 bg-yellow-400/40 rounded-full blur-2xl" />
+      </div>
+      <div className="absolute -inset-4 rounded-full opacity-80">
+        <div className="absolute inset-0 bg-yellow-500/50 rounded-full blur-xl" />
+      </div>
+      
+      {/* Main sun container */}
+      <div className="relative w-full h-full rounded-full overflow-hidden">
+        <Canvas
+          camera={{ position: [0, 0, 6], fov: 40 }}
+          style={{ background: 'transparent' }}
+          dpr={[1, 2]}
+          gl={{ antialias: true, alpha: true }}
+        >
+          <ambientLight intensity={1} />
+          <pointLight position={[10, 10, 10]} intensity={1} color="#8B5CF6" />
+          <pointLight position={[-10, -10, -10]} intensity={0.8} color="#10B981" />
+          <directionalLight position={[0, 5, 5]} intensity={0.5} color="#FFFFFF" />
+          
+          <Model url="/sample3.glb" />
+          <OrbitControls enableZoom={false} enablePan={false} enableRotate={false} />
+        </Canvas>
         
-        <Model url="/sample3.glb" />
-        <OrbitControls enableZoom={false} enablePan={false} enableRotate={false} />
-      </Canvas>
+        {/* Yellow sun background with gradient */}
+        <div className="absolute inset-0 rounded-full -z-10">
+          <div className="absolute inset-0 bg-gradient-to-br from-yellow-300 via-yellow-400 to-orange-400 rounded-full" />
+        </div>
+        
+        {/* Inner sun glow effect */}
+        <div className="absolute inset-0 rounded-full pointer-events-none">
+          <div className="absolute inset-0 bg-gradient-radial from-white/40 via-yellow-300/20 to-transparent rounded-full" />
+          <div className="absolute inset-0 bg-gradient-radial from-yellow-200/30 via-transparent to-transparent rounded-full animate-pulse" style={{ animationDuration: '3s' }} />
+        </div>
+        
+        {/* Soft edge fade */}
+        <div className="absolute inset-0 rounded-full pointer-events-none" style={{
+          background: 'radial-gradient(circle at center, transparent 70%, rgba(255, 255, 255, 0.1) 100%)',
+        }} />
+      </div>
       
-      {/* Yellow sun background */}
-      <div className="absolute inset-0 bg-yellow-400/90 rounded-full -z-10" />
-      
-      {/* Sun glow effect */}
-      <div className="absolute inset-0 rounded-full pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-radial from-yellow-300/50 via-yellow-400/30 to-transparent rounded-full blur-xl" />
-        <div className="absolute inset-0 bg-gradient-radial from-orange-400/30 via-yellow-500/20 to-transparent rounded-full blur-2xl animate-pulse" />
+      {/* Outer corona effect */}
+      <div className="absolute -inset-2 rounded-full pointer-events-none animate-pulse" style={{ animationDuration: '4s' }}>
+        <div className="absolute inset-0 rounded-full" style={{
+          background: 'radial-gradient(circle at center, transparent 50%, rgba(251, 191, 36, 0.2) 70%, transparent 100%)',
+        }} />
       </div>
     </div>
   );

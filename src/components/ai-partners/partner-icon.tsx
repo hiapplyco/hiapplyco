@@ -75,10 +75,12 @@ export const AIPartnerIcon = memo<AIPartnerIconProps>(({
           }}
         >
           <div 
-            className="h-16 w-16 bg-white/5 backdrop-blur-md rounded-full flex items-center justify-center"
+            className="h-16 w-16 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center overflow-hidden shadow-lg"
             style={{
               transform: 'translateZ(0)', // Force GPU layer
               backfaceVisibility: 'hidden',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+              boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1), inset 0 0 20px rgba(255, 255, 255, 0.1)',
             }}
           >
             <img 
@@ -87,9 +89,12 @@ export const AIPartnerIcon = memo<AIPartnerIconProps>(({
               className="max-h-10 max-w-10 object-contain"
               loading="lazy"
               decoding="async"
+              style={{
+                filter: 'brightness(1.1) contrast(1.1)',
+              }}
             />
           </div>
-          <p className="mt-1 text-xs text-center text-gray-400 w-20 mx-auto">{partner.name}</p>
+          <p className="mt-1 text-xs text-center text-gray-400 w-20 mx-auto opacity-70">{partner.name}</p>
         </motion.div>
       </motion.div>
     </motion.div>
