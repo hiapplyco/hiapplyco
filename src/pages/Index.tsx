@@ -12,6 +12,7 @@ import AIPartnersSection from '@/components/ai-partners';
 import Pricing from '@/components/Pricing';
 import DualValueProposition from '@/components/DualValueProposition';
 import IndustryShowcase from '@/components/IndustryShowcase';
+import ColorfulApplyLogo from '@/components/ColorfulApplyLogo';
 
 const Index = () => {
   return (
@@ -27,17 +28,21 @@ const Index = () => {
         {/* Hero Section */}
         <section id="home" className="relative min-h-[70vh] flex items-center justify-center pt-20 px-6 overflow-hidden">
           <div className="relative max-w-4xl mx-auto text-center" style={{ zIndex: 10 }}>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-up text-balance">
+            {/* Central Logo */}
+            <div className="mb-8 flex justify-center animate-fade-up">
+              <ColorfulApplyLogo className="h-32 md:h-40 lg:h-48" />
+            </div>
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-up animation-delay-200 text-balance">
               Custom AI Agents & Industry Experts for <span className="text-gradient-purple-green">Every Business</span>
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8 animate-fade-up animation-delay-200 max-w-2xl mx-auto">
+            <p className="text-xl md:text-2xl text-muted-foreground mb-8 animate-fade-up animation-delay-300 max-w-2xl mx-auto">
               Transform healthcare, finance, legal, manufacturing, retail, or education businesses with specialized AI solutions and expert talent. Rapid deployment, measurable ROI.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-md mx-auto">
-              <a href="#contact" className="inline-flex items-center justify-center btn-gradient-border px-8 py-4 rounded-lg font-medium animate-fade-up animation-delay-300">
+              <a href="#contact" className="inline-flex items-center justify-center btn-gradient-border px-8 py-4 rounded-lg font-medium animate-fade-up animation-delay-400">
                 <span>Schedule a Consultation</span>
               </a>
-              <a href="#case-studies" className="inline-flex items-center justify-center btn-gradient-border px-8 py-4 rounded-lg font-medium animate-fade-up animation-delay-400">
+              <a href="#case-studies" className="inline-flex items-center justify-center btn-gradient-border px-8 py-4 rounded-lg font-medium animate-fade-up animation-delay-500">
                 <span>View Work</span>
               </a>
             </div>

@@ -33,7 +33,7 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
           <Link to="/" className="hover:opacity-90 transition-all duration-300 transform hover:scale-105">
-            <ColorfulApplyLogo className="h-12 md:h-14" />
+            <ColorfulApplyLogo className="h-16 md:h-20" />
           </Link>
           
           <nav className="hidden md:flex items-center space-x-1">
