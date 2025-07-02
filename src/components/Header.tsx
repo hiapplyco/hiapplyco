@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Store, Wrench, Workflow, MessageSquare, Info, DollarSign } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
-import ColorfulApplyLogo from './ColorfulApplyLogo';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,7 +32,11 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
           <Link to="/" className="hover:opacity-90 transition-all duration-300 transform hover:scale-105">
-            <ColorfulApplyLogo className="h-16 md:h-20" />
+            <img 
+              src="https://kxghaajojntkqrmvsngn.supabase.co/storage/v1/object/public/logos//Apply2025logo.png"
+              alt="Apply Logo"
+              className="h-16 md:h-20 object-contain"
+            />
           </Link>
           
           <nav className="hidden md:flex items-center space-x-1">

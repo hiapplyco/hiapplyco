@@ -12,7 +12,6 @@ import AIPartnersSection from '@/components/ai-partners';
 import Pricing from '@/components/Pricing';
 import DualValueProposition from '@/components/DualValueProposition';
 import IndustryShowcase from '@/components/IndustryShowcase';
-import ColorfulApplyLogo from '@/components/ColorfulApplyLogo';
 
 const Index = () => {
   return (
@@ -30,7 +29,11 @@ const Index = () => {
           <div className="relative max-w-4xl mx-auto text-center" style={{ zIndex: 10 }}>
             {/* Central Logo */}
             <div className="mb-8 flex justify-center animate-fade-up">
-              <ColorfulApplyLogo className="h-32 md:h-40 lg:h-48" />
+              <img 
+                src="https://kxghaajojntkqrmvsngn.supabase.co/storage/v1/object/public/logos//Apply2025logo.png"
+                alt="Apply Logo"
+                className="h-32 md:h-40 lg:h-48 object-contain"
+              />
             </div>
             <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-up animation-delay-200 text-balance">
               Custom AI Agents & Industry Experts for <span className="text-gradient-purple-green">Every Business</span>
