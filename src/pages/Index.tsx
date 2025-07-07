@@ -12,10 +12,14 @@ import AIPartnersSection from '@/components/ai-partners';
 import Pricing from '@/components/Pricing';
 import DualValueProposition from '@/components/DualValueProposition';
 import IndustryShowcase from '@/components/IndustryShowcase';
+import FAQ from '@/components/FAQ';
+import StructuredData from '@/components/StructuredData';
+import PioneeringSolutions from '@/components/PioneeringSolutions';
 
 const Index = () => {
   return (
     <>
+      <StructuredData />
       <div className="min-h-screen bg-background text-foreground font-sans antialiased">
         <Header />
         
@@ -36,10 +40,13 @@ const Index = () => {
               />
             </div>
             <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-up animation-delay-200 text-balance">
-              Custom AI Agents & Industry Experts for <span className="text-gradient-purple-green">Every Business</span>
+              First to Build AI Agents for <span className="text-gradient-purple-green">Every Industry</span>
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8 animate-fade-up animation-delay-300 max-w-2xl mx-auto">
-              Transform healthcare, finance, legal, manufacturing, retail, or education businesses with specialized AI solutions and expert talent. Rapid deployment, measurable ROI.
+            <p className="text-xl md:text-2xl text-muted-foreground mb-4 animate-fade-up animation-delay-300 max-w-2xl mx-auto">
+              Pioneering AI agent development since day one. First in Recruitment, Entertainment, Legal, and Sales Ops. Now building custom AI solutions for companies of any size.
+            </p>
+            <p className="text-lg md:text-xl text-muted-foreground mb-8 animate-fade-up animation-delay-350 max-w-2xl mx-auto">
+              From Fortune 500 to local SMBs – we've built the AI agents that transform industries.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-md mx-auto">
               <a href="#contact" className="inline-flex items-center justify-center btn-gradient-border px-8 py-4 rounded-lg font-medium animate-fade-up animation-delay-400">
@@ -53,14 +60,19 @@ const Index = () => {
         </section>
 
         <div className="relative" style={{ zIndex: 10 }}>
-          {/* Section 1: Our Unique Offer */}
+          {/* Section 1: Pioneering Solutions - First Mover */}
           <section className="section-spacing">
+            <PioneeringSolutions />
+          </section>
+
+          {/* Section 2: Our Unique Offer */}
+          <section className="section-spacing bg-muted/30">
             <UniqueOffer />
             <AIPartnersSection />
           </section>
           
-          {/* Section 2: Dual Value Proposition */}
-          <section className="section-spacing bg-muted/30">
+          {/* Section 3: Dual Value Proposition */}
+          <section className="section-spacing">
             <DualValueProposition />
           </section>
           
@@ -94,6 +106,10 @@ const Index = () => {
             <Pricing />
           </section>
           
+          {/* Section 9: FAQ */}
+          <section id="faq" className="section-spacing">
+            <FAQ />
+          </section>
           
           {/* Call-to-Action Footer */}
           <section id="contact" className="section-spacing bg-muted/30">

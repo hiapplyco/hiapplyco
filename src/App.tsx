@@ -9,6 +9,7 @@ import NotFound from "./pages/NotFound";
 import AnimationDemo from "./pages/AnimationDemo";
 import CustomCursor from "./components/CustomCursor";
 import ErrorBoundary from "./components/ErrorBoundary";
+import AIReferralTracking from "./components/AIReferralTracking";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +21,7 @@ const App = () => (
           <Toaster />
           <Sonner />
           <CustomCursor />
+          <AIReferralTracking />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/animation-demo" element={<AnimationDemo />} />

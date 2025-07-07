@@ -1,0 +1,39 @@
+# robots.txt for hiapply.co
+# Traditional search engine crawlers
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+Disallow: /tmp/
+
+# Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+# AI-specific crawlers
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: Perplexity-Bot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Anthropic-AI
+Allow: /
+
+User-agent: Cohere-ai
+Allow: /
+
+# Microsoft/Bing AI
+User-agent: Bingbot
+Allow: /
+
+# Sitemap location
+Sitemap: https://hiapply.co/sitemap.xml
