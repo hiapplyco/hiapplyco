@@ -15,6 +15,7 @@ import IndustryShowcase from '@/components/IndustryShowcase';
 import FAQ from '@/components/FAQ';
 import StructuredData from '@/components/StructuredData';
 import PioneeringSolutions from '@/components/PioneeringSolutions';
+import HumanVsAIComparison from '@/components/HumanVsAIComparison';
 
 const Index = () => {
   return (
@@ -40,20 +41,20 @@ const Index = () => {
               />
             </div>
             <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-up animation-delay-200 text-balance">
-              First to Build AI Agents for <span className="text-gradient-purple-green">Every Industry</span>
+              Build AI Agents. <span className="text-gradient-purple-green">Hire Human Experts.</span> Know the Difference.
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground mb-4 animate-fade-up animation-delay-300 max-w-2xl mx-auto">
-              Pioneering AI agent development since day one. First in Recruitment, Entertainment, Legal, and Sales Ops. Now building custom AI solutions for companies of any size.
+              First to pioneer AI agent development for every industry. Trusted for strategic human recruitment when expertise matters. We deliver the right solution – artificial or human intelligence – tailored to your needs.
             </p>
             <p className="text-lg md:text-xl text-muted-foreground mb-8 animate-fade-up animation-delay-350 max-w-2xl mx-auto">
-              From Fortune 500 to local SMBs – we've built the AI agents that transform industries.
+              From Fortune 500 to local SMBs – we know when you need cutting-edge AI automation and when you need exceptional human talent.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-md mx-auto">
               <a href="#contact" className="inline-flex items-center justify-center btn-gradient-border px-8 py-4 rounded-lg font-medium animate-fade-up animation-delay-400">
                 <span>Schedule a Consultation</span>
               </a>
-              <a href="#case-studies" className="inline-flex items-center justify-center btn-gradient-border px-8 py-4 rounded-lg font-medium animate-fade-up animation-delay-500">
-                <span>View Work</span>
+              <a href="https://apply.codes" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center btn-gradient-border px-8 py-4 rounded-lg font-medium animate-fade-up animation-delay-500">
+                <span>Hiring Platform →</span>
               </a>
             </div>
           </div>
@@ -76,37 +77,42 @@ const Index = () => {
             <DualValueProposition />
           </section>
           
-          {/* Section 3: Recruitment & Staffing */}
+          {/* Section 4: Human vs AI Comparison Guide */}
+          <section className="section-spacing bg-muted/30">
+            <HumanVsAIComparison />
+          </section>
+          
+          {/* Section 5: Recruitment & Staffing */}
           <section id="recruitment" className="section-spacing">
             <RecruitmentServices />
           </section>
 
-          {/* Section 4: AI Agent Development */}
+          {/* Section 6: AI Agent Development */}
           <section id="ai-development" className="section-spacing bg-muted/30">
             <AIAgentDevelopment />
           </section>
           
-          {/* Section 5: Case Studies & Success Stories */}
+          {/* Section 7: Case Studies & Success Stories */}
           <section id="case-studies" className="section-spacing">
             <Projects />
           </section>
 
-          {/* Section 6: Industry Solutions */}
+          {/* Section 8: Industry Solutions */}
           <section className="section-spacing bg-muted/30">
             <IndustryShowcase />
           </section>
           
-          {/* Section 7: Why Choose Apply, Co.? */}
+          {/* Section 9: Why Choose Apply, Co.? */}
           <section className="section-spacing">
             <WhyChooseUs />
           </section>
           
-          {/* Section 8: Pricing */}
+          {/* Section 10: Pricing */}
           <section id="pricing" className="section-spacing bg-muted/30">
             <Pricing />
           </section>
           
-          {/* Section 9: FAQ */}
+          {/* Section 11: FAQ */}
           <section id="faq" className="section-spacing">
             <FAQ />
           </section>

@@ -5,23 +5,24 @@ export const seoConfig = {
   // Base metadata
   siteName: 'Apply, Co.',
   siteUrl: 'https://hiapply.co',
-  defaultTitle: 'Custom AI Agents & Industry Experts | Apply, Co.',
+  defaultTitle: 'AI Agents & Human Recruitment - Know the Difference | Apply, Co.',
   titleTemplate: '%s | Apply, Co. - AI Solutions',
   
   // Domain-agnostic descriptions
-  defaultDescription: 'Transform any business challenge with custom AI agents and industry experts. Specialized solutions for healthcare, finance, legal, manufacturing, retail, and education.',
+  defaultDescription: 'Build AI agents or hire human experts - we know the difference. Custom AI solutions and strategic recruitment for every industry. Powered by apply.codes for seamless hiring.',
   
   // Multi-industry keywords
   keywords: {
     primary: [
       'custom AI agents',
+      'human recruitment services',
+      'AI vs human expertise',
+      'apply.codes hiring platform',
       'AI solutions for business',
       'industry experts consulting',
       'business automation AI',
-      'enterprise AI development',
-      'AI transformation services',
-      'sector-specific AI solutions',
-      'AI consulting services'
+      'strategic talent acquisition',
+      'AI and human recruitment'
     ],
     
     byIndustry: {
@@ -89,7 +90,7 @@ export const seoConfig = {
       name: 'Apply, Co.',
       url: 'https://hiapply.co',
       logo: 'https://hiapply.co/APPLYFullwordlogo2025.png',
-      description: 'Custom AI agents and industry experts for business transformation',
+      description: 'AI agents and human recruitment - we know when you need each. Custom AI development and strategic talent acquisition powered by apply.codes',
       sameAs: [
         'https://apply.codes',
         // Add social media URLs when available
@@ -181,8 +182,8 @@ export const seoConfig = {
   // Page-specific metadata
   pages: {
     home: {
-      title: 'Custom AI Agents & Industry Experts for Every Business',
-      description: 'Transform your business with AI solutions tailored to your industry. Healthcare, finance, legal, manufacturing, retail, education experts + custom AI automation.',
+      title: 'Build AI Agents. Hire Human Experts. Know the Difference.',
+      description: 'Custom AI agents when automation works best. Expert human talent when expertise matters. We deliver the right solution for your business. Powered by apply.codes.',
       keywords: 'custom AI agents, industry experts, business automation AI, AI solutions'
     },
     

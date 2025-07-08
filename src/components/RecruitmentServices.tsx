@@ -32,9 +32,9 @@ const RecruitmentServices = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="text-center mb-8">
-        <h2 className="text-4xl font-bold tracking-tight">Industry Expert Solutions</h2>
+        <h2 className="text-4xl font-bold tracking-tight">Human Talent Recruitment</h2>
         <p className="mt-3 text-lg text-muted-foreground max-w-3xl mx-auto">
-          Access specialized professionals who understand your industry's unique challenges. From strategic advisors to technical specialists, domain architects to transformation leaders, we connect you with experts who speak your language and deliver immediate value—whether you need one key person or an entire team transformation.
+          When AI isn't the answer, we deliver exceptional human expertise. Access specialized professionals who understand your industry's unique challenges. From strategic advisors to technical specialists, domain architects to transformation leaders, we connect you with the human talent that drives real business outcomes. Powered by <a href="https://apply.codes" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">apply.codes</a>.
         </p>
       </div>
 

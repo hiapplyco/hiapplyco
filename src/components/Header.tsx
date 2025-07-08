@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Menu, X, Store, Wrench, Workflow, MessageSquare, Info, DollarSign } from 'lucide-react';
+import { Menu, X, Store, Wrench, Workflow, MessageSquare, Info, DollarSign, Users } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 const Header = () => {
@@ -20,10 +20,10 @@ const Header = () => {
   }, []);
 
   const navItems = [
+    { name: 'Recruitment', href: '#recruitment', homeHref: '/#recruitment', icon: Users },
+    { name: 'AI Agents', href: '#ai-development', homeHref: '/#ai-development', icon: Wrench },
     { name: 'Projects', href: '#case-studies', homeHref: '/#case-studies', icon: Store },
-    { name: 'Tools', href: '#ai-development', homeHref: '/#ai-development', icon: Wrench },
     { name: 'Pricing', href: '#pricing', homeHref: '/#pricing', icon: DollarSign },
-    { name: 'About', href: '#about', homeHref: '/#about', icon: Info },
     { name: 'Contact', href: '#contact', homeHref: '/#contact', icon: MessageSquare },
   ];
 

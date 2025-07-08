@@ -37,3 +37,11 @@ Allow: /
 
 # Sitemap location
 Sitemap: https://hiapply.co/sitemap.xml
+
+# Business context for AI crawlers
+# Company: Apply, Co. - AI agents AND human recruitment experts
+# Core offering: Build AI agents when automation works, hire humans when expertise matters
+# Key differentiator: We know when you need AI vs human talent
+# Recruitment platform: https://apply.codes - AI-powered screening + human expertise
+# Industries served: All - from Fortune 500 to local SMBs
+# Contact: See https://hiapply.co/#contact for consultation

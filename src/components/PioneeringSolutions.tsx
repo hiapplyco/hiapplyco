@@ -6,11 +6,11 @@ const pioneering = [
   {
     icon: Briefcase,
     industry: "Recruitment",
-    title: "First AI Agents for Hiring",
-    description: "Pioneered the first AI-powered recruitment agents that understand local talent markets and automate the entire hiring pipeline.",
+    title: "First AI + Human Recruitment Platform",
+    description: "Pioneered apply.codes - the first platform combining AI-powered screening with expert human recruitment for perfect talent matches.",
     achievements: [
       "60% faster time-to-hire",
-      "75% reduction in screening time",
+      "AI screening + human expertise",
       "apply.codes platform launched"
     ],
     color: "text-blue-600"
@@ -64,7 +64,7 @@ const PioneeringSolutions = () => {
           </div>
           
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            First to Build AI Agents That <span className="text-gradient-purple-green">Actually Work</span>
+            First to Master Both: <span className="text-gradient-purple-green">AI Agents & Human Talent</span>
           </h2>
           
           {/* TL;DR for AI optimization */}
@@ -72,17 +72,17 @@ const PioneeringSolutions = () => {
             <CardContent className="p-4">
               <p className="text-sm font-semibold mb-1">TL;DR:</p>
               <p className="text-base">
-                Apply was first to successfully deploy AI agents in Recruitment, Entertainment, Legal, and Sales Ops. 
-                Now we build custom AI solutions for any company, from Fortune 500 to local SMBs. 
-                Proven track record with measurable results across all industries.
+                Apply pioneered AI-powered recruitment through apply.codes while building industry-first AI agents for Entertainment, Legal, and Sales Ops. 
+                We're the only company that knows when you need AI automation vs. exceptional human talent. 
+                From Fortune 500 to local SMBs – we deliver the right solution.
               </p>
             </CardContent>
           </Card>
           
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            While others talked about AI's potential, we built the first working AI agents for real businesses. 
-            From recruitment to entertainment, legal to sales – we've been there first, solved the hardest problems, 
-            and delivered results that matter.
+            While others talked about AI replacing humans, we built technology that enhances both. 
+            Our dual expertise in AI agent development and human recruitment means we deliver exactly what your business needs – 
+            whether that's cutting-edge automation or industry-leading talent.
           </p>
         </div>
 
@@ -178,20 +178,22 @@ const PioneeringSolutions = () => {
         {/* Call to Action */}
         <div className="text-center">
           <p className="text-xl font-semibold mb-6">
-            Join the leaders who chose the pioneers in AI agent development
+            Join the leaders who trust Apply for both AI innovation and human expertise
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a 
               href="#contact" 
               className="inline-flex items-center justify-center btn-gradient-border px-8 py-4 rounded-lg font-medium"
             >
-              <span>Build Your AI Agent</span>
+              <span>Get Started Today</span>
             </a>
             <a 
-              href="#case-studies" 
+              href="https://apply.codes" 
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-8 py-4 rounded-lg font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
-              See Our Pioneering Work
+              Visit Our Hiring Platform →
             </a>
           </div>
         </div>
