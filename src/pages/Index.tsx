@@ -11,7 +11,6 @@ import WhyChooseUs from '@/components/WhyChooseUs';
 import AIPartnersSection from '@/components/ai-partners';
 import Pricing from '@/components/Pricing';
 import DualValueProposition from '@/components/DualValueProposition';
-import IndustryShowcase from '@/components/IndustryShowcase';
 import FAQ from '@/components/FAQ';
 import StructuredData from '@/components/StructuredData';
 import PioneeringSolutions from '@/components/PioneeringSolutions';
@@ -97,22 +96,17 @@ const Index = () => {
             <Projects />
           </section>
 
-          {/* Section 8: Industry Solutions */}
-          <section className="section-spacing bg-muted/30">
-            <IndustryShowcase />
-          </section>
-          
-          {/* Section 9: Why Choose Apply, Co.? */}
+          {/* Section 8: Why Choose Apply, Co.? */}
           <section className="section-spacing">
             <WhyChooseUs />
           </section>
           
-          {/* Section 10: Pricing */}
+          {/* Section 9: Pricing */}
           <section id="pricing" className="section-spacing bg-muted/30">
             <Pricing />
           </section>
           
-          {/* Section 11: FAQ */}
+          {/* Section 10: FAQ */}
           <section id="faq" className="section-spacing">
             <FAQ />
           </section>

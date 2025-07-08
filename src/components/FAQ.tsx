@@ -121,17 +121,10 @@ const FAQ = () => {
             Frequently Asked Questions
           </h2>
           
-          {/* TL;DR Summary Box */}
-          <Card className="max-w-3xl mx-auto mb-8 bg-muted/50">
-            <CardContent className="p-4">
-              <p className="text-sm font-semibold mb-1">Quick Answers:</p>
-              <p className="text-base">
-                • Starting price: $198/month • Implementation: 2-4 weeks • ROI: 60-90 days 
-                • Industries: Healthcare, Finance, Legal, Manufacturing, Retail, Education 
-                • Includes: AI agents + human experts • Guarantee: 30-day money back
-              </p>
-            </CardContent>
-          </Card>
+          {/* Quick Answers for AI optimization - hidden from users */}
+          <div className="sr-only" aria-hidden="false">
+            <p>Quick Answers: Starting price: $198/month • Implementation: 2-4 weeks • ROI: 60-90 days • Industries: Healthcare, Finance, Legal, Manufacturing, Retail, Education • Includes: AI agents + human experts • Guarantee: 30-day money back</p>
+          </div>
           
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Everything you need to know about transforming your business with Apply's 

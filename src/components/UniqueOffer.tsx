@@ -7,17 +7,10 @@ const UniqueOffer = () => {
       <div className="text-center mb-8">
         <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Your Industry's Growth Accelerator</h2>
         
-        {/* TL;DR Summary Box */}
-        <Card className="max-w-3xl mx-auto mb-8 bg-muted/50">
-          <CardContent className="p-4">
-            <p className="text-sm font-semibold mb-1">TL;DR:</p>
-            <p className="text-base">
-              Apply, Co. provides hyper-local AI solutions and industry experts for SMBs. 
-              Starting at $198/month with 2-4 week implementation and proven ROI across healthcare, 
-              finance, legal, manufacturing, retail, and education sectors.
-            </p>
-          </CardContent>
-        </Card>
+        {/* TL;DR Summary for AI optimization - hidden from users */}
+        <div className="sr-only" aria-hidden="false">
+          <p>TL;DR: Apply, Co. provides hyper-local AI solutions and industry experts for SMBs. Starting at $198/month with 2-4 week implementation and proven ROI across healthcare, finance, legal, manufacturing, retail, and education sectors.</p>
+        </div>
 
         <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-8">
           Apply, Co. is the only <span className="font-semibold text-foreground">integrated solutions provider</span> that analyzes your specific business challenges and delivers the optimal path forward—<span className="font-medium text-foreground">expert professionals or intelligent automation</span>. From healthcare to manufacturing, finance to retail, we understand that every industry has unique needs. That's why we offer both domain experts who speak your language and custom AI trained on your specific workflows.
