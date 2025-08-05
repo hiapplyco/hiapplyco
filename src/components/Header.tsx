@@ -20,11 +20,12 @@ const Header = () => {
   }, []);
 
   const navItems = [
-    { name: 'Recruitment', href: '#recruitment', homeHref: '/#recruitment', icon: Users },
-    { name: 'AI Agents', href: '#ai-development', homeHref: '/#ai-development', icon: Wrench },
-    { name: 'Projects', href: '#case-studies', homeHref: '/#case-studies', icon: Store },
-    { name: 'Pricing', href: '#pricing', homeHref: '/#pricing', icon: DollarSign },
-    { name: 'Contact', href: '#contact', homeHref: '/#contact', icon: MessageSquare },
+    { name: 'Services', href: '/services', isRoute: true, icon: Wrench },
+    { name: 'Solutions', href: '/solutions', isRoute: true, icon: Workflow },
+    { name: 'Case Studies', href: '/case-studies', isRoute: true, icon: Store },
+    { name: 'Pricing', href: '/pricing', isRoute: true, icon: DollarSign },
+    { name: 'About', href: '/about', isRoute: true, icon: Info },
+    { name: 'Contact', href: '/contact', isRoute: true, icon: MessageSquare },
   ];
 
   return (

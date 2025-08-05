@@ -1,0 +1,27 @@
+# Security Policy for Apply, Co. (HiApply)
+
+Contact: security@hiapply.co
+Expires: 2026-01-01T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://hiapply.co/.well-known/security.txt
+
+# Our commitment to security
+We take security seriously at Apply, Co. If you discover a security issue,
+please report it to us responsibly. We appreciate your efforts to help keep
+our systems and our users' data secure.
+
+# Scope
+This policy applies to:
+- https://hiapply.co
+- https://apply.codes
+- All associated subdomains and services
+
+# Safe Harbor
+We consider security research conducted in accordance with this policy
+as authorized conduct and will not pursue legal action.
+
+# Response Time
+We aim to respond to security reports within 48 hours and resolve
+critical issues as quickly as possible.
+
+Thank you for helping us maintain the security of our services.

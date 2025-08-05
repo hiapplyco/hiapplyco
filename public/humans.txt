@@ -1,0 +1,53 @@
+# Humans.txt - The team behind Apply, Co. (HiApply)
+# humanstxt.org
+
+/* COMPANY */
+Company: Apply, Co.
+Brand: HiApply
+Website: https://hiapply.co
+Platform: https://apply.codes
+Location: United States
+Founded: 2024
+Mission: Empowering organizations with the right intelligence – artificial or human
+
+/* WHAT WE DO */
+Services: AI Agent Development, Human Recruitment, Strategic Consulting
+Specialties: First company to develop AI agents for every industry
+Industries: Healthcare, Finance, Legal, Manufacturing, Retail, Education, Technology, Government, and more
+
+/* OUR APPROACH */
+Philosophy: We believe in the harmonious integration of AI and human intelligence
+Values: Transparency, Innovation, Ethics, Results, Unbiased Guidance
+Unique: Equal expertise in both AI development and human recruitment
+
+/* TECHNOLOGY */
+AI Stack: Custom AI Agents, NLP, Machine Learning, Workflow Automation
+Platforms: Multi-platform AI deployment
+Languages: Python, TypeScript, JavaScript, Go
+Frameworks: React, Node.js, TensorFlow, PyTorch
+
+/* STANDARDS */
+Accessibility: WCAG 2.1 AA
+Performance: Core Web Vitals optimized
+Security: SOC 2 compliant, GDPR ready
+Ethics: Committed to responsible AI development
+
+/* CONTACT */
+General: https://hiapply.co/contact
+Services: https://hiapply.co/services
+Solutions: https://hiapply.co/solutions
+
+/* SOCIAL */
+Platform: https://apply.codes
+
+/* THANKS */
+Thanks to our clients who trust us with their AI and human intelligence needs
+Thanks to the open source community
+Thanks to everyone pushing the boundaries of what's possible
+
+/* SITE */
+Last update: 2025-08-05
+Standards: HTML5, CSS3, JavaScript ES6+
+Components: React, TypeScript, Tailwind CSS
+Performance: Optimized for speed and SEO
+AI-Friendly: llms.txt and ai-agents.txt available

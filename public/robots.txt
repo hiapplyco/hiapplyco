@@ -1,27 +1,142 @@
+# Robots.txt for Apply, Co. (HiApply)
+# Optimized for search engines and AI assistants
+
+# Default rules for all bots
 User-agent: *
 Allow: /
+Allow: /services
+Allow: /solutions
+Allow: /case-studies
+Allow: /pricing
+Allow: /about
+Allow: /contact
+Allow: /industries/
+Allow: /solutions/
 Disallow: /animation-demo
 Disallow: /protected-pricing/
+Disallow: /api/
+Disallow: /admin/
+Disallow: /*.json$
+Disallow: /private/
 Crawl-delay: 1
 
-# Search engine specific rules
+# Google (including AI/Bard)
 User-agent: Googlebot
+User-agent: Googlebot-Image
+User-agent: Google-Extended
 Allow: /
 Crawl-delay: 0
 
+# Bing (including Copilot)
 User-agent: Bingbot
+User-agent: BingPreview
+Allow: /
+Crawl-delay: 0
+
+# OpenAI (ChatGPT)
+User-agent: GPTBot
+User-agent: ChatGPT-User
 Allow: /
 Crawl-delay: 1
 
-# Block bad bots
+# Anthropic (Claude)
+User-agent: Claude-Web
+User-agent: anthropic-ai
+Allow: /
+Crawl-delay: 1
+
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /
+Crawl-delay: 1
+
+# Facebook/Meta AI
+User-agent: FacebookBot
+User-agent: facebookexternalhit
+Allow: /
+Crawl-delay: 2
+
+# Apple (Siri/AppleBot)
+User-agent: Applebot
+Allow: /
+Crawl-delay: 1
+
+# Amazon Alexa
+User-agent: Amazonbot
+Allow: /
+Crawl-delay: 2
+
+# Yandex
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 2
+
+# DuckDuckGo
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1
+
+# Twitter/X
+User-agent: Twitterbot
+Allow: /
+Crawl-delay: 1
+
+# LinkedIn
+User-agent: LinkedInBot
+Allow: /
+Crawl-delay: 1
+
+# Common AI and research crawlers - Allow
+User-agent: CCBot
+User-agent: FacebookBot
+User-agent: Slackbot
+User-agent: WhatsApp
+User-agent: Discordbot
+User-agent: TelegramBot
+Allow: /
+Crawl-delay: 2
+
+# SEO Tools - Controlled Access
 User-agent: AhrefsBot
-Disallow: /
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Crawl-delay: 10
 
 User-agent: SemrushBot
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Crawl-delay: 10
+
+User-agent: MJ12bot
+Allow: /
+Crawl-delay: 10
+
+User-agent: DotBot
+Allow: /
+Crawl-delay: 10
+
+# Bad bots - Block
+User-agent: SemrushBot-SA
+User-agent: SemrushBot-BA
+User-agent: SemrushBot-SI
+User-agent: SemrushBot-SWA
+User-agent: SemrushBot-CT
+User-agent: SemrushBot-BM
+User-agent: MegaIndex.ru
+User-agent: BLEXBot
+User-agent: PetalBot
 Disallow: /
 
-# Sitemap location
+# Sitemaps
 Sitemap: https://hiapply.co/sitemap.xml
+Sitemap: https://hiapply.co/sitemap-pages.xml
+Sitemap: https://hiapply.co/sitemap-industries.xml
+Sitemap: https://hiapply.co/sitemap-solutions.xml
 
-# Host directive (for Yandex)
+# Host directive
 Host: https://hiapply.co
+
+# LLMs.txt location for AI assistants
+# AI agents can find context at: https://hiapply.co/llms.txt
