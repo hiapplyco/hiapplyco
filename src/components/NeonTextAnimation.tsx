@@ -3,6 +3,9 @@ import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
 import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js";
+import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
+import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
+import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
 
 interface NeonTextAnimationProps {
   text: string;
@@ -20,261 +23,238 @@ export default function NeonTextAnimation({ text = "Apply" }: NeonTextAnimationP
 
     // === Basic Scene Setup ===
     const scene = new THREE.Scene();
+    // scene.fog = new THREE.FogExp2(0x000000, 0.03); // Add fog for depth
+
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({
       canvas: canvasRef.current,
-      antialias: true,
+      antialias: false, // Disable antialias for performance when using post-processing
       alpha: true,
+      powerPreference: "high-performance",
     });
 
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    camera.position.z = 6; // Move camera slightly further back for bevel room
+    camera.position.z = 7;
 
-    // Add a simple cube to test if Three.js is working
-    const testCube = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({ color: 0xff00ff }));
-    scene.add(testCube);
+    // === Post-processing (Bloom) ===
+    const renderScene = new RenderPass(scene, camera);
+    
+    const bloomPass = new UnrealBloomPass(
+      new THREE.Vector2(window.innerWidth, window.innerHeight),
+      1.5, // strength
+      0.4, // radius
+      0.85 // threshold
+    );
+    bloomPass.strength = 2.0;
+    bloomPass.radius = 0.5;
+    bloomPass.threshold = 0.1;
 
-    // Render the test cube once
-    renderer.render(scene, camera);
-    console.log("Test cube rendered");
+    const composer = new EffectComposer(renderer);
+    composer.addPass(renderScene);
+    composer.addPass(bloomPass);
 
     // === Font Loading and Particle Generation ===
     const fontLoader = new FontLoader();
     let particleSystem: THREE.Points | null = null;
     let originalPositions: Float32Array | null = null;
-    const targetParticleCount = 10000; // Reduced for better performance
+    let originalColors: Float32Array | null = null;
 
     const particleMaterial = new THREE.PointsMaterial({
       vertexColors: true,
-      size: 0.05, // Increased size for better visibility
+      size: 0.08,
       sizeAttenuation: true,
+      transparent: true,
+      opacity: 0.9,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
     });
 
-    console.log("Loading font...");
     fontLoader.load(
       "https://cdn.jsdelivr.net/npm/three@0.128.0/examples/fonts/helvetiker_regular.typeface.json",
       (font) => {
-        console.log("Font loaded successfully");
         try {
-          // Remove test cube once font is loaded
-          scene.remove(testCube);
-
-          // --- Create Text Geometry with Bevel for Balloon Effect ---
           const textGeometry = new TextGeometry(text, {
             font: font,
-            size: 1,
-            height: 0.2, // Increase height for thickness
-            curveSegments: 8, // Reduced for better performance
-            bevelEnabled: true, // Enable bevel
-            bevelThickness: 0.1, // How far the bevel goes back
-            bevelSize: 0.05, // How far the bevel goes wide from the edge
+            size: 1.5,
+            height: 0.2,
+            curveSegments: 4, // Reduced for performance
+            bevelEnabled: true,
+            bevelThickness: 0.1,
+            bevelSize: 0.02,
             bevelOffset: 0,
-            bevelSegments: 5, // Reduced for better performance
+            bevelSegments: 3, // Reduced for performance
           });
 
-          // --- Center the Geometry ---
-          textGeometry.computeBoundingBox();
-          if (textGeometry.boundingBox) {
-            const textWidth = textGeometry.boundingBox.max.x - textGeometry.boundingBox.min.x;
-            const textHeight = textGeometry.boundingBox.max.y - textGeometry.boundingBox.min.y;
-            textGeometry.translate(-textWidth / 2, -textHeight / 2, 0); // Center on X, Y
-          }
+          textGeometry.center();
 
-          console.log("Text geometry created and centered");
-
-          // --- Sample points uniformly across triangle surfaces ---
+          // Efficiently sample points
           const sampledPositions: number[] = [];
           const sampledColors: number[] = [];
           const color = new THREE.Color();
 
-          // Simplified approach: sample points directly from the geometry
+          // Use non-indexed geometry for easier sampling
           const nonIndexedGeometry = textGeometry.toNonIndexed();
           const positions = nonIndexedGeometry.attributes.position.array;
+          const count = positions.length / 3;
+          
+          // Density factor - skip vertices to control count
+          const step = 3; 
 
-          // Sample a subset of points from the geometry
-          for (let i = 0; i < positions.length; i += 9) {
-            // Each triangle has 3 vertices (9 values)
-            for (let j = 0; j < 3; j++) {
-              // For each vertex in the triangle
-              const baseIndex = i + j * 3;
+          for (let i = 0; i < count; i += step) {
+             const x = positions[i * 3];
+             const y = positions[i * 3 + 1];
+             const z = positions[i * 3 + 2];
 
-              // Add some randomness to the position
-              sampledPositions.push(
-                (positions[baseIndex] as number) + (Math.random() - 0.5) * 0.05,
-                (positions[baseIndex + 1] as number) + (Math.random() - 0.5) * 0.05,
-                (positions[baseIndex + 2] as number) + (Math.random() - 0.5) * 0.05,
-              );
+             // Add multiple layers of particles for volume
+             for(let j=0; j<2; j++) {
+                sampledPositions.push(
+                  x + (Math.random() - 0.5) * 0.1,
+                  y + (Math.random() - 0.5) * 0.1,
+                  z + (Math.random() - 0.5) * 0.1
+                );
 
-              // Random neon color
-              const hue = Math.random();
-              const saturation = 0.8 + Math.random() * 0.2;
-              const lightness = 0.5 + Math.random() * 0.3;
-              color.setHSL(hue, saturation, lightness);
-              sampledColors.push(color.r, color.g, color.b);
-            }
+                // Gradient colors: Purple to Green/Blue
+                // Map X position to hue
+                const normalizedX = (x + 2) / 4; // Approximate normalization
+                const hue = 0.7 + normalizedX * 0.2; // Purple (0.7) to Blue/Green range
+                const saturation = 0.9;
+                const lightness = 0.6;
+                
+                color.setHSL(hue % 1, saturation, lightness);
+                sampledColors.push(color.r, color.g, color.b);
+             }
           }
 
-          console.log(`Generated ${sampledPositions.length / 3} particles`);
-
-          // --- Create Buffer Geometry for Particles ---
           const particleGeometry = new THREE.BufferGeometry();
           const finalPositions = new Float32Array(sampledPositions);
-
-          if (finalPositions.length === 0) {
-            throw new Error("No particle positions were generated.");
-          }
+          const finalColors = new Float32Array(sampledColors);
 
           particleGeometry.setAttribute("position", new THREE.BufferAttribute(finalPositions, 3));
-          particleGeometry.setAttribute("color", new THREE.BufferAttribute(new Float32Array(sampledColors), 3));
+          particleGeometry.setAttribute("color", new THREE.BufferAttribute(finalColors, 3));
 
-          originalPositions = new Float32Array(finalPositions.length);
-          originalPositions.set(finalPositions);
+          originalPositions = new Float32Array(finalPositions);
+          originalColors = new Float32Array(finalColors);
 
-          // --- Create Particle System ---
           particleSystem = new THREE.Points(particleGeometry, particleMaterial);
           scene.add(particleSystem);
 
-          console.log("Particle system created and added to scene");
-
-          // Clean up intermediate geometry
           textGeometry.dispose();
           nonIndexedGeometry.dispose();
-
           setIsLoading(false);
 
-          // Start animation
-          animate();
         } catch (error) {
           console.error("Error during particle generation:", error);
           setError(`Error creating particles: ${error instanceof Error ? error.message : "Unknown error"}`);
           setIsLoading(false);
         }
       },
-      // onProgress callback
-      (xhr) => console.log((xhr.loaded / xhr.total) * 100 + "% font loaded"),
-      // onError callback
+      undefined,
       (err) => {
         console.error("Font loading failed:", err);
-        setError("Error loading the 3D font. Cannot display animation.");
+        setError("Error loading font.");
         setIsLoading(false);
-      },
+      }
     );
-
-    // === Scroll Animation Logic ===
-    let scrollY = window.scrollY;
-    const maxScrollEffect = 600; // Adjust scroll distance if needed
-
-    const handleScroll = () => {
-      scrollY = window.scrollY;
-    };
-
-    window.addEventListener("scroll", handleScroll);
 
     // === Animation Loop ===
     const clock = new THREE.Clock();
-    let animationFrameId: number | null = null;
+    let animationFrameId: number;
+    
+    // Mouse interaction
+    const mouse = new THREE.Vector2();
+    const targetMouse = new THREE.Vector2();
+    
+    const onMouseMove = (event: MouseEvent) => {
+      targetMouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+      targetMouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    };
+    window.addEventListener('mousemove', onMouseMove);
 
     function animate() {
       animationFrameId = requestAnimationFrame(animate);
-      const elapsedTime = clock.getElapsedTime();
+      const time = clock.getElapsedTime();
 
-      // Rotate test cube if it's still in the scene
-      if (scene.children.includes(testCube)) {
-        testCube.rotation.x = elapsedTime;
-        testCube.rotation.y = elapsedTime * 0.5;
-      }
+      // Smooth mouse movement
+      mouse.x += (targetMouse.x - mouse.x) * 0.05;
+      mouse.y += (targetMouse.y - mouse.y) * 0.05;
 
-      // --- Particle Animation Based on Scroll ---
       if (particleSystem && originalPositions) {
         const positions = particleSystem.geometry.attributes.position.array;
-        const scrollFactor = Math.min(scrollY / maxScrollEffect, 1.0);
+        const count = positions.length / 3;
 
-        for (let i = 0; i < positions.length; i += 3) {
-          const ox = originalPositions[i];
-          const oy = originalPositions[i + 1];
-          const oz = originalPositions[i + 2];
+        // Camera subtle movement
+        camera.position.x = Math.sin(time * 0.2) * 0.5;
+        camera.position.y = Math.cos(time * 0.2) * 0.5;
+        camera.lookAt(0, 0, 0);
 
-          const randomFactor = 5.5; // Slightly increased spread
-          const speedFactor = 0.4;
-          const offsetX = Math.sin(oy * 20 + elapsedTime * speedFactor + ox * 5) * scrollFactor * randomFactor;
-          const offsetY = Math.cos(ox * 20 + elapsedTime * speedFactor + oy * 5) * scrollFactor * randomFactor;
-          const offsetZ = Math.sin((ox + oy) * 10 + elapsedTime * speedFactor) * scrollFactor * randomFactor; // More Z spread now
+        for (let i = 0; i < count; i++) {
+          const i3 = i * 3;
+          const ox = originalPositions[i3];
+          const oy = originalPositions[i3 + 1];
+          const oz = originalPositions[i3 + 2];
 
-          positions[i] = ox + offsetX;
-          positions[i + 1] = oy + offsetY;
-          positions[i + 2] = oz + offsetZ;
+          // Noise / Wave effect
+          const waveX = Math.sin(oy * 2 + time) * 0.05;
+          const waveY = Math.cos(ox * 2 + time) * 0.05;
+          const waveZ = Math.sin((ox + oy) * 5 + time) * 0.05;
+
+          // Mouse repulsion
+          const dx = ox - mouse.x * 5; // Scale mouse influence
+          const dy = oy - mouse.y * 2;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          const repulsion = Math.max(0, 1.5 - dist); // Radius of 1.5
+
+          positions[i3] = ox + waveX + (dx / dist) * repulsion * 0.5;
+          positions[i3 + 1] = oy + waveY + (dy / dist) * repulsion * 0.5;
+          positions[i3 + 2] = oz + waveZ + repulsion * 0.5;
         }
+        
         particleSystem.geometry.attributes.position.needsUpdate = true;
-
-        // Rotate the whole system
-        particleSystem.rotation.y = elapsedTime * 0.02; // Slower rotation
+        particleSystem.rotation.y = time * 0.05;
       }
 
-      // --- Render the Scene ---
-      renderer.render(scene, camera);
+      composer.render();
     }
 
-    // Start animation immediately with test cube
     animate();
 
-    // === Handle Window Resize ===
     const handleResize = () => {
       if (!canvasRef.current) return;
-
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      composer.setSize(window.innerWidth, window.innerHeight);
     };
 
     window.addEventListener("resize", handleResize);
 
-    // Cleanup
     return () => {
-      console.log("Cleaning up Three.js resources");
       window.removeEventListener("resize", handleResize);
-      window.removeEventListener("scroll", handleScroll);
-
-      if (animationFrameId !== null) {
-        cancelAnimationFrame(animationFrameId);
-      }
-
+      window.removeEventListener("mousemove", onMouseMove);
+      cancelAnimationFrame(animationFrameId);
+      
       if (particleSystem) {
         scene.remove(particleSystem);
         particleSystem.geometry.dispose();
         particleMaterial.dispose();
       }
-
-      scene.remove(testCube);
-      testCube.geometry.dispose();
-      (testCube.material as THREE.Material).dispose();
-
       renderer.dispose();
+      composer.dispose();
     };
   }, [text]);
 
   return (
-    <div className="relative h-screen w-full">
+    <div className="relative w-full h-screen overflow-hidden bg-black">
       <canvas
         ref={canvasRef}
-        className="fixed top-0 left-0 w-full h-full -z-10"
-        style={{ display: "block" }} // Ensure canvas is displayed
+        className="absolute top-0 left-0 w-full h-full"
       />
-
       {isLoading && (
-        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/70 text-white p-5 rounded-lg z-10">
-          Loading animation...
+        <div className="absolute inset-0 flex items-center justify-center text-white/50">
+          Loading...
         </div>
       )}
-
-      {error && (
-        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/70 text-red-500 p-5 rounded-lg z-10">
-          {error}
-        </div>
-      )}
-
-      <h1 className="opacity-0 text-5xl font-bold text-center pt-[45vh]">{text}</h1>
     </div>
   );
 }
