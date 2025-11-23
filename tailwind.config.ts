@@ -15,7 +15,8 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
-        mono: ['ui-monospace', 'SFMono-Regular', 'Consolas', 'monospace'],
+        mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'Consolas', 'monospace'],
+        display: ['Space Grotesk', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -39,10 +40,18 @@ export default {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
         },
+        // Redesign specific colors
+        electric: {
+          purple: "#8B5CF6",
+          cyan: "#06B6D4",
+        },
+        warning: {
+          orange: "#F97316",
+        },
       },
       keyframes: {
         "fade-up": {
-          "0%": { 
+          "0%": {
             opacity: "0",
             transform: "translateY(20px)"
           },
@@ -56,7 +65,7 @@ export default {
           "100%": { opacity: "1" },
         },
         "fade-right": {
-          "0%": { 
+          "0%": {
             opacity: "0",
             transform: "translateX(-20px)"
           },
@@ -66,7 +75,7 @@ export default {
           },
         },
         "fade-left": {
-          "0%": { 
+          "0%": {
             opacity: "0",
             transform: "translateX(20px)"
           },
@@ -76,7 +85,7 @@ export default {
           },
         },
         "scale-in": {
-          "0%": { 
+          "0%": {
             opacity: "0",
             transform: "scale(0.9)"
           },
@@ -98,7 +107,7 @@ export default {
           "100%": { backgroundPosition: "500px 0" },
         },
         "cinematic-entrance": {
-          "0%": { 
+          "0%": {
             opacity: "0",
             transform: "translateY(30px) scale(0.95)"
           },
@@ -113,11 +122,11 @@ export default {
           "60%": { transform: "translateY(-4px)" },
         },
         "slow-bounce": {
-          "0%, 100%": { 
+          "0%, 100%": {
             transform: "translateY(0)",
             "animation-timing-function": "cubic-bezier(0.8, 0, 1, 1)"
           },
-          "50%": { 
+          "50%": {
             transform: "translateY(-12px)",
             "animation-timing-function": "cubic-bezier(0, 0, 0.2, 1)"
           },

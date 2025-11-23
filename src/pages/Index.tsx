@@ -1,29 +1,33 @@
-import Header from '@/components/Header';
+import { FloatingNav } from '@/components/landing/FloatingNav';
 import Footer from '@/components/Footer';
 import StructuredData from '@/components/StructuredData';
+import { Hero } from '@/components/landing/Hero';
+import { TechStack } from '@/components/landing/TechStack';
+import { DualServices } from '@/components/landing/DualServices';
+import { CaseStudies } from '@/components/landing/CaseStudies';
+import { PricingTeaser } from '@/components/landing/PricingTeaser';
+import { ChatWidget } from '@/components/chat/ChatWidget';
+import { ChatProvider } from '@/context/ChatContext';
 
 const Index = () => {
   return (
-    <>
+    <ChatProvider>
       <StructuredData />
-      <div className="min-h-screen bg-[#050505] text-white font-sans antialiased">
-        <Header />
+      <div className="min-h-screen bg-background text-foreground font-sans antialiased dark">
+        <FloatingNav />
 
-        {/* Main content area - ready for new design */}
-        <main className="min-h-screen flex items-center justify-center px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Landing Page
-            </h1>
-            <p className="text-xl text-gray-400">
-              Ready for redesign
-            </p>
-          </div>
+        <main>
+          <Hero />
+          <TechStack />
+          <DualServices />
+          <CaseStudies />
+          <PricingTeaser />
         </main>
 
         <Footer />
+        <ChatWidget />
       </div>
-    </>
+    </ChatProvider>
   );
 };
 
