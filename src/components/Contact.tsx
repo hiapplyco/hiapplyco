@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Send, Mail, Building, Clock, DollarSign } from 'lucide-react';
 import EnhancedButton from './EnhancedButton';
-import { supabase } from '@/integrations/supabase/client';
+import { functions } from '@/integrations/firebase/client';
+import { httpsCallable } from 'firebase/functions';
 
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -13,21 +14,20 @@ const Contact = () => {
   const onSubmit = async (data) => {
     setIsSubmitting(true);
     console.log('Submitting form with data:', data);
-    
+
     try {
-      // Call Supabase edge function directly
-      console.log('Calling Supabase function send-email...');
-      const { data: result, error } = await supabase.functions.invoke('send-email', {
-        body: {
-          name: data.name,
-          email: data.email,
-          industry: data.industry,
-          message: data.message,
-          source: 'contact-form'
-        }
+      // Call Firebase Cloud Function
+      console.log('Calling Firebase function sendEmail...');
+      const sendEmail = httpsCallable(functions, 'sendEmail');
+      const result = await sendEmail({
+        name: data.name,
+        email: data.email,
+        industry: data.industry,
+        message: data.message,
+        source: 'contact-form'
       });
 
-      if (!error && result) {
+      if (result.data) {
         console.log('Email sent successfully:', result);
         setIsSuccess(true);
         reset(); // Clear form
@@ -35,10 +35,6 @@ const Contact = () => {
         setTimeout(() => {
           setIsSuccess(false);
         }, 3000);
-      } else {
-        console.error('Failed to send email:', error);
-        console.error('Error details:', error?.message || 'Unknown error');
-        alert(`Failed to send message: ${error?.message || 'Unknown error'}. Please check the console for details.`);
       }
     } catch (error) {
       console.error('Error sending email:', error);
@@ -53,7 +49,7 @@ const Contact = () => {
       {/* Decorative background elements */}
       <div className="absolute top-20 left-16 w-64 h-64 bg-accent/5 rounded-full blur-3xl animate-pulse pointer-events-none"></div>
       <div className="absolute bottom-0 right-10 w-80 h-80 bg-primary/5 rounded-full blur-3xl animate-pulse pointer-events-none"></div>
-      
+
       <div className="max-w-3xl mx-auto relative z-10">
         <div className="text-center mb-6 animate-fade-up">
           <h2 className="text-3xl md:text-4xl font-bold mb-3">Get Your Industry Solution</h2>
@@ -64,7 +60,7 @@ const Contact = () => {
             Contact us at <a href="mailto:martin@hiapply.co" className="text-accent hover:underline">martin@hiapply.co</a>
           </p>
         </div>
-        
+
         <div className="glass p-8 md:p-10 rounded-2xl animate-fade-up shadow-lg">
           {isSuccess ? (
             <div className="text-center">

@@ -1,25 +1,20 @@
-import { supabase } from '@/integrations/supabase/client';
+import { functions } from '@/integrations/firebase/client';
+import { httpsCallable } from 'firebase/functions';
 
 export async function testEmailFunction() {
   console.log('Testing email function...');
-  
+
   try {
-    const { data, error } = await supabase.functions.invoke('send-email', {
-      body: {
-        name: 'Test User',
-        email: 'test@example.com',
-        message: 'This is a test message',
-        source: 'test'
-      }
+    const sendEmail = httpsCallable(functions, 'sendEmail');
+    const result = await sendEmail({
+      name: 'Test User',
+      email: 'test@example.com',
+      message: 'This is a test message',
+      source: 'test'
     });
-    
-    if (error) {
-      console.error('Error response:', error);
-      return { success: false, error };
-    }
-    
-    console.log('Success response:', data);
-    return { success: true, data };
+
+    console.log('Success response:', result.data);
+    return { success: true, data: result.data };
   } catch (err) {
     console.error('Caught error:', err);
     return { success: false, error: err };

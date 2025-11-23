@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Send, DollarSign } from 'lucide-react';
 import EnhancedButton from './EnhancedButton';
-import { supabase } from '@/integrations/supabase/client';
+import { functions } from '@/integrations/firebase/client';
+import { httpsCallable } from 'firebase/functions';
 
 interface ContactCTAProps {
   title?: string;
@@ -9,7 +10,7 @@ interface ContactCTAProps {
   compact?: boolean;
 }
 
-const ContactCTA = ({ 
+const ContactCTA = ({
   title = "Ready to Transform Your Business?",
   description = "Schedule a free consultation to see how AI can help your SMB",
   compact = false
@@ -35,22 +36,19 @@ const ContactCTA = ({
 
     setIsSubmitting(true);
     try {
-      const { error } = await supabase.functions.invoke('send-email', {
-        body: {
-          name: formData.name,
-          email: formData.email,
-          message: formData.message || 'Quick consultation request from CTA',
-          source: 'quick-cta'
-        }
+      const sendEmail = httpsCallable(functions, 'sendEmail');
+      const result = await sendEmail({
+        name: formData.name,
+        email: formData.email,
+        message: formData.message || 'Quick consultation request from CTA',
+        source: 'quick-cta'
       });
 
-      if (!error) {
+      // Firebase functions throw on error, so if we get here it's success
+      if (result.data) {
         alert('Thank you! We\'ll be in touch within 24 hours.');
         setShowForm(false);
         setFormData({ name: '', email: '', message: '' });
-      } else {
-        console.error('Failed to send email:', error);
-        alert('Failed to send message. Please try again.');
       }
     } catch (error) {
       console.error('Error sending email:', error);
@@ -88,7 +86,7 @@ const ContactCTA = ({
     <div className="bg-gradient-to-br from-accent/10 to-transparent p-8 rounded-2xl">
       <h3 className="text-2xl font-bold mb-2">{title}</h3>
       <p className="text-muted-foreground mb-6">{description}</p>
-      
+
       {showForm && (
         <div className="mb-6 space-y-4 animate-fade-in">
           <input
@@ -114,7 +112,7 @@ const ContactCTA = ({
           />
         </div>
       )}
-      
+
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <EnhancedButton
           onClick={handleQuickContact}
