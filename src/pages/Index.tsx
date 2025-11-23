@@ -5,7 +5,6 @@ import AIPartnersSection from '@/components/ai-partners';
 import StructuredData from '@/components/StructuredData';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Sparkles, Users, Brain, TrendingUp, Code, Zap } from 'lucide-react';
-import NeonTextAnimation from '@/components/NeonTextAnimation';
 import GlassCard from '@/components/GlassCard';
 import FloatingElement from '@/components/FloatingElement';
 

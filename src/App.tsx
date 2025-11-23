@@ -12,7 +12,6 @@ import PricingPage from "./pages/PricingPage";
 import About from "./pages/About";
 import ContactPage from "./pages/ContactPage";
 import NotFound from "./pages/NotFound";
-import AnimationDemo from "./pages/AnimationDemo";
 import CustomCursor from "./components/CustomCursor";
 import ErrorBoundary from "./components/ErrorBoundary";
 import AIReferralTracking from "./components/AIReferralTracking";
@@ -36,7 +35,6 @@ const App = () => (
             <Route path="/pricing" element={<PricingPage />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<ContactPage />} />
-            <Route path="/animation-demo" element={<AnimationDemo />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </TooltipProvider>
